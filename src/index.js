@@ -1,0 +1,1 @@
+import { initAccordion } from "./js/accordion";
