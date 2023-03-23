@@ -36,31 +36,48 @@
     <div class="top-wrapper">
       <a class="logo link" href="#">News</a>
       <button class="button-close js-close-menu">
-        <svg class="menu-container__icon" width="24" height="24">
+        <svg width="24" height="24">
           <use href="./images/icons/icons.svg#icon-close_menu"></use>
         </svg>
       </button>
     </div>
 
     <ul class="mobile-menu__list">
-      <li class="mobile-menu__item header__item">
-        <svg class="menu-container__icon" width="18" height="18">
-          <use href="./images/icons/icons.svg#icon-home"></use>
-        </svg>
-        <a class="mobile-menu__link" href="#">Home</a>
-      </li>
-      <li class="mobile-menu__item header__item">
-        <svg class="menu-container__icon" width="18" height="18">
-          <use href="./images/icons/icons.svg#icon-favorite"></use>
-        </svg>
-        <a class="mobile-menu__link" href="#">Favorite</a>
-      </li>
-      <li class="mobile-menu__item header__item">
-        <svg class="menu-container__icon" width="18" height="18">
-          <use href="./images/icons/icons.svg#icon-read"></use>
-        </svg>
-        <a class="mobile-menu__link" href="#">Read</a>
-      </li>
+      <a
+        class="mobile-menu__link header__item mobile-menu__link--current"
+        href="#"
+        ><li class="mobile-menu__item">
+          <svg class="menu-container__icon" width="32" height="32">
+            <use href="./images/icons/icons.svg#icon-home"></use>
+          </svg>
+        </li>
+        Home</a
+      >
+      <a class="mobile-menu__link" href="#"
+        ><li class="mobile-menu__item header__item">
+          <svg class="menu-container__icon" width="32" height="32">
+            <use href="./images/icons/icons.svg#icon-favorite"></use>
+          </svg>
+        </li>
+        Favorite</a
+      >
+      <a class="mobile-menu__link" href="#"
+        ><li class="mobile-menu__item header__item">
+          <svg class="menu-container__icon" width="32" height="32">
+            <use href="./images/icons/icons.svg#icon-read"></use>
+          </svg>
+        </li>
+        Read</a
+      >
     </ul>
+  </div>
+  <div class="toggle-wrapper">
+    <svg class="icon-active_theme" width="21" height="21">
+      <use href="./images/icons/icons.svg#icon-sun"></use>
+    </svg>
+    <div class="toggle"></div>
+    <svg class="icon-active_theme" width="21" height="21">
+      <use href="./images/icons/icons.svg#icon-moon"></use>
+    </svg>
   </div>
 </div>

@@ -1,6 +1,9 @@
 import './js/mobile-menu';
+
 import { renderArticle } from './renderArticle';
 import NewArticles from './js/API-service/api-news';
+import './js/toggle-switcher-theme';
+
 const buttonEL = document.querySelector('.fetch');
 const newArticles = new NewArticles();
 
