@@ -1,0 +1,29 @@
+.search {
+position: relative;
+width: 15px;
+height: 15px;
+transition: 0.5s;
+}
+
+.search.active {
+width: 173px;
+    height: 31px;
+    left: 0px;
+    top: 0px;
+    border: 1px solid #111321;
+border-radius: 20px;
+}
+
+.search__icon {
+position: relative;
+top: 0;
+left: 0;
+width: 15px;
+height: 15px;
+display: flex;
+align-items: center;
+justify-content: center;
+cursor: pointer;
+}
+
+
