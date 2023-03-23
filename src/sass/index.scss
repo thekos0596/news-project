@@ -2,7 +2,12 @@
 @import './utils/breakpoints';
 @import './utils/variables';
 @import './utils/visually-hidden';
+@import '../../node_modules/modern-normalize/modern-normalize.css';
+@import './base/base';
 
 @import './components/container';
+@import './components/header';
 @import './components/read-page';
 
+
+@import './components/news-card.scss';
