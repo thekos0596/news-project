@@ -1,0 +1,131 @@
+.news-card__list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  list-style: none;
+}
+
+.news-card__item {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  list-style: none;
+}
+
+.news-card {
+  gap: 32px;
+  height: 676px;
+  border-radius: 4px;
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 60px;
+  padding-bottom: 60px;
+  justify-content: center;
+}
+
+.news-card__description {
+  max-width: 395px;
+}
+
+.news-card__abstract {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  margin: 0 0 20px 0;
+  font-family: 'Manrope';
+  font-size: 16px;
+  line-height: 1.375;
+
+  color: #111321;
+}
+
+.news-card__image {
+  width: 395px;
+  height: 395px;
+  border-radius: 4px;
+}
+
+.news-card__image-container {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  height: 676px;
+  position: relative;
+}
+
+.news-card__title {
+  margin: 20px 0;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 1.375;
+  letter-spacing: -0.01em;
+  color: #111321;
+}
+
+.news-card__date {
+  font-size: 16px;
+  line-height: 1.375;
+  color: #a8a8a8;
+}
+
+.news-card__image {
+  width: 395px;
+  height: 395px;
+  object-fit: cover;
+}
+
+.news-card__read-more {
+  padding: 5px 10px;
+  font-size: 16px;
+  line-height: 1.375;
+  color: #4440f7;
+  text-decoration: none;
+}
+
+.news-card__container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.news-card__category {
+  position: absolute;
+  top: 40px;
+  left: 0;
+  padding: 4px 8px;
+  color: #fff;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.33;
+  text-align: center;
+  background: rgba(68, 64, 247, 0.7);
+  border-radius: 0px 4px 4px 0px;
+  width: 96px;
+  height: 16px;
+}
+
+.news-card__favorite-button {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  background-color: #fff;
+  padding: 6px 12px;
+
+  border-radius: 20px;
+  border: none;
+  color: #000;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.333;
+  text-align: center;
+  cursor: pointer;
+}
+
+.news-card__foto {
+  position: relative;
+  width: 395px;
+  height: 395px;
+}
