@@ -1,4 +1,7 @@
+@import './base/base';
 @import './base/fonts';
+@import './components/container';
+@import '../../node_modules/modern-normalize/modern-normalize.css';
 @import './utils/variables';
-@import './utils/visually-hidden'
-
+@import './utils/visually-hidden';
+@import './components/header';
