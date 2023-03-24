@@ -2,15 +2,21 @@ body.dark {
     background-color: $bg-colo-dark-site;
 }
 
-.toggle-wrapper {
-    position: absolute;
-    bottom: 18px;
+.toggle__wrapper {
     display: inline-flex;
     gap: 8px;
+}
 
-    @media screen and (min-width: $tablet-less) {
-        position: relative;
-        top: 49px;
+.toggle__wrapper--bottom {
+    position: absolute;
+    bottom: 18px;
+}
+
+.toggle__wrapper--right {
+    display: none;
+
+    @media screen and (min-width: $tablet) {
+        display: inline-flex;
     }
 }
 

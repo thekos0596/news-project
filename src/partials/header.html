@@ -2,32 +2,52 @@
   <div class="container">
     <div class="header__container">
       <a class="logo link" href="#">News</a>
-      <div class="button-wrapper">
-        <!-- SEARCH-BAR here!!! -->
-        <button
-          class="button-burger js-open-menu"
-          aria-expanded="false"
-          aria-controls="mobile-menu"
-        >
-          <svg width="24" height="24">
-            <use href="./images/icons/icons.svg#icon-menu"></use>
-          </svg>
-        </button>
-      </div>
 
-      <nav class="navigation-menu">
-        <ul class="navigation-menu__list">
-          <li class="navigation-menu__item">
-            <a class="navigation-menu__link" href="#">Home</a>
-          </li>
-          <li class="navigation-menu__item">
-            <a class="navigation-menu__link" href="#">Favorite</a>
-          </li>
-          <li class="navigation-menu__item">
-            <a class="navigation-menu__link" href="#">Read</a>
-          </li>
-        </ul>
-      </nav>
+      <!-- SEARCH-BAR here!!! -->
+      <button
+        class="button-burger js-open-menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <svg width="24" height="24">
+          <use href="./images/icons/icons.svg#icon-menu"></use>
+        </svg>
+      </button>
+
+      <div class="navbar__items">
+        <nav class="navigation-menu">
+          <ul class="navigation-menu__list">
+            <li class="navigation-menu__item">
+              <a class="navigation-menu__link" href="#">Home</a>
+            </li>
+            <li class="navigation-menu__item">
+              <a class="navigation-menu__link" href="#">Favorite</a>
+            </li>
+            <li class="navigation-menu__item">
+              <a class="navigation-menu__link" href="#">Read</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="navbar__items--right">
+          <div class="search-box">
+            <span class="search-box__icon">
+              <svg class="search-box__icon-svg" width="106" height="60">
+                <use href="/src/images/icons/icons.svg#icon-search"></use>
+            </span>
+            <input type="search-input" placeholder="Search |" id="mySearch">
+            <span class="close-icon"></span>
+          </div>
+              <div class="toggle__wrapper toggle__wrapper--right">
+                <svg class="icon-active_theme" width="21" height="21">
+                  <use href="./images/icons/icons.svg#icon-sun"></use>
+                </svg>
+                <div class="toggle"></div>
+                <svg class="icon-active_theme" width="21" height="21">
+                  <use href="./images/icons/icons.svg#icon-moon"></use>
+                </svg>
+              </div>
+        </div>
+      </div>
     </div>
   </div>
 </header>
@@ -70,14 +90,14 @@
         Read</a
       >
     </ul>
-  </div>
-  <div class="toggle-wrapper">
-    <svg class="icon-active_theme" width="21" height="21">
-      <use href="./images/icons/icons.svg#icon-sun"></use>
-    </svg>
-    <div class="toggle"></div>
-    <svg class="icon-active_theme" width="21" height="21">
-      <use href="./images/icons/icons.svg#icon-moon"></use>
-    </svg>
+    <div class="toggle__wrapper toggle__wrapper--bottom">
+      <svg class="icon-active_theme" width="21" height="21">
+        <use href="./images/icons/icons.svg#icon-sun"></use>
+      </svg>
+      <div class="toggle"></div>
+      <svg class="icon-active_theme" width="21" height="21">
+        <use href="./images/icons/icons.svg#icon-moon"></use>
+      </svg>
+    </div>
   </div>
 </div>

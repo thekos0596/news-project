@@ -23,8 +23,15 @@
     color: $color-black-primary;
 }
 
-.navigation-menu {
+.navbar__items {
     display: none;
+
+    @media screen and (min-width: $tablet) {
+        display: flex;
+    }
+}
+
+.navigation-menu {
 
     &__list {
         display: flex;
@@ -46,11 +53,6 @@
         letter-spacing: 0.02em;
         text-transform: none;
         color: inherit;
-
-        &:hover,
-        &:focus {
-            color: #2196f3;
-        }
     }
 
 
@@ -66,12 +68,10 @@
     // }
 }
 
-// .button-wrapper {
-//     display: flex;
-//     gap: 14px;
-//     align-items: center;
+.navbar__items--right {
+    // display: flex;
 
-// }
+}
 
 
 .button-burger {
@@ -113,7 +113,8 @@
     position: fixed;
     top: 0;
     left: 0;
-    height: 100vh;
+    height: 100%;
+    width: 100%;
     z-index: 999;
 
     visibility: hidden;
