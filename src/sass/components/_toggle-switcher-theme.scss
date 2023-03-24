@@ -1,5 +1,5 @@
 body.dark {
-    background-color: $bg-colo-dark-site;
+    background-color: $bg-color-dark-site;
 }
 
 .toggle__wrapper {
@@ -17,6 +17,8 @@ body.dark {
 
     @media screen and (min-width: $tablet) {
         display: inline-flex;
+        position: absolute;
+        right: 16px;
     }
 }
 

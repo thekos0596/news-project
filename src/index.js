@@ -21,3 +21,4 @@ async function onFormSubmit(event) {
   }
 }
 import './js/API-service/api-weather';
+import './js/search-form';
