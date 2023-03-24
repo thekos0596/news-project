@@ -1,5 +1,5 @@
 import './js/mobile-menu';
-import { renderArticle } from './renderArticle';
+import { renderArticle } from './js/renderArticle';
 import NewArticles from './js/API-service/api-news';
 import { initAccordion } from "./js/accordion";
 const buttonEL = document.querySelector('.fetch');

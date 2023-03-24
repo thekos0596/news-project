@@ -1,4 +1,5 @@
-export { renderArticle, onGetDate };
+export { renderArticle };
+import sha256 from 'crypto-js/sha256';
 
 const newCardEl = document.querySelector('.news-card');
 
@@ -17,6 +18,20 @@ function onGetDate(res) {
   return dataStr;
 }
 
+function generateId(res) {
+  const newsItem = res.results.map(
+    ({
+      title = 'No title',
+      updated_date = 'No date',
+      slug_name = 'No name',
+    }) => {
+      const hash = sha256(`${updated_date}-${title}-${slug_name}`).toString();
+      return hash;
+    }
+  );
+  return newsItem;
+}
+
 function renderArticle(res) {
   const markup = `<ul class="news-card__image-container">${res.results
     .map(
@@ -24,11 +39,12 @@ function renderArticle(res) {
         const imageUrl =
           multimedia && multimedia[2]?.url
             ? multimedia[2].url
-            : './picture/image2.jpg';
+            : './../images/defaultimage.jpg';
         const imageAlt =
           multimedia && multimedia[2]?.caption
             ? multimedia[2].caption
             : 'Default Image';
+        const newsId = generateId();
 
         return `
   <li class="news-card__item">
@@ -37,7 +53,7 @@ function renderArticle(res) {
   <div class="news-card__category">
    ${section}
   </div>
-  <button class="news-card__favorite-button" data-news-id="">
+  <button class="news-card__favorite-button" data-news-id="${newsId}">
     Add to favorite
   </button>
   </div>
