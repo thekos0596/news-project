@@ -1,0 +1,112 @@
+#weather {
+
+    color: #FFFFFF;
+    background-color: #4440F7;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 675px;
+    font-family: 'Roboto', sans-serif;
+
+    @media screen and (min-width: 768px) {
+        // width: 353px;
+        padding-top: 40px;
+    }
+
+    @media screen and (min-width: 1200px) {
+        // width: 395px;
+        padding-top: 45px;
+    }
+
+    @media screen and (max-width: 767px) {
+        // width: 288px;
+        height: 469px;
+        padding-top: 37px;
+    }
+
+    &__header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+    }
+
+    &__degree {
+        font-weight: 400;
+        font-size: 64px;
+        line-height: 75px;
+
+        @media screen and (max-width: 767px) {
+            font-size: 55px;
+            line-height: 64px;
+        }
+    }
+
+    &__description {
+        border-left: 1px solid #FFFFFF;
+        padding-left: 12px;
+    }
+
+    &__cloud {
+        font-weight: 400;
+        font-size: 36px;
+        line-height: 42px;
+
+        @media screen and (max-width: 767px) {
+            font-size: 20px;
+            line-height: 23px;
+        }
+    }
+
+    &__location {
+        background: rgba(254, 254, 255, 0.3);
+        border-radius: 10px;
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 23px;
+
+        @media screen and (max-width: 767px) {
+            font-size: 14px;
+            line-height: 16px;
+        }
+
+        padding: 10px 17px 9px 11px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+
+        @media screen and (max-width: 767px) {
+            gap: 7px;
+        }
+
+    }
+
+    &__image {
+        margin: 0 auto;
+        margin-top: 91px;
+        width: 165px;
+
+        @media screen and (max-width: 767px) {
+            margin-top: 54px;
+            width: 156px;
+        }
+
+    }
+
+    &__time {
+        text-align: center;
+        margin-top: 90px;
+        font-size: 36px;
+        line-height: 42px;
+
+        @media screen and (max-width: 767px) {
+            margin-top: 40px;
+            font-size: 28px;
+            line-height: 33px;
+        }
+
+    }
+
+}

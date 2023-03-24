@@ -4,6 +4,7 @@ import { renderArticle } from './renderArticle';
 import NewArticles from './js/API-service/api-news';
 import './js/toggle-switcher-theme';
 
+import { initAccordion } from './js/accordion';
 const buttonEL = document.querySelector('.fetch');
 const newArticles = new NewArticles();
 
@@ -14,11 +15,9 @@ async function onFormSubmit(event) {
 
   try {
     const res = await newArticles.fetchArtic();
-
-    console.log(res);
-
     renderArticle(res);
   } catch (error) {
     console.log(error);
   }
 }
+import './js/API-service/api-weather';

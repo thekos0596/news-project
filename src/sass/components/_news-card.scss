@@ -10,16 +10,12 @@
   flex-direction: column;
   background-color: #fff;
   border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   list-style: none;
 }
 
 .news-card {
-  gap: 32px;
   height: 676px;
   border-radius: 4px;
-  display: flex;
-  flex-wrap: wrap;
   padding-top: 60px;
   padding-bottom: 60px;
   justify-content: center;
@@ -54,6 +50,9 @@
   display: flex;
   height: 676px;
   position: relative;
+  flex-wrap: wrap;
+  gap: 32px;
+  justify-content: center;
 }
 
 .news-card__title {
@@ -103,8 +102,8 @@
   text-align: center;
   background: rgba(68, 64, 247, 0.7);
   border-radius: 0px 4px 4px 0px;
-  width: 96px;
-  height: 16px;
+  width: 112px;
+  height: 24px;
 }
 
 .news-card__favorite-button {
