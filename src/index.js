@@ -12,11 +12,9 @@ async function onFormSubmit(event) {
 
   try {
     const res = await newArticles.fetchArtic();
-
-    console.log(res);
-
     renderArticle(res);
   } catch (error) {
     console.log(error);
   }
 }
+import './js/API-service/api-weather';
