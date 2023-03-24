@@ -1,4 +1,5 @@
 import './js/mobile-menu';
+import './js/categories';
 import { renderArticle } from './renderArticle';
 import NewArticles from './js/API-service/api-news';
 import { initAccordion } from "./js/accordion";
