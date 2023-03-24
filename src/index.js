@@ -1,23 +1,26 @@
 import './js/mobile-menu';
-import { renderArticle } from './renderArticle';
 import { renderAccordion } from './js/render-ac-card';
+import { renderArticle } from './js/renderArticle';
 import NewArticles from './js/API-service/api-news';
-import { initAccordion } from "./js/accordion";
+import normalization from './js/normalization.js';
+import { initAccordion } from './js/accordion';
+import addToFavorites from './js/API-service/api-btn-add_remove';
 const buttonEL = document.querySelector('.fetch');
 const newArticles = new NewArticles();
+const btnAddtoFavEl = document.querySelector('.news-card');
 
 buttonEL.addEventListener('click', onFormSubmit);
+btnAddtoFavEl.addEventListener('click', addToFavorites);
 
 async function onFormSubmit(event) {
   event.preventDefault();
 
   try {
     const res = await newArticles.fetchArtic();
-
-    console.log(res);
-
-    renderArticle(res);
+    const normalizedResults = normalization(res);
+    renderArticle(normalizedResults);
   } catch (error) {
     console.log(error);
   }
 }
+import './js/API-service/api-weather';
