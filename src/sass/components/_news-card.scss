@@ -14,7 +14,7 @@
 }
 
 .news-card {
-  height: 676px;
+  // height: 676px;  //  накладається пагінатор! без нього ОК.
   border-radius: 4px;
   padding-top: 60px;
   padding-bottom: 60px;
@@ -48,7 +48,7 @@
   padding: 0;
   margin: 0;
   display: flex;
-  height: 676px;
+  // height: 676px; //  накладається пагінатор! без нього ОК.
   position: relative;
   flex-wrap: wrap;
   gap: 32px;
