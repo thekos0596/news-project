@@ -3,6 +3,13 @@
   margin-top: 60px;
   margin-bottom: 150px;
 }
+.arrow_left {
+justify-content: flex-end;
+}
+
+.arrow_right {
+  justify-content: flex-start;
+}
 
 ul {
   list-style: none;
