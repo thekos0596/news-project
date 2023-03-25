@@ -217,8 +217,11 @@
     // }
 }
 
-// .mobile-menu__item {}
-
+.menu-container__icon {
+    display: flex;
+    border: 1px solid $color-white-secondary;
+    border-radius: 50%;
+}
 
 .current {
     position: relative;
@@ -239,10 +242,4 @@
             background-color: $color-accent;
         }
     }
-}
-
-.menu-container__icon {
-    display: flex;
-    border: 1px solid $color-white-secondary;
-    border-radius: 50%;
 }
