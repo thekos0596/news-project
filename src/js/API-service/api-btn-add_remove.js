@@ -1,57 +1,30 @@
-const addToFavBtn = document.getElementById('addToFavBtn');
-const removeFromFavBtn = document.getElementById('removeFromFavBtn');
-const newsId = ''; // унікальний ідентифікатор новини
+export default function addToFavorites(event) {
+  const newsId = event.target.dataset.newsId;
 
-// Перевіряємо, чи є дана новина у списку улюблених користувача
-const isFav = localStorage.getItem('favoriteNews')?.includes(newsId);
-
-// Функція для додавання новини до списку улюблених
-function addToFavorites() {
-  let favorites = localStorage.getItem('favoriteNews');
-  if (!favorites) {
-    favorites = [];
+  const favoriteList = JSON.parse(localStorage.getItem('favoriteList')) || []; // отримання списку з localStorage
+  const favoriteIndex = favoriteList.findIndex(
+    favorite => favorite.id === newsId
+  ); // пошук індексу обраної новини
+  if (favoriteIndex === -1) {
+    // якщо новина не знаходиться у списку
+    favoriteList.push({ id: newsId }); // додавання нової новини
+    localStorage.setItem('favoriteList', JSON.stringify(favoriteList)); // збереження списку в localStorage
+    event.target.textContent = 'RemoveFromFavorite'; // зміна тексту кнопки
   } else {
-    favorites = JSON.parse(favorites);
-  }
-
-  if (!favorites.includes(newsId)) {
-    favorites.push(newsId);
-    localStorage.setItem('favoriteNews', JSON.stringify(favorites));
-  }
-
-  updateBtnnState();
-}
-
-// Функція для видалення новини зі списку улюблених
-function removeFromFavorites() {
-  let favorites = localStorage.getItem('favoriteNews');
-  if (favorites) {
-    favorites = JSON.parse(favorites);
-    const index = favorites.indexOf(newsId);
-    if (index > -1) {
-      favorites.splice(index, 1);
-      localStorage.setItem('favoriteNews', JSON.stringify(favorites));
-    }
-  }
-
-  updateBtnState();
-}
-
-// Функція для оновлення стану кнопки додавання/видалення зі списку улюблених
-function updateBtnState() {
-  const isFav = localStorage.getItem('favoriteNews')?.includes(newsId);
-  if (isFav) {
-    addToFavBtn.style.display = 'none';
-    removeFromFavBtn.style.display = 'block';
-  } else {
-    addToFavBtn.style.display = 'block';
-    removeFromFavBtn.style.display = 'none';
+    // якщо новина вже знаходиться у списку
+    favoriteList.splice(favoriteIndex, 1); // видалення новини
+    localStorage.setItem('favoriteList', JSON.stringify(favoriteList)); // збереження списку в localStorage
+    event.target.textContent = 'AddToFavorite'; // зміна тексту кнопки
   }
 }
 
-// Встановлюємо обробник подій на кнопки додавання/видалення зі списку улюблених
-addToFavBtn.addEventListener('click', addToFavorites);
-removeFromFavBtn.addEventListener('click', removeFromFavorites);
-
-// Оновлюємо стан кнопки при завантаженні сторінки
-updateBtnState();
+// перевірка, чи знаходиться новина у списку обраних
+// const favoriteList = JSON.parse(localStorage.getItem('favoriteList')) || [];
+// const favoriteIndex = favoriteList.findIndex(
+//   favorite => favorite.id === newsId
+// );
+// if (favoriteIndex === -1) {
+//   favoriteBtn.textContent = 'AddToFavorite';
+// } else {
+//   favoriteBtn.textContent = 'RemoveFromFavorite';
+// }
