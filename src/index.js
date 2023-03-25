@@ -9,7 +9,7 @@ import { renderArticle } from './js/renderArticle';
 import NewArticles from './js/API-service/api-news';
 import normalization from './js/normalization.js';
 import { initAccordion } from './js/accordion';
-import addToFavorites from './js/API-service/api-btn-add_remove';
+import addToFavorites from './js/btn-add-remove';
 import './js/current-page';
 
 const buttonEL = document.querySelector('.fetch');
