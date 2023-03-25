@@ -1,4 +1,5 @@
-import svgSprite from '../../images/icons/icons.svg';
+import svgSprite from '../images/icons/icons.svg';
+import { normalization } from './normalization';
 import { currentNewsPage } from './normalization';
 export default function addToFavorites(event) {
   console.log('res--', currentNewsPage);
