@@ -16,14 +16,14 @@ document.addEventListener('click', (e) => {
         search.classList.remove("active") 
     }
 })
-    // закриття форми по кліку поза формою
+    // закриття форми по кліку поза формою на мобільній версії
 
 document.addEventListener('keydown', function(e) {
-	if( e.key == 27 ){ // код клавиши Escape
+	if( e.key == 27 ){ // код клавіші Escape
 		search.classList.remove("active")
 	}
 });
-// закриття форми по натисканню на Esc
+// закриття форми по натисканню на Esc на мобільній версії
 
 open() {
     $('body').classList.add('overflow__hidden')
@@ -55,4 +55,7 @@ start () {
     }
 }
 
-
+function sSearch() {
+    let count = 0;
+    let liveList = 
+}
