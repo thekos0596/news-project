@@ -54,7 +54,7 @@ function renderArticle(res) {
   <div class="news-card__date">
     ${onGetDate({ results: [{ published_date }] })}
   </div>
-  <a href="${url}" class="news-card__read-more" data-news-id="${title}">
+  <a href="${url}" target="_blank" rel="noreferrer noopener nofollow" class="news-card__read-more" data-news-id="${title}">
     Read more
   </a>
   <div class="news-card__overlay" style="display: none">Already read</div>

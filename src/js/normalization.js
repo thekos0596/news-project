@@ -1,6 +1,6 @@
-const currentNewsPage = [];
+export const currentNewsPage = [];
 
-export default function normalization(res) {
+export function normalization(res) {
   res.results.map(res => {
     currentNewsPage.push({
       section: res.section,
