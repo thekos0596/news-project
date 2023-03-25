@@ -9,3 +9,10 @@ closeIcon.addEventListener("click", () =>
     search.classList.remove("active")
 );
 
+
+let dataSearch = [];
+
+
+if (dataSearch.length === 0) {
+    
+}
