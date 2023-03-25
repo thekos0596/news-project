@@ -1,100 +1,104 @@
-.page-container {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  margin-top: 2rem;
-  background-color: #fff;
-  box-shadow: 0 0 10px #d3d3d3;
-  border-radius: 5px;
-  padding: 10px 15px;
-}
-
-.page-container i {
-  padding: 6px 12px;
-  cursor: pointer;
-  font-size: 18px;
-  color: var(--color-dark);
-  pointer-events: none;
-}
-
-.page-container button {
-  cursor: pointer;
-  background-color: transparent;
-  border: none;
-}
-
-.page-container button:disabled i {
-  color: #aaadc7;
-}
-
-#pagination {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-#pagination li {
-  list-style: none;
-  cursor: pointer;
-  border-radius: 5px;
-  overflow: hidden;
-  margin: 0 3px;
-}
 
 .pagination {
   margin-top: 60px;
   margin-bottom: 150px;
-
-
-  &__pages {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-  }
-
-  &__arrow {
-    width: 82px;
-    height: 31px;
-  }
-
-  &__numbers {
-  width: 33px;
-  height: 31px;
-  }
-
-  &__arrow, &__numbers {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: 500;
-    line-height: 22px;
-    background: $color-white-secondary;
-    border: 1px solid $color-accent;
-    border-radius: 2px;
-    cursor: pointer;
-    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
-
-    &:hover,
-    &:focus {
-      background: $color-accent;
-      color: $color-white-secondary;
-    }
-  }
-  &__name {
-    padding: 4px 10px;
-  } 
 }
 
-.current {
-  background: $color-accent;
+ul {
+  list-style: none;
+}
+
+.page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.prew-icon {
+  pointer-events: none;
+  padding-right: 10px;
+}
+
+.next-icon {
+  pointer-events: none;
+  padding-left: 10px;
+}
+
+.prew-page,
+.next-page {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 82px;
+  height: 31px;
+  background: $color-white-secondary;
+  border: 1px solid $color-accent;;
+  border-radius: 2px;
+  padding-left: 16px;
+  padding-right: 10px;
+  cursor: pointer;
+  font-family: 'Manrope';
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 22px;
+  color: $color-black-primary;
+
+  &:hover {
+      background-color: $color-accent;
+    }
+}
+
+.prew-page:disabled,
+.next-page:disabled {
+  opacity: 0.5;
+  background-color: $color-white-secondary;
+}
+
+.pg-item {
+  overflow: hidden;
+  width: 33px;
+  height: 31px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $color-white-secondary;
+  border: 1px solid $color-accent;;
+  border-radius: 2px;
+  cursor: pointer;
+
+  &:active,
+  &:hover,
+  &:focus {
+    background-color: $color-accent;
+  }
+}
+
+.pagination-buttons {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+#pagination li.active a {
   color: $color-white-secondary;
 }
 
-.disabled-arrow {
-  pointer-events: none;
-  background-color: $color-white-secondary;
-  opacity: 0.5;
+#pagination li:hover a {
+  color: $color-white-primary;
 }
 
+#pagination .active {
+  background: $color-accent;
+}
+
+.pg-link {
+  pointer-events: none;
+  text-decoration: none;
+  font-family: 'Manrope';
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 19px;
+  color: $color-black-primary;
+}

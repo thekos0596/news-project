@@ -2,9 +2,8 @@ import NewArticles from './API-service/api-news';
 import { renderArticle } from '../renderArticle';
 
 const pg = document.getElementById('pagination');
-const btnPrevPg = document.querySelector('.arrow-prew');
-const btnNextPg = document.querySelector('.arrow-next');
-
+const btnNextPg = document.querySelector('button.next-page');
+const btnPrewPg = document.querySelector('button.prew-page');
 const valuePage = {
   curPage: 1,
   numLinksTwoSide: 1,
@@ -15,10 +14,9 @@ pagination();
 
 pg.addEventListener('click', e => {
   const ele = e.target;
-  console.log('ele:', ele);
 
   if (ele.dataset.page) {
-    const pageNumber = parseInt(e.target.dataset.page);
+    const pageNumber = parseInt(e.target.dataset.page, 10);
 
     valuePage.curPage = pageNumber;
     pagination(valuePage);
@@ -99,36 +97,30 @@ function handleButton(element) {
   if (element.classList.contains('first-page')) {
     valuePage.curPage = 1;
   } else if (element.classList.contains('last-page')) {
-    valuePage.curPage = 20;
-  } else if (element.classList.contains('prev-page')) {
+    valuePage.curPage = 10;
+  } else if (element.classList.contains('prew-page')) {
     valuePage.curPage--;
     handleButtonLeft();
     btnNextPg.disabled = false;
-    btnLastPg.disabled = false;
   } else if (element.classList.contains('next-page')) {
     valuePage.curPage++;
     handleButtonRight();
-    btnPrevPg.disabled = false;
-    btnFirstPg.disabled = false;
+    btnPrewPg.disabled = false;
   }
   pagination();
 }
 function handleButtonLeft() {
   if (valuePage.curPage === 1) {
-    btnPrevPg.disabled = true;
-    btnFirstPg.disabled = true;
+    btnPrewPg.disabled = true;
   } else {
-    btnPrevPg.disabled = false;
-    btnFirstPg.disabled = false;
+    btnPrewPg.disabled = false;
   }
 }
 function handleButtonRight() {
   if (valuePage.curPage === valuePage.totalPages) {
     console.log(valuePage.curPage);
     btnNextPg.disabled = true;
-    btnLastPg.disabled = true;
   } else {
     btnNextPg.disabled = false;
-    btnLastPg.disabled = false;
   }
 }
