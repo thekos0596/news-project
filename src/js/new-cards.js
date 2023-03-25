@@ -1,6 +1,6 @@
 import { renderArticle } from './renderArticle';
 import NewArticles from './API-service/api-news';
-import { normalization } from './normalization.js';
+import normalization from './normalization.js';
 import addToFavorites from './btn-add-remove';
 
 const buttonEL = document.querySelector('.fetch');
