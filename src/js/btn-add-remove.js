@@ -1,5 +1,5 @@
 import svgSprite from '../../images/icons/icons.svg';
-import { currentNewsPage } from '../normalization';
+import { currentNewsPage } from './normalization';
 export default function addToFavorites(event) {
   console.log('res--', currentNewsPage);
   const newsId = event.target.dataset.newsId;
