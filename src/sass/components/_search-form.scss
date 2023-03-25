@@ -1,6 +1,6 @@
 .search-box {
     position: absolute;
-    right: 54px;
+    right: 77px;
     // width: 173px;
     height: 31px;
     border-radius: 20px;
@@ -24,6 +24,7 @@
     outline: none;
     border: none;
     height: 100%;
+    width: 173px;
 
     padding: 0px 0px 0px 48px;
 
@@ -51,6 +52,7 @@
     // width: 173px;
     border: 1px solid #111321;
     border-radius: 20px;
+    margin-right: -22px
 }
 
 .search-box.active .search__input {
