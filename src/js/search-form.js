@@ -2,12 +2,21 @@ import axios from 'axios';
 
 const icon = document.querySelector('.search-box__icon');
 const search = document.querySelector('.search-box');
+const input = document.querySelector('.input');
 let dataSearch = [];
 
 icon.onclick = () => {
     search.classList.add("active");
 }
 // відкриття форми пошуку на мобільній версії
+
+icon.addEventListener('submit', () => {
+    if (input.value != '') {
+        
+    }
+})
+
+// зробити сабміт по кліку на лупу як в інпут введено хоч один символ
 
 document.addEventListener('click', (e) => {
     const withinBoundaries = e.composedPath().includes(search);
@@ -25,11 +34,10 @@ document.addEventListener('keydown', function(e) {
 });
 // закриття форми по натисканню на Esc на мобільній версії
 
-open() {
-    $('body').classList.add('overflow__hidden')
-}
+// open() {
+//     $('body').classList.add('overflow__hidden')
+// }
 // блокую body щоб не скролився
-
 
 export class SearchModel{
 start () {
@@ -55,7 +63,37 @@ start () {
     }
 }
 
-function sSearch() {
-    let count = 0;
-    let liveList = 
+// функція - що буде показуватись як результат
+
+input.addEventListener("input", (e) => {
+    let value = e.target.value
+
+    if (value && value.trim().length > 0) {
+        value = value.trim().toLowerCase()
+
+        // return the results only, 
+        // a function for filtering through our data to include the search input value
+
+// let dataRelivant = dataSearch.sort((a, b) => b.views - a.views)
+
+// dataRelivant.forEach((elem) => {
+//     let title = elem.title.trim()
+
+//     if (title.includes(inputText)) {
+        
+//     }
+// })
+
+    } else {
+    noResults()
+    }
+})
+
+function noResults() {
+    const error = document.createElement('h2')
+    error.classList.add('error-message')
+
+    const text = document.createTextNode('We have not found news from this category')
+    error.appendChild(text)
+    list.appendChild(error)
 }
