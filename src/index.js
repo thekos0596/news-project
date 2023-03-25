@@ -7,6 +7,7 @@ import './js/toggle-switcher-theme';
 import './js/search-form';
 import './js/API-service/api-weather';
 import addToFavorites from './js/API-service/api-btn-add_remove';
+import './js/current-page';
 
 const buttonEL = document.querySelector('.fetch');
 const newArticles = new NewArticles();
