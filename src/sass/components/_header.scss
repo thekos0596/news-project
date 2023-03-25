@@ -26,6 +26,11 @@
         font-size: 32px;
         line-height: 43.71px;
     }
+
+    @media screen and (min-width: $desktop) {
+        font-size: 42px;
+        line-height: 57px;
+    }
 }
 
 .navbar__items {
@@ -48,6 +53,11 @@
             margin-left: 48px;
             gap: 44px;
         }
+
+        @media screen and (min-width: $desktop) {
+            margin-left: 102px;
+            gap: 69px;
+        }
     }
 
     &__link {
@@ -67,6 +77,11 @@
         @media screen and (min-width: $tablet) {
             font-weight: 700;
             font-size: 16px;
+            line-height: 1.38;
+        }
+
+        @media screen and (min-width: $desktop) {
+            font-size: 18px;
         }
     }
 
@@ -83,10 +98,6 @@
     // }
 }
 
-// .navbar__items--right {
-// display: flex;
-
-// }
 
 .navbar__items--right {
 
@@ -209,9 +220,25 @@
 // .mobile-menu__item {}
 
 
-.mobile-menu__link--current {
-    background-color: $color-accent;
-    color: $color-white-primary;
+.current {
+    position: relative;
+    color: $color-black-primary;
+    pointer-events: none;
+    cursor: default;
+
+    @media screen and (min-width: $tablet-less) {
+        &::after {
+            position: absolute;
+            display: flex;
+            content: "";
+            width: 100%;
+            bottom: -12px;
+            position: absolute;
+            border-radius: 2px;
+            height: 2px;
+            background-color: $color-accent;
+        }
+    }
 }
 
 .menu-container__icon {
