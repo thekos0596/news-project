@@ -1,5 +1,6 @@
 import './js/mobile-menu';
 import { renderAccordion } from './js/render-ac-card';
+import { readOnFormSubmit } from './js/render-ac-card';
 import { renderArticle } from './js/renderArticle';
 import NewArticles from './js/API-service/api-news';
 import normalization from './js/normalization.js';

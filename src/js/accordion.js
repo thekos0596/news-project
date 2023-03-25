@@ -1,4 +1,4 @@
-const accordionEl = document.getElementsByClassName('accordion__active');
+const accordionEl = document.getElementsByClassName('.accordion__active');
 
 export function initAccordion() {
   const accordionEl = document.querySelectorAll('.accordion__wrap');

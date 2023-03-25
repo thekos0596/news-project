@@ -1,12 +1,16 @@
 import NewArticles from './API-service/api-news';
 import { initAccordion } from './accordion';
+import iconAc from '../images/icons/icons.svg';
+import defImg from '../images/defaultimage.jpg';
 
-const buttonEL = document.querySelector('.fetch');
+
+const containerEl = document.querySelector('.container__read')
+const buttonEL = document.querySelector('.read_fetch');
 const newArticles = new NewArticles();
 
-buttonEL.addEventListener('click', onFormSubmit);
+buttonEL.addEventListener('click', readOnFormSubmit);
 
-async function onFormSubmit(event) {
+export async function readOnFormSubmit(event) {
   event.preventDefault();
 
   try {
@@ -42,8 +46,8 @@ export function renderAccordion(res){
               <div class="accordion__wrap">
                   <div class="accordion__active">
                     <div class="read__date">${formattedDate}</div>
-                    <svg class="accordion_icon" width="15" height="9" viewBox="0 0 32 32" fill="none">
-                      <use href="./images/icons/icons.svg#icon-vector-down"></use>
+                    <svg class="accordion_icon" width="15" height="9">
+                      <use href="${iconAc}#icon-vector-down"></use>
                     </svg>
                   </div>
                   <hr class="accordion__line">
@@ -60,3 +64,17 @@ export function renderAccordion(res){
   newAccorEl.insertAdjacentHTML('beforeEnd', markupAccordion)
   initAccordion();
 }
+
+export function pageEmpty(){
+  const items = localStorage.getItem('url');
+  if(!items){
+    return `
+    <div class="page-empty">
+    <h2 class="page-empty__text">You don't have any read news</h2>
+    <img src="${defImg}" alt="You have not read news" class="page-empty__img">
+    </div>`
+  }
+  return
+}
+
+containerEl.insertAdjacentHTML('beforeEnd', pageEmpty())
