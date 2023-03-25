@@ -1,4 +1,5 @@
 import './js/mobile-menu';
+import './js/pagination';
 import { renderArticle } from './js/renderArticle';
 import NewArticles from './js/API-service/api-news';
 import normalization from './js/normalization.js';
