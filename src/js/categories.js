@@ -217,37 +217,7 @@ console.log(viewportWidth);
 console.log(buttonSelect.textContent);
 buttonSelect.textContent = viewportWidth < 768 ? 'Categories' : 'Other';
 
-// let selectedCategory = null;
-
-// function updateSelectedCategory() {
-//   if (viewportWidth < 768) {
-//     selectedCategory = categories[0];
-//   } else if (viewportWidth < 1280) {
-//     selectedCategory = categories[4];
-//   } else {
-//     selectedCategory = categories[6];
-//   }
-
-//   const dropdownContent = document.querySelector(".categories__buttons .categories__dropdown-content");
-//   dropdownContent.innerHTML = "";
-
-//   for (let i = 0; i < categories.length; i++) {
-//     if (selectedCategory === categories[i]) {
-//       const button = document.createElement('button');
-//       button.classList.add('categories__dropdown-item');
-//       button.dataset.section = categories[i].section;
-//       button.innerText = categories[i].display_name;
-//       dropdownContent.appendChild(button);
-//       document
-//         .querySelector('.categories__buttons .categories__dropdown-content')
-//         .appendChild(button);
-//     }
-//   }
-// }
-
-// updateSelectedCategory();
-// window.addEventListener("resize", updateSelectedCategory);
-function createButton() {categories.forEach(function(category) {
+function createButton(array) {array.forEach(function(category) {
   const button = document.createElement("button");
   button.classList.add("categories__dropdown-item");
   button.dataset.section = category.section;
@@ -256,36 +226,26 @@ function createButton() {categories.forEach(function(category) {
 });}
 
 console.log(categories.length);
-// const buttonContainer = document.getElementById('button-container');
 
-// // функція для створення кнопок
-// function createButton(text) {
-//   const button = document.createElement("button");
-//           button.classList.add("categories__dropdown-item");
-//           button.dataset.section = category.section;
-//           button.innerText = category.display_name;
-//           document.querySelector(".categories__buttons .categories__dropdown-content").appendChild(button);
-// }
-
-// createButton(text);
-// // ширина вьюпорту
 const screenWidth = window.innerWidth;
-// console.log(screenWidth);
-// // додавання кнопок з назвами з масиву залежно від ширини вьюпорту
+
 if (screenWidth < 768) {
-  for (let i = 0; i < categories.length; i++) {
-    createButton(categories[i].display_name);
+ {
+  const newArray = categories;
+         createButton(newArray);
     return;
   }
 } else if (screenWidth < 1268) {
-  for (let i = 4; i < categories.length; i++) {
-    createButton(categories[i].display_name);
+  
+    const newArray = categories.slice(4, categories.length);
+    createButton(newArray);
     return;
   }
-} else {
-  for (let i = 6; i < categories.length; i++) {
-    createButton(categories[i].display_name);
+ else {
+  {
+    const newArray = categories.slice(6, categories.length);
+    createButton(newArray);
+    
     return;
   }
 }
-// createButton();
