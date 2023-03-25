@@ -4,7 +4,7 @@ import './js/categories';
 import './js/toggle-switcher-theme';
 import './js/search-form';
 import './js/API-service/api-weather';
-
+import './js/calendar.js';
 import { renderArticle } from './js/renderArticle';
 import NewArticles from './js/API-service/api-news';
 import normalization from './js/normalization.js';
