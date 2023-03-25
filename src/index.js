@@ -1,11 +1,13 @@
 import './js/mobile-menu';
+import './js/categories';
+import './js/toggle-switcher-theme';
+import './js/search-form';
+import './js/API-service/api-weather';
+
 import { renderArticle } from './js/renderArticle';
 import NewArticles from './js/API-service/api-news';
 import normalization from './js/normalization.js';
 import { initAccordion } from './js/accordion';
-import './js/toggle-switcher-theme';
-import './js/search-form';
-import './js/API-service/api-weather';
 import addToFavorites from './js/API-service/api-btn-add_remove';
 import './js/current-page';
 
