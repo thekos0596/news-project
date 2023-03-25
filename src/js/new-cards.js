@@ -1,16 +1,7 @@
-import './js/mobile-menu';
-import './js/new-cards';
-import './js/categories';
-import './js/toggle-switcher-theme';
-import './js/search-form';
-import './js/API-service/api-weather';
-import './js/calendar.js';
-import { renderArticle } from './js/renderArticle';
-import NewArticles from './js/API-service/api-news';
-import normalization from './js/normalization.js';
-import { initAccordion } from './js/accordion';
-import addToFavorites from './js/btn-add-remove';
-import './js/current-page';
+import { renderArticle } from './renderArticle';
+import NewArticles from './API-service/api-news';
+import normalization from './normalization.js';
+import addToFavorites from './btn-add-remove';
 
 const buttonEL = document.querySelector('.fetch');
 const newArticles = new NewArticles();
