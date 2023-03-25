@@ -255,7 +255,7 @@ function createButton() {categories.forEach(function(category) {
   document.querySelector(".categories__buttons .categories__dropdown-content").appendChild(button);
 });}
 
-
+console.log(categories.length);
 // const buttonContainer = document.getElementById('button-container');
 
 // // функція для створення кнопок
@@ -272,17 +272,20 @@ function createButton() {categories.forEach(function(category) {
 const screenWidth = window.innerWidth;
 // console.log(screenWidth);
 // // додавання кнопок з назвами з масиву залежно від ширини вьюпорту
-// if (screenWidth < 768) {
-//   for (let i = 0; i < categories.length; i++) {
-//     createButton(categories[i].display_name);
-//   }
-// } else if (screenWidth < 1268) {
-//   for (let i = 4; i < categories.length; i++) {
-//     createButton(categories[i].display_name);
-//   }
-// } else {
-//   for (let i = 6; i < categories.length; i++) {
-//     createButton(categories[i].display_name);
-//   }
-// }
-createButton();
+if (screenWidth < 768) {
+  for (let i = 0; i < categories.length; i++) {
+    createButton(categories[i].display_name);
+    return;
+  }
+} else if (screenWidth < 1268) {
+  for (let i = 4; i < categories.length; i++) {
+    createButton(categories[i].display_name);
+    return;
+  }
+} else {
+  for (let i = 6; i < categories.length; i++) {
+    createButton(categories[i].display_name);
+    return;
+  }
+}
+// createButton();
