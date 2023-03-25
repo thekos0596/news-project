@@ -3,6 +3,7 @@ import axios from 'axios';
 const icon = document.querySelector('.search-box__icon');
 const search = document.querySelector('.search-box');
 const input = document.querySelector('.input');
+
 let dataSearch = [];
 
 icon.onclick = () => {
@@ -10,11 +11,24 @@ icon.onclick = () => {
 }
 // відкриття форми пошуку на мобільній версії
 
-icon.addEventListener('submit', () => {
-    if (input.value != '') {
-        
-    }
-})
+input.addEventListener('submit', async (e) => {
+    e.preventDefault()
+
+    if (input.value === '') {
+        return 
+    } 
+    const searchNews = input.value 
+
+  try {
+    const res = await newArticles.fetchArtic(searchNews);
+    const normalizedResults = normalization(res);
+    renderArticle(normalizedResults);
+  } catch (error) {
+    console.log(error);
+  }
+}
+)
+
 
 // зробити сабміт по кліку на лупу як в інпут введено хоч один символ
 
@@ -96,4 +110,10 @@ function noResults() {
     const text = document.createTextNode('We have not found news from this category')
     error.appendChild(text)
     list.appendChild(error)
+}
+
+
+filteredDate = dates.filter(dateFilter);
+function dateFilter(date) {
+
 }
