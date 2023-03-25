@@ -2,6 +2,8 @@
     display: flex;
     align-items: flex-start;
     gap: 10px;
+    margin-top: 28px;
+    margin-bottom: 60px;
   }
   
   .categories__button {
@@ -88,6 +90,7 @@
   }
   
   .categories__dropdown-content {
+    background-color: #F8F8F8;
      position: absolute;
     display: none;
         justify-content: center;
@@ -104,20 +107,22 @@
     line-height: 1.33;
     letter-spacing: 0.01em;
     color: $color-accent;
-    width: 160px;
+    width: 200px;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
     gap: 12px;
+    z-index: 20;
   }
   
   .categories__dropdown-item {
+    border: none;
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 8px 21px;
+    // padding: 8px 21px;
     height: 31px;
-    background-color: #fff;
+    background-color: #F8F8F8;
    padding-left: 0px;
     font-family: Manrope;
     font-weight: 400;
@@ -127,8 +132,8 @@
     color: #4440F6;
     &:hover,
     &:focus {
-      background-color: #4440F6;
-      color: #FFFFFF;
+     
+      
       cursor: pointer;
     }
   }
