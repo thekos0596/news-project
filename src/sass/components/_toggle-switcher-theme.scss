@@ -1,0 +1,76 @@
+body.dark {
+    background-color: $bg-color-dark-site;
+}
+
+.toggle__wrapper {
+    display: inline-flex;
+    gap: 8px;
+}
+
+.toggle__wrapper--bottom {
+    position: absolute;
+    bottom: 18px;
+}
+
+.toggle__wrapper--right {
+    display: none;
+
+    @media screen and (min-width: $tablet) {
+        display: inline-flex;
+        position: absolute;
+        right: 16px;
+    }
+}
+
+.toggle {
+    position: relative;
+    height: 20px;
+    width: 40px;
+    border: 0.6px solid $color-switches;
+    border-radius: 100px;
+    background-color: #fff;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.toggle::before {
+    content: "";
+    position: absolute;
+    height: 16px;
+    width: 16px;
+    background: $color-switches;
+    border-radius: 50%;
+    top: 50%;
+    right: 22px;
+    transform: translateY(-50%);
+    transition: all 0.3s ease-in-out;
+}
+
+.toggle.active::before {
+    background-color: #18191a;
+    right: calc(100% - 24px - 14px);
+}
+
+.icon-theme {
+    @media screen and (min-width: $desktop) {
+        display: none;
+    }
+}
+
+.theme__text {
+    display: none;
+
+    @media screen and (min-width: $desktop) {
+        display: inline;
+        font-size: 18px;
+        line-height: 1.3;
+    }
+}
+
+.theme__text--light {
+    margin-right: 12px;
+}
+
+.theme__text--dark {
+    margin-left: 12px;
+}
