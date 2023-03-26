@@ -1,37 +1,20 @@
 import NewArticles from './API-service/api-news';
 import { initAccordion } from './accordion';
-import iconAc from '../images/icons/icons.svg';
-import defImg from '../images/defaultimage.jpg';
-
+import svgSprite from '../images/icons/icons.svg';
+import defImgPng from '../images/default_hidden.png';
+import './btn-add-remove';
 
 const containerEl = document.querySelector('.container__read')
-const buttonEL = document.querySelector('.read_fetch');
-const newArticles = new NewArticles();
-
-buttonEL.addEventListener('click', readOnFormSubmit);
-
-export async function readOnFormSubmit(event) {
-  event.preventDefault();
-
-  try {
-    const res = await newArticles.fetchArtic();
-
-    console.log(res);
-
-    renderAccordion(res);
-  } catch (error) {
-    console.log(error);
-  }
-}
 
 const newAccorEl = document.querySelector('.accordion');
 
-export function renderAccordion(res){
-  console.log (res.results)
+export function renderAccordion(){
+  containerEl.insertAdjacentHTML('beforeEnd', pageEmpty());
+  const response = JSON.parse(localStorage.getItem('favoriteList'));
 
   const uniqueDates = new Set();
-
-  res.results.forEach(({published_date}) => {
+ 
+  response.forEach(({published_date}) => {
       const date = new Date(published_date);
       const formattedDate = date.toLocaleDateString('en-GB', {
           day: '2-digit',
@@ -47,13 +30,13 @@ export function renderAccordion(res){
                   <div class="accordion__active">
                     <div class="read__date">${formattedDate}</div>
                     <svg class="accordion_icon" width="15" height="9">
-                      <use href="${iconAc}#icon-vector-down"></use>
+                      <use href="${svgSprite}#icon-vector-down"></use>
                     </svg>
                   </div>
                   <hr class="accordion__line">
                   <div class="content">
                     <div class="news-card">
-                  
+
                     </div>
                   </div>
               </div>
@@ -64,17 +47,18 @@ export function renderAccordion(res){
   newAccorEl.insertAdjacentHTML('beforeEnd', markupAccordion)
   initAccordion();
 }
+renderAccordion()
 
 export function pageEmpty(){
-  const items = localStorage.getItem('url');
-  if(!items){
+  const items = JSON.parse(localStorage.getItem('favoriteList'));
+
+  if (items && items.length === 0){
     return `
     <div class="page-empty">
     <h2 class="page-empty__text">You don't have any read news</h2>
-    <img src="${defImg}" alt="You have not read news" class="page-empty__img">
+    <img src="${defImgPng}" alt="You have not read news" class="page-empty__img">
     </div>`
+    
   }
-  return
+  return ''
 }
-
-containerEl.insertAdjacentHTML('beforeEnd', pageEmpty())

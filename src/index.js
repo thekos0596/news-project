@@ -6,6 +6,3 @@ import './js/API-service/api-weather';
 import './js/current-page';
 import './js/categories';
 import './js/pagination';
-import { initAccordion } from './js/accordion';
-import { renderAccordion } from './js/render-ac-card';
-import { readOnFormSubmit } from './js/render-ac-card';
