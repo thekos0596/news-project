@@ -1,34 +1,47 @@
-import { APIService } from './API-service/api-news';
+import { fetchArtic } from './API-service/api-news';
+import { API_KEY } from './API-service/api-news';
+import { BASE_URL } from './API-service/api-news';
 import axios from 'axios';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
-
 const icon = document.querySelector('.search-box__icon');
 const search = document.querySelector('.search-box');
-const input = document.querySelector('#mySearch');
+const input = document.querySelector("#mySearch");
+let page = 1;
+let title = ' ';
+const perPage = 7;
 
-icon.onclick = () => {
-    search.classList.add("active");
+let cardNews = []
+
+axios.defaults.baseURL = BASE_URL;
+
+async function searchingNews(title, page = 1, perPage = 40) {
+  const response = await axios(
+    `?key=${API_KEY}&q=${title}${fetchArtic}&page=${page}&per_page=${perPage}`
+  );
+  return response;
 }
-// відкриття форми пошуку на мобільній версії
 
-input.addEventListener('submit', e => console.log("test", e.currentTarget.value));
-    
+search.addEventListener('submit', e => console.log(e));
+
 async function onSubmitNews(e) {
-    e.preventDefault()
-console.log("test", e.currentTarget.value)
-    title = e.target.elements.searchQuery.value.trim();
-    if ((input.value === '') && (input.value.lendth <= 1)) {
-        return Notify.failure(
+  e.preventDefault();
+  console.log("test", e.currentTarget.value)
+
+  title = e.target.elements.searchQuery.value.trim();
+  if ((input.value === '') && (input.value.lendth <= 1)) {
+     return Notify.failure(
       'Sorry, the search field cannot be empty. Please enter information to search.'
     );
-    } 
+  }
 
-  //   const { data } = await searchingNews(title);
+    const { data } = await searchingNews(title);
 
-  //     messageInfo(data); 
-  // stopSearch(data); 
-  // e.target.reset(); 
+  articleCard(data);
+  // сюди будуть додаватись знайдені статті
+  messageInfo(data); 
+  stopSearch(data); 
+  e.target.reset(); 
 
   try {
     const res = await newArticles.fetchArtic(searchNews);
@@ -39,17 +52,6 @@ console.log("test", e.currentTarget.value)
   }
 }
  
-let page = 1;
-let title = ' ';
-const perPage = 7;
-
-
-async function searchingNews(title, page = 1, perPage = 7) {
-  const response = await axios(
-    `?key=${API_KEY}&q=${title}${restAPI}&page=${page}&per_page=${perPage}`
-  ); 
-  return response;
-}
 
 function messageInfo(arr) {
   if (arr.input.value === 0) {
@@ -57,8 +59,10 @@ function messageInfo(arr) {
     <img src="./images/defaultimage.jpg"/>`
     ;
   }
-  if (arr.totalHits !== 0) {
-    Notify.success(`Hooray! We found ${arr.totalHits} images.`);
+  // повинна підгружатись картинка
+
+  if (arr.totalInput.value !== 0) {
+    Notify.success(`Hooray! We found ${arr.totalInput.value} articles.`);
   }
 }
 function stopSearch(arr) {
@@ -73,8 +77,10 @@ function stopSearch(arr) {
 
 
 
-
-
+icon.onclick = () => {
+    search.classList.add("active");
+}
+// відкриття форми пошуку на мобільній версії
 
 document.addEventListener('click', (e) => {
     const withinBoundaries = e.composedPath().includes(search);
@@ -84,11 +90,3 @@ document.addEventListener('click', (e) => {
     }
 })
     // закриття форми по кліку поза формою на мобільній версії
-
-document.addEventListener('keydown', function(e) {
-	if( e.key == 27 ){ // код клавіші Escape
-		search.classList.remove("active")
-	}
-});
-// закриття форми по натисканню на Esc на мобільній версії
-
