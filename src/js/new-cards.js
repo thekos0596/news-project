@@ -19,14 +19,17 @@ newsCardEl.addEventListener('click', function (event) {
   }
 });
 
+const numCardsOnPages = 9;
+
 async function onFormSubmit(event) {
   event.preventDefault();
-  console.log(event);
+
   try {
     const res = await newArticles.fetchArtic();
     const normalizedResults = normalization(res);
+    const newArray = normalizedResults.slice(0, numCardsOnPages);
     btnAddtoFavEl.innerHTML = '';
-    renderArticle(normalizedResults);
+    renderArticle(newArray);
   } catch (error) {
     console.log(error);
   }
