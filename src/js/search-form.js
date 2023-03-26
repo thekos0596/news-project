@@ -1,23 +1,34 @@
+import { APIService } from './API-service/api-news';
 import axios from 'axios';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
+
 
 const icon = document.querySelector('.search-box__icon');
 const search = document.querySelector('.search-box');
 const input = document.querySelector('.input');
-
-let dataSearch = [];
 
 icon.onclick = () => {
     search.classList.add("active");
 }
 // відкриття форми пошуку на мобільній версії
 
-input.addEventListener('submit', async (e) => {
+input.addEventListener('submit', onSubmitNews);
+    
+async function onSubmitNews(e) {
     e.preventDefault()
 
-    if (input.value === '') {
-        return 
+    title = e.target.elements.searchQuery.value.trim();
+    if ((input.value === '') && (input.value === < 1)) {
+        return Notify.failure(
+      'Sorry, the search field cannot be empty. Please enter information to search.'
+    );
     } 
-    const searchNews = input.value 
+
+    const { data } = await searchingNews(title);
+
+      messageInfo(data); 
+  stopSearch(data); 
+  e.target.reset(); 
 
   try {
     const res = await newArticles.fetchArtic(searchNews);
@@ -27,10 +38,43 @@ input.addEventListener('submit', async (e) => {
     console.log(error);
   }
 }
-)
+ 
+let page = 1;
+let title = ' ';
+const perPage = 7;
 
 
-// зробити сабміт по кліку на лупу як в інпут введено хоч один символ
+async function searchingNews(title, page = 1, perPage = 7) {
+  const response = await axios(
+    `?key=${API_KEY}&q=${title}${restAPI}&page=${page}&per_page=${perPage}`
+  ); 
+  return response;
+}
+
+function messageInfo(arr) {
+  if (arr.input.value === 0) {
+      return `<h2 class="message-info">We haven’t found news from this category</h2>
+    <img src="./images/defaultimage.jpg"/>`
+    ;
+  }
+  if (arr.totalHits !== 0) {
+    Notify.success(`Hooray! We found ${arr.totalHits} images.`);
+  }
+}
+function stopSearch(arr) {
+  if (arr.hits.length < 40 && arr.hits.length > 0) {
+    loadMoreBtn.style.display = 'none';
+    Notify.info("We're sorry, but you've reached the end of search results.");
+  }
+  if (arr.hits.length === 40) {
+    loadMoreBtn.style.display = 'block';
+  }
+}
+
+
+
+
+
 
 document.addEventListener('click', (e) => {
     const withinBoundaries = e.composedPath().includes(search);
@@ -48,72 +92,3 @@ document.addEventListener('keydown', function(e) {
 });
 // закриття форми по натисканню на Esc на мобільній версії
 
-// open() {
-//     $('body').classList.add('overflow__hidden')
-// }
-// блокую body щоб не скролився
-
-export class SearchModel{
-start () {
-    if (localStorage.getItem("search-data") === null) {
-// перевіряю якщо масив пустий тоді виконується функція
-
-    axios.get(`/search`).then((r) => {
-     
-        localStorage.setItem("search-data", JSON.stringify(r.data))
-// дані перероблюю на стрічку
-        dataSearch = JSON.parse(localStorage.getItem("search-data"))
-// в масив кладу дані із локалсторедж
-    }).catch(r => {
-       
-        CustomPush.show({
-            title:r,
-        })
-    });
-} else {
-    dataSearch = JSON.parse(localStorage.getItem("search-data"))
-// якщо дані в локалсторедж є, то отримую їх без запиту 
-    }
-    }
-}
-
-// функція - що буде показуватись як результат
-
-input.addEventListener("input", (e) => {
-    let value = e.target.value
-
-    if (value && value.trim().length > 0) {
-        value = value.trim().toLowerCase()
-
-        // return the results only, 
-        // a function for filtering through our data to include the search input value
-
-// let dataRelivant = dataSearch.sort((a, b) => b.views - a.views)
-
-// dataRelivant.forEach((elem) => {
-//     let title = elem.title.trim()
-
-//     if (title.includes(inputText)) {
-        
-//     }
-// })
-
-    } else {
-    noResults()
-    }
-})
-
-function noResults() {
-    const error = document.createElement('h2')
-    error.classList.add('error-message')
-
-    const text = document.createTextNode('We have not found news from this category')
-    error.appendChild(text)
-    list.appendChild(error)
-}
-
-
-filteredDate = dates.filter(dateFilter);
-function dateFilter(date) {
-
-}
