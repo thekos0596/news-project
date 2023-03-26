@@ -3,8 +3,7 @@ import { normalization, currentNewsPage } from './normalization';
 
 export default function addToFavorites(event) {
   const newsId = event.target.dataset.newsId;
-  const favoriteList =
-    JSON.parse(localStorage.getItem('favoriteList')) || [] || false;
+  const favoriteList = JSON.parse(localStorage.getItem('favoriteList')) || [];
   const favoriteIndex = favoriteList.findIndex(
     favorite => favorite.title === newsId
   );
