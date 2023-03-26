@@ -3,16 +3,34 @@ import { renderArticle } from './renderArticle';
 import normalization from './normalization';
 
 const pg = document.getElementById('pagination');
+const ulPageContainer = document.querySelector('.page-container');
 const btnNextPg = document.querySelector('button.next-page');
 const btnPrewPg = document.querySelector('button.prew-page');
 const addCard = document.querySelector('.news-card');
 
-window.addEventListener('load', onFormSubmit);
+window.addEventListener('load', onFirstLoad);
 
 const newArticles = new NewArticles();
 
-const numCardsOnPages = 9;
-const numCardsOnFirstPages = numCardsOnPages - 1;
+const pageDesktop = 9;
+const pageTablet = 8;
+const pageMobile = 5;
+
+let numCardsOnPages;
+
+const desktopWidth = window.matchMedia('(min-width: 1280px)');
+const tabletWidth = window.matchMedia(
+  '(min-width: 767px) and (max-width: 1279px)'
+);
+const mobileWidth = window.matchMedia('(max-width: 766px)');
+
+if (desktopWidth.matches === true) {
+  numCardsOnPages = pageDesktop;
+} else if (tabletWidth.matches === true) {
+  numCardsOnPages = pageTablet;
+} else if (mobileWidth.matches === true) {
+  numCardsOnPages = pageMobile;
+}
 
 const valuePage = {
   curPage: 1,
@@ -20,40 +38,17 @@ const valuePage = {
   totalPages: 10,
 };
 
-async function onFormSubmit(event) {
+async function onFirstLoad(event) {
   event.preventDefault();
   try {
     const res = await newArticles.fetchArtic();
-    totalObjsApi = res.results; // 20[]
-    totalNumberPagesApi = res.results.length; // 20
+    // totalObjsApi = res.results; // 20[]
+    const totalNumberPagesApi = res.results.length; // 20
     valuePage.totalPages = Math.ceil(totalNumberPagesApi / numCardsOnPages); // 3
     const normalizedResults = normalization(res);
     const newArray = normalizedResults.slice(0, numCardsOnPages);
     addCard.innerHTML = '';
     renderArticle(newArray);
-
-    // for (let i = 1; i <= valuePage.totalPages; i++) {
-    //   let normalizedResults;
-    //   chunkSize = 8;
-    //   let newsRange =
-    //     totalObjsApi.length < chunkSize
-    //       ? totalObjsApi
-    //       : totalObjsApi.slice(i, i + chunkSize); // 8
-    //   totalObjsApi = totalObjsApi.slice(newsRange.length, totalObjsApi.length); // 12 elements
-    //   console.log('totalObjsApi', totalObjsApi);
-
-    //   // Normilize
-    //   const res = { results: newsRange };
-    //   normalizedResults = normalization(res);
-    //   newsRange = 0;
-
-    //   // Create HTML button
-    //   const button = document.createElement('pagination');
-    //   const elementText = document.createTextNode(i);
-    //   button.appendChild(elementText);
-    //   button.addEventListener('click', renderArticle, normalizedResults);
-    //   buttonsContainer.append(button); // button.innerHTML(0 + i)
-    // }
   } catch (error) {
     console.log(error);
   }
@@ -63,9 +58,9 @@ async function onFormSubmit(event) {
   async function renderNumPage(page) {
     try {
       const res = await newArticles.fetchArtic();
-      totalObjsApi = res.results; // 20[]
-      totalNumberPagesApi = res.results.length; // 20
-      valuePage.totalPages = Math.ceil(totalNumberPagesApi / numCardsOnPages); // 3
+      // totalObjsApi = res.results; // 20[]
+      // totalNumberPagesApi = res.results.length; // 20
+      // valuePage.totalPages = Math.ceil(totalNumberPagesApi / numCardsOnPages); // 3
       const normalizedResults = normalization(res);
 
       const s = (page - 1) * numCardsOnPages;
@@ -83,12 +78,12 @@ async function onFormSubmit(event) {
 
     if (ele.dataset.page) {
       renderNumPage(ele.dataset.page);
-
       const pageNumber = parseInt(e.target.dataset.page);
       valuePage.curPage = pageNumber;
       pagination(valuePage);
       handleButtonLeft();
       handleButtonRight();
+      window.scrollTo(0, 0);
     }
   });
 
@@ -155,28 +150,31 @@ async function onFormSubmit(event) {
     </li>`;
   }
 
-  document
-    .querySelector('.page-container')
-    .addEventListener('click', function (e) {
-      handleButton(e.target);
-    });
+  ulPageContainer.addEventListener('click', function (e) {
+    handleButton(e.target);
+  });
 
   function handleButton(element) {
     if (element.classList.contains('first-page')) {
       valuePage.curPage = 1;
     } else if (element.classList.contains('last-page')) {
-      valuePage.curPage = 10;
+      valuePage.curPage = valuePage.totalPages;
     } else if (element.classList.contains('prew-page')) {
       valuePage.curPage--;
       handleButtonLeft();
+      renderNumPage(valuePage.curPage);
+      window.scrollTo(0, 0);
       btnNextPg.disabled = false;
     } else if (element.classList.contains('next-page')) {
       valuePage.curPage++;
       handleButtonRight();
+      renderNumPage(valuePage.curPage);
+      window.scrollTo(0, 0);
       btnPrewPg.disabled = false;
     }
     pagination();
   }
+
   function handleButtonLeft() {
     if (valuePage.curPage === 1) {
       btnPrewPg.disabled = true;
@@ -184,6 +182,7 @@ async function onFormSubmit(event) {
       btnPrewPg.disabled = false;
     }
   }
+
   function handleButtonRight() {
     if (valuePage.curPage === valuePage.totalPages) {
       btnNextPg.disabled = true;

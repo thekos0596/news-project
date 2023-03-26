@@ -201,17 +201,53 @@ const categories = [
   },
 ];
 
+import NewArticles from './API-service/api-news';
+import { renderArticle } from './renderArticle';
+import normalization from './normalization';
+
+const newArticles = new NewArticles();
+const buttonsEl = document.querySelector('.categories__buttons');
+
+const numCardsOnPages = 9;
+const addCard = document.querySelector('.news-card');
+buttonsEl.addEventListener('click', async function (e) {
+  const selectedCategory = e.target.dataset.section;
+  console.dir(selectedCategory);
+  try {
+    const res = await newArticles.fetchCategories(selectedCategory);
+    console.log(res);
+    const normalizedResults = normalization(res);
+    const newArray = normalizedResults.slice(0, numCardsOnPages);
+    addCard.innerHTML = '';
+    renderArticle(newArray);
+  } catch (error) {}
+});
+
 let select = function () {
   let selectHeader = document.querySelectorAll('.categories__dropdown-header');
+  
+
+  let selectItem = document.querySelectorAll('.categories__dropdown-item');
   selectHeader.forEach(item => {
-    item.addEventListener('click', function () {
-      this.parentElement.classList.toggle('is-active');
-    });
+    item.addEventListener('click', selectToggle);
   });
+  selectItem.forEach(item => {
+    item.addEventListener('click', selectChoose);
+  });
+  function selectToggle() {
+    this.parentElement.classList.toggle('is-active');
+  }
+  function selectChoose() {
+    let text = this.innerText,
+      select = this.closest('.categories__dropdown'),
+      currentText = select.querySelector('#dropdown-span');
+    currentText.innerText = text;
+    select.classList.remove('is-active');
+  }
 };
 select();
 
-const buttonSelect = document.getElementById('dropdown-btn');
+const buttonSelect = document.getElementById('dropdown-span');
 const viewportWidth = window.innerWidth;
 buttonSelect.textContent = viewportWidth < 768 ? 'Categories' : 'Other';
 
@@ -227,15 +263,13 @@ function createButton(array) {
   });
 }
 
-const screenWidth = window.innerWidth;
-
-if (screenWidth < 768) {
+if (viewportWidth < 768) {
   {
     const newArray = categories;
     createButton(newArray);
     return;
   }
-} else if (screenWidth < 1268) {
+} else if (viewportWidth < 1268) {
   const newArray = categories.slice(4, categories.length);
   createButton(newArray);
   return;
