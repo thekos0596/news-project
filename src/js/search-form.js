@@ -4,9 +4,9 @@ import { normalizationSearch } from './normalization.js';
 import defImg from '../images/defaultimage.jpg';
 
 import renderSearchNews from './renderSerchNews';
-import { log } from 'console';
+// import { log } from 'console';
 
-const newArticles = new NewArticles();
+// const newArticles = new NewArticles();
 
 const btnAddtoFavEl = document.querySelector('.news-card');
 const icon = document.querySelector('.search-box__icon-svg');
