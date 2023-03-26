@@ -14,6 +14,15 @@ export default class NewArticles {
       console.log(error);
     }
   }
+
+  async fetchSearch(query) {
+    const url = `${BASE_URL}search/v2/articlesearch.json?api-key=${API_KEY}&q=${query}`;
+
+    try {
+      const { data } = await axios.get(url);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }
-
-

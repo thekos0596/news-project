@@ -15,3 +15,19 @@ export default function normalization(res) {
   // console.log(currentNewsPage);
   return currentNewsPage;
 }
+export function normalizationSearch(res) {
+  currentNewsPage = [];
+  res.response.docs.map(r => {
+    currentNewsPage.push({
+      section: r.section_name,
+      title: r.headline.main,
+      abstract: r.abstract,
+      published_date: r.pub_date,
+      multimedia: r.multimedia || [],
+      url: r.web_url,
+      id: null,
+    });
+  });
+  // console.log(currentNewsPage);
+  return currentNewsPage;
+}

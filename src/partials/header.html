@@ -2,14 +2,24 @@
   <div class="container">
     <div class="header__container">
       <a class="logo link" href="./index.html" id="">News</a>
-      <button class="button-burger js-open-menu" aria-expanded="false" aria-controls="mobile-menu">
+      <button
+        class="button-burger js-open-menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
         <svg width="24" height="24">
           <use href="./images/icons/icons.svg#icon-menu"></use>
         </svg>
       </button>
       <!-- SEARCH BAR -->
       <form class="search-box">
-        <input class="search__input" type="text" placeholder="Search" id="mySearch" />
+        <input
+          class="search__input"
+          name="mySearch"
+          type="text"
+          placeholder="Search"
+          id="mySearch"
+        />
         <button class="search-box__icon fetch" type="submit">
           <svg class="search-box__icon-svg" width="20" height="20">
             <use href="/src/images/icons/icons.svg#icon-search"></use>
@@ -20,24 +30,37 @@
         <nav class="navigation-menu">
           <ul class="navigation-menu__list">
             <li class="navigation-menu__item">
-              <a class="navigation-menu__link" href="./index.html" id="index">Home</a>
+              <a class="navigation-menu__link" href="./index.html" id="index"
+                >Home</a
+              >
             </li>
             <li class="navigation-menu__item">
-              <a class="navigation-menu__link" href="./favorite.html" id="favorite">Favorite</a>
+              <a
+                class="navigation-menu__link"
+                href="./favorite.html"
+                id="favorite"
+                >Favorite</a
+              >
             </li>
             <li class="navigation-menu__item">
-              <a class="navigation-menu__link" href="./read.html" id="read">Read</a>
+              <a class="navigation-menu__link" href="./read.html" id="read"
+                >Read</a
+              >
             </li>
           </ul>
         </nav>
       </div>
       <div class="toggle__wrapper toggle__wrapper--right">
-        <span class="theme__text theme__text--light icon-active_theme">Light</span>
+        <span class="theme__text theme__text--light icon-active_theme"
+          >Light</span
+        >
         <svg class="icon-active_theme icon-theme" width="21" height="21">
           <use href="./images/icons/icons.svg#icon-sun"></use>
         </svg>
         <div class="toggle"></div>
-        <span class="theme__text theme__text--dark icon-active_theme">Dark</span>
+        <span class="theme__text theme__text--dark icon-active_theme"
+          >Dark</span
+        >
         <svg class="icon-active_theme icon-theme" width="21" height="21">
           <use href="./images/icons/icons.svg#icon-moon"></use>
         </svg>
