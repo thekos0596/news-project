@@ -1,33 +1,11 @@
 import './js/mobile-menu';
-import { renderAccordion } from './js/render-ac-card';
-import { readOnFormSubmit } from './js/render-ac-card';
 import './js/new-cards';
-import './js/categories';
 import './js/toggle-switcher-theme';
 import './js/search-form';
 import './js/API-service/api-weather';
-import { renderArticle } from './js/renderArticle';
-import NewArticles from './js/API-service/api-news';
-import normalization from './js/normalization.js';
-import { initAccordion } from './js/accordion';
-import addToFavorites from './js/btn-add-remove';
 import './js/current-page';
+import './js/categories';
+import { initAccordion } from './js/accordion';
+import { renderAccordion } from './js/render-ac-card';
+import { readOnFormSubmit } from './js/render-ac-card';
 
-const buttonEL = document.querySelector('.fetch');
-const newArticles = new NewArticles();
-const btnAddtoFavEl = document.querySelector('.news-card');
-
-buttonEL.addEventListener('click', onFormSubmit);
-btnAddtoFavEl.addEventListener('click', addToFavorites);
-
-async function onFormSubmit(event) {
-  event.preventDefault();
-
-  try {
-    const res = await newArticles.fetchArtic();
-    const normalizedResults = normalization(res);
-    renderArticle(normalizedResults);
-  } catch (error) {
-    console.log(error);
-  }
-}

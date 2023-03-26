@@ -18,8 +18,7 @@
 @import './components/pagination';
 @import './components/news-card.scss';
 
-@import './components/weather.scss';
-
+@import './components/weather';
+@import './components/datepicker'; 
 @import './components/search-form';
-
-@import './components/page-empty'
+@import './components/page-empty';
