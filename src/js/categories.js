@@ -263,7 +263,7 @@ if (viewportWidth < 768) {
   {
     const newArray = categories.slice(6, categories.length);
     createButton(newArray);
-    
+
     return;
   }
 }

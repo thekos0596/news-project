@@ -1,126 +1,194 @@
 import NewArticles from './API-service/api-news';
-import { renderArticle } from '../renderArticle';
+import { renderArticle } from './renderArticle';
+import normalization from './normalization';
 
 const pg = document.getElementById('pagination');
 const btnNextPg = document.querySelector('button.next-page');
 const btnPrewPg = document.querySelector('button.prew-page');
+const addCard = document.querySelector('.news-card');
+
+window.addEventListener('load', onFormSubmit);
+
+const newArticles = new NewArticles();
+
+const numCardsOnPages = 9;
+const numCardsOnFirstPages = numCardsOnPages - 1;
+
 const valuePage = {
   curPage: 1,
   numLinksTwoSide: 1,
-  totalPages: 20,
+  totalPages: 10,
 };
 
-pagination();
+async function onFormSubmit(event) {
+  event.preventDefault();
+  try {
+    const res = await newArticles.fetchArtic();
+    totalObjsApi = res.results; // 20[]
+    totalNumberPagesApi = res.results.length; // 20
+    valuePage.totalPages = Math.ceil(totalNumberPagesApi / numCardsOnPages); // 3
+    const normalizedResults = normalization(res);
+    const newArray = normalizedResults.slice(0, numCardsOnPages);
+    addCard.innerHTML = '';
+    renderArticle(newArray);
 
-pg.addEventListener('click', e => {
-  const ele = e.target;
+    // for (let i = 1; i <= valuePage.totalPages; i++) {
+    //   let normalizedResults;
+    //   chunkSize = 8;
+    //   let newsRange =
+    //     totalObjsApi.length < chunkSize
+    //       ? totalObjsApi
+    //       : totalObjsApi.slice(i, i + chunkSize); // 8
+    //   totalObjsApi = totalObjsApi.slice(newsRange.length, totalObjsApi.length); // 12 elements
+    //   console.log('totalObjsApi', totalObjsApi);
 
-  if (ele.dataset.page) {
-    const pageNumber = parseInt(e.target.dataset.page, 10);
+    //   // Normilize
+    //   const res = { results: newsRange };
+    //   normalizedResults = normalization(res);
+    //   newsRange = 0;
 
-    valuePage.curPage = pageNumber;
-    pagination(valuePage);
-    console.log(valuePage);
-    handleButtonLeft();
-    handleButtonRight();
+    //   // Create HTML button
+    //   const button = document.createElement('pagination');
+    //   const elementText = document.createTextNode(i);
+    //   button.appendChild(elementText);
+    //   button.addEventListener('click', renderArticle, normalizedResults);
+    //   buttonsContainer.append(button); // button.innerHTML(0 + i)
+    // }
+  } catch (error) {
+    console.log(error);
   }
-});
 
-// DYNAMIC PAGINATION
-function pagination() {
-  const { totalPages, curPage, numLinksTwoSide: delta } = valuePage;
+  pagination();
 
-  const range = delta + 4; // use for handle visible number of links left side
+  async function renderNumPage(page) {
+    try {
+      const res = await newArticles.fetchArtic();
+      totalObjsApi = res.results; // 20[]
+      totalNumberPagesApi = res.results.length; // 20
+      valuePage.totalPages = Math.ceil(totalNumberPagesApi / numCardsOnPages); // 3
+      const normalizedResults = normalization(res);
 
-  let render = '';
-  let renderTwoSide = '';
-  let dot = `<li class="pg-item"><a class="pg-link">...</a></li>`;
-  let countTruncate = 0; // use for ellipsis - truncate left side or right side
-
-  // use for truncate two side
-  const numberTruncateLeft = curPage - delta;
-  const numberTruncateRight = curPage + delta;
-
-  let active = '';
-  for (let pos = 1; pos <= totalPages; pos++) {
-    active = pos === curPage ? 'active' : '';
-
-    // truncate
-    if (totalPages >= 2 * range - 1) {
-      if (numberTruncateLeft > 3 && numberTruncateRight < totalPages - 3 + 1) {
-        // truncate 2 side
-        if (pos >= numberTruncateLeft && pos <= numberTruncateRight) {
-          renderTwoSide += renderPage(pos, active);
-        }
-      } else {
-        // truncate left side or right side
-        if (
-          (curPage < range && pos <= range) ||
-          (curPage > totalPages - range && pos >= totalPages - range + 1) ||
-          pos === totalPages ||
-          pos === 1
-        ) {
-          render += renderPage(pos, active);
-        } else {
-          countTruncate++;
-          if (countTruncate === 1) render += dot;
-        }
-      }
-    } else {
-      // not truncate
-      render += renderPage(pos, active);
+      const s = (page - 1) * numCardsOnPages;
+      const e = s + numCardsOnPages;
+      const newArray = normalizedResults.slice(s, e);
+      addCard.innerHTML = '';
+      renderArticle(newArray);
+    } catch (error) {
+      console.log(error);
     }
   }
 
-  if (renderTwoSide) {
-    renderTwoSide =
-      renderPage(1) + dot + renderTwoSide + dot + renderPage(totalPages);
-    pg.innerHTML = renderTwoSide;
-  } else {
-    pg.innerHTML = render;
-  }
-}
+  pg.addEventListener('click', e => {
+    const ele = e.target;
 
-function renderPage(index, active = '') {
-  return ` <li class="pg-item ${active}" data-page="${index}">
-        <a class="pg-link" href="#">${index}</a>
-    </li>`;
-}
+    if (ele.dataset.page) {
+      renderNumPage(ele.dataset.page);
 
-document
-  .querySelector('.page-container')
-  .addEventListener('click', function (e) {
-    handleButton(e.target);
+      const pageNumber = parseInt(e.target.dataset.page);
+      valuePage.curPage = pageNumber;
+      pagination(valuePage);
+      handleButtonLeft();
+      handleButtonRight();
+    }
   });
 
-function handleButton(element) {
-  if (element.classList.contains('first-page')) {
-    valuePage.curPage = 1;
-  } else if (element.classList.contains('last-page')) {
-    valuePage.curPage = 10;
-  } else if (element.classList.contains('prew-page')) {
-    valuePage.curPage--;
-    handleButtonLeft();
-    btnNextPg.disabled = false;
-  } else if (element.classList.contains('next-page')) {
-    valuePage.curPage++;
-    handleButtonRight();
-    btnPrewPg.disabled = false;
+  // DYNAMIC PAGINATION
+  function pagination() {
+    const { totalPages, curPage, numLinksTwoSide: delta } = valuePage;
+    const range = delta + 4; // use for handle visible number of links left side
+
+    let render = '';
+    let renderTwoSide = '';
+    let dot = `<li class="pg-item"><a class="pg-link">...</a></li>`;
+    let countTruncate = 0; // use for ellipsis - truncate left side or right side
+
+    // use for truncate two side
+    const numberTruncateLeft = curPage - delta;
+    const numberTruncateRight = curPage + delta;
+
+    let active = '';
+    for (let pos = 1; pos <= totalPages; pos++) {
+      active = pos === curPage ? 'active' : '';
+
+      // truncate
+      if (totalPages >= 2 * range - 1) {
+        if (
+          numberTruncateLeft > 3 &&
+          numberTruncateRight < totalPages - 3 + 1
+        ) {
+          // truncate 2 side
+          if (pos >= numberTruncateLeft && pos <= numberTruncateRight) {
+            renderTwoSide += renderPage(pos, active);
+          }
+        } else {
+          // truncate left side or right side
+          if (
+            (curPage < range && pos <= range) ||
+            (curPage > totalPages - range && pos >= totalPages - range + 1) ||
+            pos === totalPages ||
+            pos === 1
+          ) {
+            render += renderPage(pos, active);
+          } else {
+            countTruncate++;
+            if (countTruncate === 1) render += dot;
+          }
+        }
+      } else {
+        // not truncate
+        render += renderPage(pos, active);
+      }
+    }
+
+    if (renderTwoSide) {
+      renderTwoSide =
+        renderPage(1) + dot + renderTwoSide + dot + renderPage(totalPages);
+      pg.innerHTML = renderTwoSide;
+    } else {
+      pg.innerHTML = render;
+    }
   }
-  pagination();
-}
-function handleButtonLeft() {
-  if (valuePage.curPage === 1) {
-    btnPrewPg.disabled = true;
-  } else {
-    btnPrewPg.disabled = false;
+
+  function renderPage(index, active = '') {
+    return ` <li class="pg-item ${active}" data-page="${index}">
+        <a class="pg-link" href="#">${index}</a>
+    </li>`;
   }
-}
-function handleButtonRight() {
-  if (valuePage.curPage === valuePage.totalPages) {
-    console.log(valuePage.curPage);
-    btnNextPg.disabled = true;
-  } else {
-    btnNextPg.disabled = false;
+
+  document
+    .querySelector('.page-container')
+    .addEventListener('click', function (e) {
+      handleButton(e.target);
+    });
+
+  function handleButton(element) {
+    if (element.classList.contains('first-page')) {
+      valuePage.curPage = 1;
+    } else if (element.classList.contains('last-page')) {
+      valuePage.curPage = 10;
+    } else if (element.classList.contains('prew-page')) {
+      valuePage.curPage--;
+      handleButtonLeft();
+      btnNextPg.disabled = false;
+    } else if (element.classList.contains('next-page')) {
+      valuePage.curPage++;
+      handleButtonRight();
+      btnPrewPg.disabled = false;
+    }
+    pagination();
+  }
+  function handleButtonLeft() {
+    if (valuePage.curPage === 1) {
+      btnPrewPg.disabled = true;
+    } else {
+      btnPrewPg.disabled = false;
+    }
+  }
+  function handleButtonRight() {
+    if (valuePage.curPage === valuePage.totalPages) {
+      btnNextPg.disabled = true;
+    } else {
+      btnNextPg.disabled = false;
+    }
   }
 }
