@@ -1,0 +1,81 @@
+// ===============Style For Dark Theme==========================
+body.dark {
+    background-color: $bg-color-dark-site;
+    color: $color-white-secondary;
+
+    .current {
+        color: $color-white-secondary;
+    }
+
+    // ===============Header==========================
+    .logo {
+        color: $color-white-secondary;
+    }
+
+    .navigation-menu__link {
+        color: $color-white-primary;
+    }
+
+    .search-box__icon-svg {
+        fill: $color-white-secondary;
+    }
+
+    .search-box {
+        border-color: $color-white-primary;
+    }
+
+    .search__input {
+        background-color: $bg-color-dark-site;
+        color: $color-white-primary;
+    }
+
+    .icon__sun {
+        color: $color-gray-primary;
+        fill: $color-gray-primary;
+    }
+
+    .icon__moon {
+        fill: $color-accent;
+        color: $color-accent;
+    }
+
+    // ===================Mobile Menu=========================
+
+    .button-burger {
+        fill: $color-white-secondary;
+        background-color: $bg-color-dark-site;
+    }
+
+    .button-close {
+        fill: $color-white-secondary;
+        background-color: $bg-color-dark-site;
+    }
+
+    .mobile-container {
+        background-color: $bg-color-dark-site;
+    }
+
+    .toggle__wrapper--battom.icon-active_theme {
+        fill: $color-accent;
+    }
+
+    // ====================Card Grid===============================
+    h2,
+    p {
+        color: $color-white-secondary;
+    }
+
+    .news-card__item {
+        background-color: $bg-color-dark-site;
+    }
+
+    // ====================Page Read===============================
+    .read__date {
+        color: $color-white-secondary;
+    }
+
+    .accordion_icon {
+        fill: $color-white-secondary;
+    }
+
+}
