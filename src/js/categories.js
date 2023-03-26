@@ -201,36 +201,49 @@ const categories = [
   },
 ];
 
-const MAIN_URL = 'https://api.nytimes.com/svc/';
-const APIS_KEY = 'qkqQGkmfT8AlFPBT4ADFZAe8t9wBji7i';
+import NewArticles from './API-service/api-news';
+import { renderArticle } from './renderArticle';
+import normalization from './normalization';
 
-const buttonEl = document.querySelector('.categories__button');
-console.log(buttonEl);
+const newArticles = new NewArticles();
+const buttonsEl = document.querySelector('.categories__buttons');
 
-buttonEl.addEventListener('click', function() {
-  const selectedCategory = this.dataset.section;
-  console.log(buttonEl);
-  const url = `https://api.nytimes.com/svc/news/v3/content/all/${selectedCategory}.json?api-key=qkqQGkmfT8AlFPBT4ADFZAe8t9wBji7i`;
-  
-  fetch(url)
-    .then(response => response.json())
-    .then(data => {
-            console.log(data);
-    })
-    .catch(error => console.error(error));
+const numCardsOnPages = 9;
+const addCard = document.querySelector('.news-card');
+buttonsEl.addEventListener('click', async function (e) {
+  const selectedCategory = e.target.dataset.section;
+  console.dir(selectedCategory);
+  try {
+    const res = await newArticles.fetchCategories(selectedCategory);
+    console.log(res);
+    const normalizedResults = normalization(res);
+    const newArray = normalizedResults.slice(0, numCardsOnPages);
+    addCard.innerHTML = '';
+    renderArticle(newArray);
+  } catch (error) {}
 });
-
-
-
-
 
 let select = function () {
   let selectHeader = document.querySelectorAll('.categories__dropdown-header');
+  
+
+  let selectItem = document.querySelectorAll('.categories__dropdown-item');
   selectHeader.forEach(item => {
-    item.addEventListener('click', function () {
-      this.parentElement.classList.toggle('is-active');
-    });
+    item.addEventListener('click', selectToggle);
   });
+  selectItem.forEach(item => {
+    item.addEventListener('click', selectChoose);
+  });
+  function selectToggle() {
+    this.parentElement.classList.toggle('is-active');
+  }
+  function selectChoose() {
+    let text = this.innerText,
+      select = this.closest('.categories__dropdown'),
+      currentText = select.querySelector('#dropdown-span');
+    currentText.innerText = text;
+    select.classList.remove('is-active');
+  }
 };
 select();
 
@@ -238,28 +251,29 @@ const buttonSelect = document.getElementById('dropdown-span');
 const viewportWidth = window.innerWidth;
 buttonSelect.textContent = viewportWidth < 768 ? 'Categories' : 'Other';
 
-function createButton(array) {array.forEach(function(category) {
-  const button = document.createElement("button");
-  button.classList.add("categories__dropdown-item");
-  button.dataset.section = category.section;
-  button.innerText = category.display_name;
-  document.querySelector(".categories__buttons .categories__dropdown-content").appendChild(button);
-});}
-
+function createButton(array) {
+  array.forEach(function (category) {
+    const button = document.createElement('button');
+    button.classList.add('categories__dropdown-item');
+    button.dataset.section = category.section;
+    button.innerText = category.display_name;
+    document
+      .querySelector('.categories__buttons .categories__dropdown-content')
+      .appendChild(button);
+  });
+}
 
 if (viewportWidth < 768) {
- {
-  const newArray = categories;
-         createButton(newArray);
-    return;
-  }
-} else if (viewportWidth < 1268) {
-  
-    const newArray = categories.slice(4, categories.length);
+  {
+    const newArray = categories;
     createButton(newArray);
     return;
   }
- else {
+} else if (viewportWidth < 1268) {
+  const newArray = categories.slice(4, categories.length);
+  createButton(newArray);
+  return;
+} else {
   {
     const newArray = categories.slice(6, categories.length);
     createButton(newArray);
@@ -267,7 +281,3 @@ if (viewportWidth < 768) {
     return;
   }
 }
-
-
-
-
