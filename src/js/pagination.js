@@ -8,7 +8,7 @@ const btnNextPg = document.querySelector('button.next-page');
 const btnPrewPg = document.querySelector('button.prew-page');
 const addCard = document.querySelector('.news-card');
 
-window.addEventListener('load', onFormSubmit);
+window.addEventListener('load', onFirstLoad);
 
 const newArticles = new NewArticles();
 
@@ -21,7 +21,7 @@ const valuePage = {
   totalPages: 10,
 };
 
-async function onFormSubmit(event) {
+async function onFirstLoad(event) {
   event.preventDefault();
   try {
     const res = await newArticles.fetchArtic();

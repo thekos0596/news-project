@@ -62,8 +62,8 @@
 
     &__link {
         text-decoration: none;
-        font-family: inherit;
-        color: inherit;
+        font-family: $font-main;
+        color: $color-black-primary;
         transition-property: color;
         transition-duration: 250ms;
         transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -72,7 +72,6 @@
         line-height: 1.172;
         letter-spacing: 0.02em;
         text-transform: none;
-        color: inherit;
 
         @media screen and (min-width: $tablet) {
             font-weight: 700;
@@ -225,7 +224,6 @@
 
 .current {
     position: relative;
-    color: $color-black-primary;
     pointer-events: none;
     cursor: default;
 
