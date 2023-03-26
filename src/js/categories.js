@@ -213,39 +213,37 @@ select();
 
 const buttonSelect = document.getElementById('dropdown-btn');
 const viewportWidth = window.innerWidth;
-console.log(viewportWidth);
-console.log(buttonSelect.textContent);
 buttonSelect.textContent = viewportWidth < 768 ? 'Categories' : 'Other';
 
-function createButton(array) {array.forEach(function(category) {
-  const button = document.createElement("button");
-  button.classList.add("categories__dropdown-item");
-  button.dataset.section = category.section;
-  button.innerText = category.display_name;
-  document.querySelector(".categories__buttons .categories__dropdown-content").appendChild(button);
-});}
-
-console.log(categories.length);
+function createButton(array) {
+  array.forEach(function (category) {
+    const button = document.createElement('button');
+    button.classList.add('categories__dropdown-item');
+    button.dataset.section = category.section;
+    button.innerText = category.display_name;
+    document
+      .querySelector('.categories__buttons .categories__dropdown-content')
+      .appendChild(button);
+  });
+}
 
 const screenWidth = window.innerWidth;
 
 if (screenWidth < 768) {
- {
-  const newArray = categories;
-         createButton(newArray);
+  {
+    const newArray = categories;
+    createButton(newArray);
     return;
   }
 } else if (screenWidth < 1268) {
-  
-    const newArray = categories.slice(4, categories.length);
-    createButton(newArray);
-    return;
-  }
- else {
+  const newArray = categories.slice(4, categories.length);
+  createButton(newArray);
+  return;
+} else {
   {
     const newArray = categories.slice(6, categories.length);
     createButton(newArray);
-    
+
     return;
   }
 }
