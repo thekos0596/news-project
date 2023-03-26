@@ -12,7 +12,12 @@
         </svg>
       </button>
       <!-- SEARCH BAR -->
-      <form class="search-box">
+      <form
+        class="search-box"
+        method="get"
+        action=""
+        enctype="application/json"
+      >
         <input
           class="search__input"
           name="mySearch"
@@ -20,7 +25,7 @@
           placeholder="Search"
           id="mySearch"
         />
-        <button class="search-box__icon fetch" type="submit">
+        <button class="search-box__icon fetch">
           <svg class="search-box__icon-svg" width="20" height="20">
             <use href="/src/images/icons/icons.svg#icon-search"></use>
           </svg>
