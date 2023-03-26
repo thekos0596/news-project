@@ -27,6 +27,7 @@ export default function addToFavorites(event) {
 
   btn.textContent = bool ? 'Remove from favorite' : 'Add to favorite';
   createIcon(bool, btn);
+
   if (bool) {
     const currentNews = currentNewsPage.find(news => news.title === newsId);
     favoriteList.push(currentNews);
