@@ -1,4 +1,5 @@
 export let currentNewsPage = [];
+export const currentPage = [];
 export default function normalization(res) {
   currentNewsPage = [];
   res.results.map(res => {
@@ -12,6 +13,6 @@ export default function normalization(res) {
       id: null,
     });
   });
-  console.log(currentNewsPage);
+
   return currentNewsPage;
 }
