@@ -269,24 +269,5 @@ if (viewportWidth < 768) {
 }
 
 
-const BASE_URL = 'https://api.nytimes.com/svc/';
-const API_KEY = 'qkqQGkmfT8AlFPBT4ADFZAe8t9wBji7i';
-
-buttonEl.addEventListener("click", () => {
-  fetchNews()
-    .then((data) => console.log(data))
-    .catch((error) => console.log(error));
-});
-
-function fetchNews() {
-  return fetch("${BASE_URL}news/v3/content/all/crosswords%20%26%20games.json?api-key=${API_KEY}").then(
-    (response) => {
-      if (!response.ok) {
-        throw new Error(response.status);
-      }
-      return response.json();
-    }
-  );
-}
 
 
