@@ -1,9 +1,8 @@
 export { renderArticle };
-
+import defImg from '../images/defaultimage.jpg';
+import svgSprite from '../images/icons/icons.svg';
 
 const newCardEl = document.querySelector('.news-card');
-
-
 
 function onGetDate(res) {
   const dataStr = res.results.map(({ published_date }) => {
@@ -25,9 +24,7 @@ function renderArticle(res) {
     .map(
       ({ abstract, section, title, published_date, multimedia = [], url }) => {
         const imageUrl =
-          multimedia && multimedia[2]?.url
-            ? multimedia[2].url
-            : './../images/defaultimage.jpg';
+          multimedia && multimedia[2]?.url ? multimedia[2].url : defImg;
         const imageAlt =
           multimedia && multimedia[2]?.caption
             ? multimedia[2].caption
@@ -41,7 +38,8 @@ function renderArticle(res) {
    ${section}
   </div>
   <button class="news-card__favorite-button" data-news-id="${title}">
-    Add to favorite
+    Add to favorite <svg width="13" height="12" class="news-card__favorite-icon">
+    <use href="${svgSprite}#icon-favorite"></use></svg>
   </button>
   </div>
   <div class="news-card__description">
@@ -56,9 +54,10 @@ function renderArticle(res) {
   <div class="news-card__date">
     ${onGetDate({ results: [{ published_date }] })}
   </div>
-  <a href="${url}" class="news-card__read-more" data-news-id="${title}">
+  <a href="${url}" target="_blank" rel="noreferrer noopener nofollow" class="news-card__read-more" data-news-id="${title}">
     Read more
   </a>
+  <div class="news-card__overlay" style="display: none">Already read</div>
   </div>
   </li>
 `;

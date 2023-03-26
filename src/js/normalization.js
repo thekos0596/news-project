@@ -13,6 +13,6 @@ export default function normalization(res) {
       id: null,
     });
   });
-  console.log(currentNewsPage);
+
   return currentNewsPage;
 }
