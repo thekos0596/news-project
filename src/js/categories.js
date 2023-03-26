@@ -200,7 +200,7 @@ const categories = [
     display_name: 'Your Money',
   },
 ];
-// const buttonEl = document.querySelectorAll('.categories__button');
+
 const MAIN_URL = 'https://api.nytimes.com/svc/';
 const APIS_KEY = 'qkqQGkmfT8AlFPBT4ADFZAe8t9wBji7i';
 
