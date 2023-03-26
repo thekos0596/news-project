@@ -57,7 +57,7 @@ function renderArticle(res) {
   <a href="${url}" target="_blank" rel="noreferrer noopener nofollow" class="news-card__read-more" data-news-id="${title}">
     Read more
   </a>
-  <div class="news-card__overlay" style="display: none">Already read</div>
+ 
   </div>
   </li>
 `;
