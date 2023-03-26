@@ -27,9 +27,10 @@ async function onFormSubmit(event) {
     totalObjsApi = res.results; // 20[]
     totalNumberPagesApi = res.results.length; // 20
     valuePage.totalPages = Math.ceil(totalNumberPagesApi / numCardsOnPages); // 3
-
     const normalizedResults = normalization(res);
-    renderArticle(normalizedResults);
+    const newArray = normalizedResults.slice(0, numCardsOnPages);
+    addCard.innerHTML = '';
+    renderArticle(newArray);
 
     // for (let i = 1; i <= valuePage.totalPages; i++) {
     //   let normalizedResults;
@@ -59,12 +60,31 @@ async function onFormSubmit(event) {
 
   pagination();
 
+  async function renderNumPage(page) {
+    try {
+      const res = await newArticles.fetchArtic();
+      totalObjsApi = res.results; // 20[]
+      totalNumberPagesApi = res.results.length; // 20
+      valuePage.totalPages = Math.ceil(totalNumberPagesApi / numCardsOnPages); // 3
+      const normalizedResults = normalization(res);
+
+      const s = (page - 1) * numCardsOnPages;
+      const e = s + numCardsOnPages;
+      const newArray = normalizedResults.slice(s, e);
+      addCard.innerHTML = '';
+      renderArticle(newArray);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   pg.addEventListener('click', e => {
     const ele = e.target;
 
     if (ele.dataset.page) {
-      const pageNumber = parseInt(e.target.dataset.page);
+      renderNumPage(ele.dataset.page);
 
+      const pageNumber = parseInt(e.target.dataset.page);
       valuePage.curPage = pageNumber;
       pagination(valuePage);
       handleButtonLeft();
@@ -75,7 +95,6 @@ async function onFormSubmit(event) {
   // DYNAMIC PAGINATION
   function pagination() {
     const { totalPages, curPage, numLinksTwoSide: delta } = valuePage;
-
     const range = delta + 4; // use for handle visible number of links left side
 
     let render = '';
