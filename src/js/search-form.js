@@ -18,7 +18,7 @@ async function onSubmitNews(e) {
     e.preventDefault()
 
     title = e.target.elements.searchQuery.value.trim();
-    if ((input.value === '') && (input.value === < 1)) {
+    if ((input.value === '') && (input.value.lendth <= 1)) {
         return Notify.failure(
       'Sorry, the search field cannot be empty. Please enter information to search.'
     );

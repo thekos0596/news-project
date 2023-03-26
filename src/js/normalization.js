@@ -1,6 +1,6 @@
-const currentNewsPage = [];
-
+export let currentNewsPage = [];
 export default function normalization(res) {
+  currentNewsPage = [];
   res.results.map(res => {
     currentNewsPage.push({
       section: res.section,
@@ -9,6 +9,7 @@ export default function normalization(res) {
       published_date: res.published_date,
       multimedia: res.multimedia || [],
       url: res.url,
+      id: null,
     });
   });
   console.log(currentNewsPage);
