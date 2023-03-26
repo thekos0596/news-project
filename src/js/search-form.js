@@ -4,6 +4,7 @@ import { normalizationSearch } from './normalization.js';
 import defImg from '../images/defaultimage.jpg';
 
 import renderSearchNews from './renderSerchNews';
+import { log } from 'console';
 
 const newArticles = new NewArticles();
 
@@ -40,16 +41,67 @@ async function onFormSubmit(e) {
 //   }
 // }
 
-icon.onclick = () => {
-  search.classList.add('active');
-};
+// icon.onclick = () => {
+//   search.classList.add('active');
+// };
 // відкриття форми пошуку на мобільній версії
 
-document.addEventListener('click', e => {
-  const withinBoundaries = e.composedPath().includes(search);
+// document.addEventListener('click', e => {
+//   const withinBoundaries = e.composedPath().includes(search);
 
-  if (!withinBoundaries) {
-    search.classList.remove('active');
-  }
-});
+//   if (!withinBoundaries) {
+//     search.classList.remove('active');
+//     brnSerchEl.classList.remove('fetch');
+//     btnSerchEl.classList.remove('visually-hidden');
+//   }
+// });
 // // закриття форми по кліку поза формою на мобільній версії
+
+// search.addEventListener('click', onOpenSearch);
+
+// function onOpenSearch(e) {
+//   const btnFetch = e.currentTarget.elements.namedItem('btn-fetch');
+//   const btnSerch = e.currentTarget.elements.namedItem('btn-search');
+
+//   search.classList.add('active');
+//   btnFetch.classList.add('fetch');
+//   btnSerch.classList.add('visually-hidden');
+//   search.addEventListener('submit', onFormSubmit);
+//   console.log(btnSerch);
+// }
+
+const brnSerchEl = document.querySelector('.search-box__icon');
+const btnSerchEl = document.querySelector('.btn-search');
+
+const screenWidth = window.innerWidth;
+if (screenWidth <= 768) {
+  btnSerchEl.classList.remove('visually-hidden');
+  search.classList.remove('active');
+
+  search.addEventListener('click', onOpenSearch);
+
+  function onOpenSearch(e) {
+    const btnFetch = e.currentTarget.elements.namedItem('btn-fetch');
+    const btnSerch = e.currentTarget.elements.namedItem('btn-search');
+
+    search.classList.add('active');
+    btnFetch.classList.add('fetch');
+    btnSerch.classList.add('visually-hidden');
+
+    console.log(btnSerch);
+
+    document.addEventListener('click', e => {
+      const withinBoundaries = e.composedPath().includes(search);
+
+      if (!withinBoundaries) {
+        search.classList.remove('active');
+        brnSerchEl.classList.remove('fetch');
+        btnSerchEl.classList.remove('visually-hidden');
+      }
+    });
+  }
+} else {
+  btnSerchEl.classList.add('visually-hidden');
+  search.classList.add('active');
+  search.removeEventListener('click', onOpenSearch);
+}
