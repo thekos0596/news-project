@@ -201,6 +201,29 @@ const categories = [
   },
 ];
 
+const MAIN_URL = 'https://api.nytimes.com/svc/';
+const APIS_KEY = 'qkqQGkmfT8AlFPBT4ADFZAe8t9wBji7i';
+
+const buttonEl = document.querySelector('.categories__button');
+console.log(buttonEl);
+
+buttonEl.addEventListener('click', function() {
+  const selectedCategory = this.dataset.section;
+  console.log(buttonEl);
+  const url = `https://api.nytimes.com/svc/news/v3/content/all/${selectedCategory}.json?api-key=qkqQGkmfT8AlFPBT4ADFZAe8t9wBji7i`;
+  
+  fetch(url)
+    .then(response => response.json())
+    .then(data => {
+            console.log(data);
+    })
+    .catch(error => console.error(error));
+});
+
+
+
+
+
 let select = function () {
   let selectHeader = document.querySelectorAll('.categories__dropdown-header');
   selectHeader.forEach(item => {
@@ -211,35 +234,32 @@ let select = function () {
 };
 select();
 
-const buttonSelect = document.getElementById('dropdown-btn');
+const buttonSelect = document.getElementById('dropdown-span');
 const viewportWidth = window.innerWidth;
 buttonSelect.textContent = viewportWidth < 768 ? 'Categories' : 'Other';
 
-function createButton(array) {
-  array.forEach(function (category) {
-    const button = document.createElement('button');
-    button.classList.add('categories__dropdown-item');
-    button.dataset.section = category.section;
-    button.innerText = category.display_name;
-    document
-      .querySelector('.categories__buttons .categories__dropdown-content')
-      .appendChild(button);
-  });
-}
+function createButton(array) {array.forEach(function(category) {
+  const button = document.createElement("button");
+  button.classList.add("categories__dropdown-item");
+  button.dataset.section = category.section;
+  button.innerText = category.display_name;
+  document.querySelector(".categories__buttons .categories__dropdown-content").appendChild(button);
+});}
 
-const screenWidth = window.innerWidth;
 
-if (screenWidth < 768) {
-  {
-    const newArray = categories;
+if (viewportWidth < 768) {
+ {
+  const newArray = categories;
+         createButton(newArray);
+    return;
+  }
+} else if (viewportWidth < 1268) {
+  
+    const newArray = categories.slice(4, categories.length);
     createButton(newArray);
     return;
   }
-} else if (screenWidth < 1268) {
-  const newArray = categories.slice(4, categories.length);
-  createButton(newArray);
-  return;
-} else {
+ else {
   {
     const newArray = categories.slice(6, categories.length);
     createButton(newArray);
@@ -247,3 +267,7 @@ if (screenWidth < 768) {
     return;
   }
 }
+
+
+
+

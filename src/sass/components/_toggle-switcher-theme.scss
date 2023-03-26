@@ -1,7 +1,3 @@
-body.dark {
-    background-color: $bg-color-dark-site;
-}
-
 .toggle__wrapper {
     display: inline-flex;
     gap: 8px;
@@ -31,6 +27,11 @@ body.dark {
     background-color: #fff;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
     cursor: pointer;
+
+    &.active {
+        background-color: $color-switches;
+        border-color: $color-white-primary;
+    }
 }
 
 .toggle::before {
@@ -47,7 +48,7 @@ body.dark {
 }
 
 .toggle.active::before {
-    background-color: #18191a;
+    background-color: $color-white-primary;
     right: calc(100% - 24px - 14px);
 }
 
@@ -73,4 +74,14 @@ body.dark {
 
 .theme__text--dark {
     margin-left: 12px;
+}
+
+.icon__sun {
+    fill: $color-accent;
+    color: $color-accent;
+}
+
+.icon__moon {
+    fill: $color-gray-primary;
+    color: $color-gray-primary;
 }

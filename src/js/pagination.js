@@ -7,7 +7,7 @@ const btnNextPg = document.querySelector('button.next-page');
 const btnPrewPg = document.querySelector('button.prew-page');
 const addCard = document.querySelector('.news-card');
 
-window.addEventListener('load', onFormSubmit);
+window.addEventListener('load', onFirstLoad);
 
 const newArticles = new NewArticles();
 
@@ -20,17 +20,19 @@ const valuePage = {
   totalPages: 10,
 };
 
-async function onFormSubmit(event) {
+async function onFirstLoad(event) {
   event.preventDefault();
   try {
     const res = await newArticles.fetchArtic();
-    totalObjsApi = res.results; // 20[]
+
+    const normalizedResults = normalization(res);
+    const renderArray = normalizedResults.slice(0, numCardsOnPages);
+    addCard.innerHTML = '';
+    renderArticle(renderArray);
+
+    totalObjsApi = normalizedResults; // 20[]
     totalNumberPagesApi = res.results.length; // 20
     valuePage.totalPages = Math.ceil(totalNumberPagesApi / numCardsOnPages); // 3
-    const normalizedResults = normalization(res);
-    const newArray = normalizedResults.slice(0, numCardsOnPages);
-    addCard.innerHTML = '';
-    renderArticle(newArray);
 
     // for (let i = 1; i <= valuePage.totalPages; i++) {
     //   let normalizedResults;
