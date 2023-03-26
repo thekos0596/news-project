@@ -25,8 +25,8 @@ async function onFirstLoad(event) {
   event.preventDefault();
   try {
     const res = await newArticles.fetchArtic();
-    totalObjsApi = res.results; // 20[]
-    totalNumberPagesApi = res.results.length; // 20
+
+    const totalNumberPagesApi = res.results.length; // 20
     valuePage.totalPages = Math.ceil(totalNumberPagesApi / numCardsOnPages); // 3
     const normalizedResults = normalization(res);
     const newArray = normalizedResults.slice(0, numCardsOnPages);
@@ -41,8 +41,8 @@ async function onFirstLoad(event) {
   async function renderNumPage(page) {
     try {
       const res = await newArticles.fetchArtic();
-      totalObjsApi = res.results; // 20[]
-      totalNumberPagesApi = res.results.length; // 20
+
+      const totalNumberPagesApi = res.results.length; // 20
       valuePage.totalPages = Math.ceil(totalNumberPagesApi / numCardsOnPages); // 3
       const normalizedResults = normalization(res);
 
