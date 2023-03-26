@@ -5,5 +5,5 @@ let currentPage =
 let currentPageLink = document.querySelector('#' + currentPage);
 
 if (currentPageLink) {
-  currentPageLink.classList.add('current');
+  currentPageLink.classList.add('current__page');
 }

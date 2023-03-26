@@ -1,13 +1,15 @@
 const body = document.querySelector('body'),
-  toggle = document.querySelector('.toggle');
+  navToggle = document.querySelector('.nav__toggle'),
+  mobToggle = document.querySelector('.mob__toggle');
 
 let getMode = localStorage.getItem('theme');
 if (getMode && getMode === 'dark') {
   body.classList.add('dark');
-  toggle.classList.add('active');
+  navToggle.classList.add('active');
+  mobToggle.classList.add('active');
 }
 
-toggle.addEventListener('click', () => {
+navToggle.addEventListener('click', () => {
   body.classList.toggle('dark');
 
   if (!body.classList.contains('dark')) {
@@ -16,4 +18,14 @@ toggle.addEventListener('click', () => {
   localStorage.setItem('theme', 'dark');
 });
 
-toggle.addEventListener('click', () => toggle.classList.toggle('active'));
+mobToggle.addEventListener('click', () => {
+  body.classList.toggle('dark');
+
+  if (!body.classList.contains('dark')) {
+    return localStorage.setItem('theme', 'light');
+  }
+  localStorage.setItem('theme', 'dark');
+});
+
+navToggle.addEventListener('click', () => navToggle.classList.toggle('active'));
+mobToggle.addEventListener('click', () => mobToggle.classList.toggle('active'));
