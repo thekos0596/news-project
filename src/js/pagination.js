@@ -12,8 +12,25 @@ window.addEventListener('load', onFirstLoad);
 
 const newArticles = new NewArticles();
 
-const numCardsOnPages = 9;
-const numCardsOnFirstPages = numCardsOnPages - 1;
+const pageDesktop = 9;
+const pageTablet = 8;
+const pageMobile = 5;
+
+let numCardsOnPages;
+
+const desktopWidth = window.matchMedia('(min-width: 1280px)');
+const tabletWidth = window.matchMedia(
+  '(min-width: 767px) and (max-width: 1279px)'
+);
+const mobileWidth = window.matchMedia('(max-width: 766px)');
+
+if (desktopWidth.matches === true) {
+  numCardsOnPages = pageDesktop;
+} else if (tabletWidth.matches === true) {
+  numCardsOnPages = pageTablet;
+} else if (mobileWidth.matches === true) {
+  numCardsOnPages = pageMobile;
+}
 
 const valuePage = {
   curPage: 1,
@@ -25,8 +42,8 @@ async function onFirstLoad(event) {
   event.preventDefault();
   try {
     const res = await newArticles.fetchArtic();
-    totalObjsApi = res.results; // 20[]
-    totalNumberPagesApi = res.results.length; // 20
+    // totalObjsApi = res.results; // 20[]
+    const totalNumberPagesApi = res.results.length; // 20
     valuePage.totalPages = Math.ceil(totalNumberPagesApi / numCardsOnPages); // 3
     const normalizedResults = normalization(res);
     const newArray = normalizedResults.slice(0, numCardsOnPages);
@@ -41,9 +58,9 @@ async function onFirstLoad(event) {
   async function renderNumPage(page) {
     try {
       const res = await newArticles.fetchArtic();
-      totalObjsApi = res.results; // 20[]
-      totalNumberPagesApi = res.results.length; // 20
-      valuePage.totalPages = Math.ceil(totalNumberPagesApi / numCardsOnPages); // 3
+      // totalObjsApi = res.results; // 20[]
+      // totalNumberPagesApi = res.results.length; // 20
+      // valuePage.totalPages = Math.ceil(totalNumberPagesApi / numCardsOnPages); // 3
       const normalizedResults = normalization(res);
 
       const s = (page - 1) * numCardsOnPages;
@@ -66,6 +83,7 @@ async function onFirstLoad(event) {
       pagination(valuePage);
       handleButtonLeft();
       handleButtonRight();
+      window.scrollTo(0, 0);
     }
   });
 
@@ -145,11 +163,13 @@ async function onFirstLoad(event) {
       valuePage.curPage--;
       handleButtonLeft();
       renderNumPage(valuePage.curPage);
+      window.scrollTo(0, 0);
       btnNextPg.disabled = false;
     } else if (element.classList.contains('next-page')) {
       valuePage.curPage++;
       handleButtonRight();
       renderNumPage(valuePage.curPage);
+      window.scrollTo(0, 0);
       btnPrewPg.disabled = false;
     }
     pagination();
