@@ -200,6 +200,29 @@ const categories = [
     display_name: 'Your Money',
   },
 ];
+// const buttonEl = document.querySelectorAll('.categories__button');
+const MAIN_URL = 'https://api.nytimes.com/svc/';
+const APIS_KEY = 'qkqQGkmfT8AlFPBT4ADFZAe8t9wBji7i';
+
+const buttonEl = document.querySelector('.categories__button');
+console.log(buttonEl);
+
+buttonEl.addEventListener('click', function() {
+  const selectedCategory = this.dataset.section;
+  console.log(buttonEl);
+  const url = `https://api.nytimes.com/svc/news/v3/content/all/${selectedCategory}.json?api-key=qkqQGkmfT8AlFPBT4ADFZAe8t9wBji7i`;
+  
+  fetch(url)
+    .then(response => response.json())
+    .then(data => {
+            console.log(data);
+    })
+    .catch(error => console.error(error));
+});
+
+
+
+
 
 let select = function () {
   let selectHeader = document.querySelectorAll('.categories__dropdown-header');
@@ -211,10 +234,8 @@ let select = function () {
 };
 select();
 
-const buttonSelect = document.getElementById('dropdown-btn');
+const buttonSelect = document.getElementById('dropdown-span');
 const viewportWidth = window.innerWidth;
-console.log(viewportWidth);
-console.log(buttonSelect.textContent);
 buttonSelect.textContent = viewportWidth < 768 ? 'Categories' : 'Other';
 
 function createButton(array) {array.forEach(function(category) {
@@ -225,17 +246,14 @@ function createButton(array) {array.forEach(function(category) {
   document.querySelector(".categories__buttons .categories__dropdown-content").appendChild(button);
 });}
 
-console.log(categories.length);
 
-const screenWidth = window.innerWidth;
-
-if (screenWidth < 768) {
+if (viewportWidth < 768) {
  {
   const newArray = categories;
          createButton(newArray);
     return;
   }
-} else if (screenWidth < 1268) {
+} else if (viewportWidth < 1268) {
   
     const newArray = categories.slice(4, categories.length);
     createButton(newArray);
@@ -249,3 +267,26 @@ if (screenWidth < 768) {
     return;
   }
 }
+
+
+const BASE_URL = 'https://api.nytimes.com/svc/';
+const API_KEY = 'qkqQGkmfT8AlFPBT4ADFZAe8t9wBji7i';
+
+buttonEl.addEventListener("click", () => {
+  fetchNews()
+    .then((data) => console.log(data))
+    .catch((error) => console.log(error));
+});
+
+function fetchNews() {
+  return fetch("${BASE_URL}news/v3/content/all/crosswords%20%26%20games.json?api-key=${API_KEY}").then(
+    (response) => {
+      if (!response.ok) {
+        throw new Error(response.status);
+      }
+      return response.json();
+    }
+  );
+}
+
+
