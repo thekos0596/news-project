@@ -5,18 +5,18 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 const icon = document.querySelector('.search-box__icon');
 const search = document.querySelector('.search-box');
-const input = document.querySelector('.input');
+const input = document.querySelector('#mySearch');
 
 icon.onclick = () => {
     search.classList.add("active");
 }
 // відкриття форми пошуку на мобільній версії
 
-input.addEventListener('submit', onSubmitNews);
+input.addEventListener('submit', e => console.log("test", e.currentTarget.value));
     
 async function onSubmitNews(e) {
     e.preventDefault()
-
+console.log("test", e.currentTarget.value)
     title = e.target.elements.searchQuery.value.trim();
     if ((input.value === '') && (input.value.lendth <= 1)) {
         return Notify.failure(
@@ -24,11 +24,11 @@ async function onSubmitNews(e) {
     );
     } 
 
-    const { data } = await searchingNews(title);
+  //   const { data } = await searchingNews(title);
 
-      messageInfo(data); 
-  stopSearch(data); 
-  e.target.reset(); 
+  //     messageInfo(data); 
+  // stopSearch(data); 
+  // e.target.reset(); 
 
   try {
     const res = await newArticles.fetchArtic(searchNews);

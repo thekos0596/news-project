@@ -12,6 +12,6 @@ export default function normalization(res) {
       id: null,
     });
   });
-  console.log(currentNewsPage);
+  // console.log(currentNewsPage);
   return currentNewsPage;
 }
