@@ -6,9 +6,9 @@ import './js/API-service/api-weather';
 import './js/current-page';
 import './js/categories';
 import './js/pagination';
+
 // import './js/formOpen';
 // import './js/formRegFatchData';
-
 const up = document.querySelector('.btn-scroll');
 
 up.addEventListener('click', () =>
