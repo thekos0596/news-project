@@ -19,10 +19,28 @@ function onGetDate(res) {
   return dataStr;
 }
 
+function getDataFromLoc() {
+  try {
+    const data = localStorage.getItem('favoriteList');
+    return data ? JSON.parse(data) : [];
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
 function renderArticle(res) {
+  let newsId = [];
+  const data = getDataFromLoc();
+  if (data.length) {
+    newsId = data.map(({ id }) => id.toUpperCase());
+  }
   const markup = `<ul class="news-card__image-container">${res
     .map(
       ({ abstract, section, title, published_date, multimedia = [], url }) => {
+        const bool = newsId.includes(title.toUpperCase());
+        const articleTitle = bool ? 'Remove from favorite' : 'Add to favorite';
+        const iconClass = bool ? 'icon-heart' : 'icon-favorite';
+
         const imageUrl =
           multimedia && multimedia[2]?.url ? multimedia[2].url : defImg;
         const imageAlt =
@@ -37,9 +55,8 @@ function renderArticle(res) {
   <div class="news-card__category">
    ${section}
   </div>
-  <button class="news-card__favorite-button" data-news-id="${title}">
-    Add to favorite <svg width="13" height="12" class="news-card__favorite-icon">
-    <use href="${svgSprite}#icon-favorite"></use></svg>
+  <button class="news-card__favorite-button" data-news-id="${title}">${articleTitle}<svg width="13" height="12" class="news-card__favorite-icon">
+    <use href="${svgSprite}#${iconClass}"></use></svg>
   </button>
   </div>
   <div class="news-card__description">
