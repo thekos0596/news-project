@@ -26,3 +26,11 @@
 @import './components/search-form';
 
 @import './components/btn-scroll';
+
+
+.sub-menu {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    max-width: $desktop;
+}

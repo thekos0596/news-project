@@ -6,7 +6,7 @@ import './js/API-service/api-weather';
 import './js/current-page';
 import './js/categories';
 import './js/pagination';
-
+import './js/calendar';
 const up = document.querySelector('.btn-scroll');
 
 up.addEventListener('click', () =>
