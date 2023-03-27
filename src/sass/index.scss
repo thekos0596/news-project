@@ -18,6 +18,11 @@
 @import './components/pagination';
 @import './components/news-card.scss';
 
+@import './components/weather.scss';
+
+@import'./components/dark-theme-style';
 @import './components/weather';
-@import './components/datepicker'; 
+@import './components/datepicker';
 @import './components/search-form';
+
+@import './components/btn-scroll';

@@ -14,9 +14,9 @@ export default class NewArticles {
       console.log(error);
     }
   }
-
-  async fetchSearch(query) {
-    const url = `${BASE_URL}search/v2/articlesearch.json?api-key=${API_KEY}&q=${query}`;
+  async fetchCategories(categories) {
+    const categoriesEncoder = encodeURIComponent(categories);
+    const url = `${BASE_URL}news/v3/content/all/${categoriesEncoder}.json?api-key=${API_KEY}`;
 
     try {
       const { data } = await axios.get(url);
