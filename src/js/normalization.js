@@ -1,3 +1,5 @@
+import { log } from 'util';
+
 export let currentNewsPage = [];
 export const currentPage = [];
 export default function normalization(res) {
@@ -16,6 +18,7 @@ export default function normalization(res) {
   // console.log(currentNewsPage);
   return currentNewsPage;
 }
+
 export function normalizationSearch(res) {
   currentNewsPage = [];
   res.response.docs.map(r => {
@@ -26,7 +29,30 @@ export function normalizationSearch(res) {
       published_date: r.pub_date,
       multimedia: r.multimedia || [],
       url: r.web_url,
-      id: null,
+      id: r.headline.main,
+    });
+  });
+  // console.log(currentNewsPage);
+  return currentNewsPage;
+}
+
+export function normalizationPopular(res) {
+  currentNewsPage = [];
+  let media;
+  res.results.map(r => {
+    const arrMedia = r.media.map(m => m['media-metadata']);
+
+    for (const arr of arrMedia) {
+      media = arr;
+    }
+    currentNewsPage.push({
+      section: r.section,
+      title: r.title,
+      abstract: r.abstract,
+      published_date: r.published_date,
+      multimedia: media || [],
+      url: r.url,
+      id: r.title,
     });
   });
   // console.log(currentNewsPage);

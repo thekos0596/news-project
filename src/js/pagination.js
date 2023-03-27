@@ -3,6 +3,7 @@ import { renderArticle } from './renderArticle';
 import normalization from './normalization';
 import { checkFavorites } from './btn-add-remove';
 import { checkRead } from './btn-read-more';
+import { normalizationPopular } from './normalization';
 
 const pg = document.getElementById('pagination');
 const ulPageContainer = document.querySelector('.page-container');
@@ -14,11 +15,11 @@ window.addEventListener('load', onFirstLoad);
 
 const newArticles = new NewArticles();
 
-const pageDesktop = 9;
-const pageTablet = 8;
-const pageMobile = 5;
+const pageDesktop = 8;
+const pageTablet = 7;
+const pageMobile = 4;
 
-let numCardsOnPages;
+let numCardsOnPages = 9;
 
 const desktopWidth = window.matchMedia('(min-width: 1280px)');
 const tabletWidth = window.matchMedia(
@@ -26,11 +27,15 @@ const tabletWidth = window.matchMedia(
 );
 const mobileWidth = window.matchMedia('(max-width: 766px)');
 
-if (desktopWidth.matches === true) {
+console.log('desktopWidth ', desktopWidth);
+console.log('tabletWidth ', tabletWidth);
+console.log('mobileWidth ', mobileWidth);
+
+if (desktopWidth.matches) {
   numCardsOnPages = pageDesktop;
-} else if (tabletWidth.matches === true) {
+} else if (tabletWidth.matches) {
   numCardsOnPages = pageTablet;
-} else if (mobileWidth.matches === true) {
+} else if (mobileWidth.matches) {
   numCardsOnPages = pageMobile;
 }
 
@@ -43,12 +48,13 @@ const valuePage = {
 async function onFirstLoad(event) {
   event.preventDefault();
   try {
-    const res = await newArticles.fetchArtic();
-    // totalObjsApi = res.results; // 20[]
+    const res = await newArticles.fetchMostPopular();
+
     const totalNumberPagesApi = res.results.length; // 20
     valuePage.totalPages = Math.ceil(totalNumberPagesApi / numCardsOnPages); // 3
-    const normalizedResults = normalization(res);
+    const normalizedResults = normalizationPopular(res);
     const newArray = normalizedResults.slice(0, numCardsOnPages);
+
     addCard.innerHTML = '';
     renderArticle(newArray);
     checkFavorites(newArray);
