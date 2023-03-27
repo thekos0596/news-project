@@ -27,6 +27,11 @@ async function onFormSubmit(e) {
   } catch (error) {
     console.log(error);
   }
+
+  if (normalizedResults === []) {
+  return `<h2 class="message-info">We haven’t found news from this category</h2><img src="${defImg}" class="defImg"/>`
+}
+
 }
 
 // function messageInfo(arr) {
