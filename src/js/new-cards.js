@@ -1,3 +1,4 @@
+import NewArticles from './API-service/api-news';
 import addToFavorites from './btn-add-remove';
 import readMore from './btn-read-more';
 
