@@ -7,7 +7,7 @@ import './js/current-page';
 import './js/categories';
 import './js/pagination';
 // import './js/formOpen';
-// import './js/formRegFatchData';
+import './js/formRegFatchData';
 import './js/calendar';
 const up = document.querySelector('.btn-scroll');
 
