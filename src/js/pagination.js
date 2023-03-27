@@ -1,6 +1,8 @@
 import NewArticles from './API-service/api-news';
 import { renderArticle } from './renderArticle';
 import normalization from './normalization';
+import { checkFavorites } from './btn-add-remove';
+import { checkRead } from './btn-read-more';
 import { normalizationPopular } from './normalization';
 
 const pg = document.getElementById('pagination');
@@ -55,6 +57,8 @@ async function onFirstLoad(event) {
 
     addCard.innerHTML = '';
     renderArticle(newArray);
+    checkFavorites(newArray);
+    checkRead(newArray);
   } catch (error) {
     console.log(error);
   }
