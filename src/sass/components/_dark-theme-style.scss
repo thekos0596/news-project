@@ -3,6 +3,7 @@ body.dark {
     background-color: $bg-color-dark-site;
     color: $color-white-secondary;
 
+
     .current__page {
         color: $color-white-secondary;
     }
@@ -14,6 +15,7 @@ body.dark {
 
     .navigation-menu__link {
         color: $color-white-primary;
+
     }
 
     .search-box__icon-svg {
@@ -53,6 +55,7 @@ body.dark {
 
     .mobile-container {
         background-color: $bg-color-dark-site;
+        transition: all 0.5s ease-in-out;
     }
 
     .toggle__wrapper--battom.icon-active_theme {
