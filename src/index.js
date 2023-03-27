@@ -14,5 +14,3 @@ const up = document.querySelector('.btn-scroll');
 up.addEventListener('click', () =>
   window.scrollTo({ top: 0, behavior: 'smooth' })
 );
-
-

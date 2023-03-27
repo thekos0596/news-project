@@ -10,7 +10,7 @@ closeButton.addEventListener('click', () => {
   modal.classList.remove('form__overlay--visible');
 });
 
-modal.addEventListener('click', (event) => {
+modal.addEventListener('click', event => {
   if (event.target === modal) {
     modal.classList.remove('form__overlay--visible');
   }
