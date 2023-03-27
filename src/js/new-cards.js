@@ -1,6 +1,3 @@
-import { renderArticle } from './renderArticle';
-import NewArticles from './API-service/api-news';
-import normalization from './normalization.js';
 import addToFavorites from './btn-add-remove';
 import readMore from './btn-read-more';
 
