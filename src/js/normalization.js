@@ -52,7 +52,7 @@ export function normalizationPopular(res) {
       published_date: r.published_date,
       multimedia: media || [],
       url: r.url,
-      id: null,
+      id: r.title,
     });
   });
   // console.log(currentNewsPage);
