@@ -1,12 +1,13 @@
-// import NewArticles from './API-service/api-news';
-import addToFavorites from './btn-add-remove';
-import readMore from './btn-read-more';
+import { renderArticle } from './renderArticle';
+import NewArticles from './API-service/api-news';
+import normalization from './normalization.js';
+import { addToFavorites, checkFavorites } from './btn-add-remove';
+import { readMore, checkRead } from './btn-read-more';
 
 const buttonEL = document.querySelector('.fetch');
-// const newArticles = new NewArticles();
+const newArticles = new NewArticles();
 const newsCardEl = document.querySelector('.news-card');
 
-// buttonEL.addEventListener('click', onFormSubmit);
 newsCardEl.addEventListener('click', function (event) {
   const targetEl = event.target;
 
@@ -28,6 +29,7 @@ newsCardEl.addEventListener('click', function (event) {
 //     const newArray = normalizedResults.slice(0, numCardsOnPages);
 //     btnAddtoFavEl.innerHTML = '';
 //     renderArticle(newArray);
+//     // checkFavorites(newArray);
 //   } catch (error) {
 //     console.log(error);
 //   }

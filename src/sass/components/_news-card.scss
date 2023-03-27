@@ -21,6 +21,7 @@
 
 .news-card__item {
   display: flex;
+  justify-content: space-between;
   flex-direction: column;
   background-color: $color-white-primary;
   border-radius: 5px;
@@ -76,6 +77,7 @@
   line-height: 1.375;
   letter-spacing: -0.01em;
   color: $color-black-primary;
+  max-height: 132px;
 }
 
 .news-card__date {
@@ -117,7 +119,7 @@
   background: rgba(68, 64, 247, 0.7);
   border-radius: 0px 4px 4px 0px;
   width: 112px;
-  height: 24px;
+  min-height: 24px;
 }
 
 .news-card__favorite-button {
