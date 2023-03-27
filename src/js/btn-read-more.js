@@ -1,7 +1,7 @@
 import svgSprite from '../images/icons/icons.svg';
 import { currentNewsPage } from './normalization';
 
-export default function readMore(event) {
+export function readMore(event) {
   const newsId = event.target.dataset.newsId;
 
   const readList = JSON.parse(localStorage.getItem('readList')) || [];
@@ -28,6 +28,11 @@ export default function readMore(event) {
   const sortedReadList = [...readList].sort((a, b) => a.readAt - b.readAt);
   localStorage.setItem('readList', JSON.stringify(sortedReadList));
 
+  const overlay = createElementAlreadyRead();
+  event.target.insertAdjacentHTML('beforeend', overlay.outerHTML);
+}
+
+function createElementAlreadyRead() {
   const overlay = document.createElement('div');
   overlay.classList.add('news-card__overlay');
   const alreadyRead = document.createElement('p');
@@ -42,5 +47,26 @@ export default function readMore(event) {
   svg.appendChild(use);
   overlay.appendChild(alreadyRead);
   overlay.appendChild(svg);
-  event.target.insertAdjacentHTML('beforeend', overlay.outerHTML);
+  return overlay;
+}
+
+export function checkRead(newArray) {
+  const favoriteList = JSON.parse(localStorage.getItem('readList')) || [];
+
+  if (!favoriteList.length) {
+    return;
+  }
+
+  newArray.forEach(item => {
+    const btn = document.querySelector(
+      `.news-card__read-more[data-news-id="${item.title}"]`
+    );
+    if (btn) {
+      const readIndex = readList.findIndex(read => read.title === item.title);
+      if (readIndex !== -1) {
+        const overlay = createElementAlreadyRead();
+        btn.insertAdjacentHTML('beforeend', overlay.outerHTML);
+      }
+    }
+  });
 }

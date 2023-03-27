@@ -1,9 +1,8 @@
 import { renderArticle } from './renderArticle';
 import NewArticles from './API-service/api-news';
 import normalization from './normalization.js';
-import { addToFavorites } from './btn-add-remove';
-import readMore from './btn-read-more';
-import { checkFavorites } from './btn-add-remove';
+import { addToFavorites, checkFavorites } from './btn-add-remove';
+import { readMore, checkRead } from './btn-read-more';
 
 const buttonEL = document.querySelector('.fetch');
 const newArticles = new NewArticles();
@@ -16,6 +15,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   // btnAddtoFavEl.innerHTML = '';
   renderArticle(newArray);
   checkFavorites(newArray);
+  checkRead(newArray);
 });
 
 // buttonEL.addEventListener('click', onFormSubmit);

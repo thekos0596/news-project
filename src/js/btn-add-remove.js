@@ -1,10 +1,8 @@
 import svgSprite from '../images/icons/icons.svg';
 import { currentNewsPage } from './normalization';
 
-function createIcon(bool, btn, isFavorite) {
-  const icon = isFavorite
-    ? `${svgSprite}#icon-favorite`
-    : `${svgSprite}#icon-heart`;
+function createIcon(bool, btn) {
+  const icon = !bool ? `${svgSprite}#icon-favorite` : `${svgSprite}#icon-heart`;
   const svg = document.createElement('svg');
   svg.classList.add('news-card__favorite-icon');
   svg.setAttribute('width', '13');
@@ -17,18 +15,18 @@ function createIcon(bool, btn, isFavorite) {
 
 export function addToFavorites(event) {
   const btn = event.target.closest('.news-card__favorite-button');
+  console.log(btn);
   const newsId = btn.dataset.newsId;
 
+  console.log(newsId);
   const favoriteList = JSON.parse(localStorage.getItem('favoriteList')) || [];
 
   const favoriteIndex = favoriteList.findIndex(
     favorite => favorite.title === newsId
   );
+  console.log(favoriteIndex);
 
   const bool = favoriteIndex === -1;
-
-  btn.textContent = bool ? 'Remove from favorite' : 'Add to favorite';
-  createIcon(bool, btn, false);
 
   if (bool) {
     const currentNews = currentNewsPage.find(news => news.title === newsId);
@@ -36,7 +34,11 @@ export function addToFavorites(event) {
   } else {
     favoriteList.splice(favoriteIndex, 1);
   }
+
   localStorage.setItem('favoriteList', JSON.stringify(favoriteList));
+
+  btn.textContent = bool ? 'Remove from favorite' : 'Add to favorite';
+  createIcon(bool, btn);
 }
 
 export function checkFavorites(newArray) {
@@ -57,7 +59,7 @@ export function checkFavorites(newArray) {
       const isFavorite = favoriteIndex !== -1;
       btn.setAttribute('data-favorite', isFavorite);
       btn.textContent = isFavorite ? 'Remove from favorite' : 'Add to favorite';
-      createIcon(isFavorite, btn, true);
+      createIcon(true, btn);
     }
   });
 }
