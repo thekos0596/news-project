@@ -1,0 +1,56 @@
+.page-empty{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.page-empty__text{
+  @media screen and (min-width: $mobile-less) {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: auto;
+      margin-top: 40px;
+      text-align: center;
+      width: 276px;
+      height: 54px;
+      font-family: $font-main;
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 1.35;
+      color: $color-black-primary;
+  }
+
+  @media screen and (min-width: $tablet-less) {
+      margin-top: 88px;
+      text-align: center;
+      width: 548px;
+      height: 110px;
+      font-size: 40px;
+  }
+
+  @media screen and (min-width: $desktop-less) {
+      margin-top: 121px;
+  }
+}
+.page-empty__img{
+
+  @media screen and (min-width: $mobile-less) {
+      display: flex;
+      justify-content: center;
+      margin: auto;
+      margin-top: 40px;
+      width: 248px;
+      height: 198px;
+  }
+
+  @media screen and (min-width: $tablet-less) {
+      width: 560px;
+      height: 444px;
+  }
+
+  @media screen and (min-width: $desktop-less) {
+      width: 601px;
+      height: 478px;
+  }
+}

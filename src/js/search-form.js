@@ -5,8 +5,7 @@ import defImg from '../images/defaultimage.jpg';
 
 import renderSearchNews from './renderSerchNews';
 
-
-// const newArticles = new NewArticles();
+const newArticles = new NewArticles();
 
 const btnAddtoFavEl = document.querySelector('.news-card');
 const icon2 = document.querySelector('.search-box__icon-svg');
@@ -29,17 +28,16 @@ async function onFormSubmit(e) {
     console.log(error);
   }
 
-  messageInfo();
+  // messageInfo();
 
-e.target.reset();
+  e.target.reset();
 }
 
-function messageInfo(arr) {
-  if (normalizedResults.value === []) {
-    return `<div><h2 class="message-info">We haven’t found news from this category</h2><img src="${defImg}" class="defImg"/></div>`
-;
-  }
-}
+// function messageInfo(arr) {
+//   if (normalizedResults.value === []) {
+//     return `<div><h2 class="message-info">We haven’t found news from this category</h2><img src="${defImg}" class="defImg"/></div>`;
+//   }
+// }
 
 // document.addEventListener('click', e => {
 //   const withinBoundaries = e.composedPath().includes(search);
@@ -98,5 +96,4 @@ if (screenWidth <= 768) {
 } else {
   btnSerchEl.classList.add('visually-hidden');
   search.classList.add('active');
-  search.removeEventListener('click', onOpenSearch);
 }
