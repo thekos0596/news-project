@@ -4,12 +4,13 @@ import { normalizationSearch } from './normalization.js';
 import defImg from '../images/defaultimage.jpg';
 
 import renderSearchNews from './renderSerchNews';
-// import { log } from 'console';
+
 
 // const newArticles = new NewArticles();
 
 const btnAddtoFavEl = document.querySelector('.news-card');
-const icon = document.querySelector('.search-box__icon-svg');
+const icon2 = document.querySelector('.search-box__icon-svg');
+const icon = document.querySelector('.search-box__icon');
 const search = document.querySelector('.search-box');
 
 search.addEventListener('submit', onFormSubmit);
@@ -28,28 +29,17 @@ async function onFormSubmit(e) {
     console.log(error);
   }
 
-  if (normalizedResults === []) {
-  return `<h2 class="message-info">We haven’t found news from this category</h2><img src="${defImg}" class="defImg"/>`
+  messageInfo();
+
+e.target.reset();
 }
 
+function messageInfo(arr) {
+  if (normalizedResults.value === []) {
+    return `<div><h2 class="message-info">We haven’t found news from this category</h2><img src="${defImg}" class="defImg"/></div>`
+;
+  }
 }
-
-// function messageInfo(arr) {
-//   if (arr.input.value === 0) {
-//     return `<h2 class="message-info">We haven’t found news from this category</h2>
-//     <img src="${defImg}" class="defImg"/>`;
-//   }
-//   // повинна підгружатись картинка
-
-//   if (arr.totalInput.value !== 0) {
-//     Notify.success(`Hooray! We found ${arr.totalInput.value} articles.`);
-//   }
-// }
-
-// icon.onclick = () => {
-//   search.classList.add('active');
-// };
-// відкриття форми пошуку на мобільній версії
 
 // document.addEventListener('click', e => {
 //   const withinBoundaries = e.composedPath().includes(search);

@@ -114,10 +114,51 @@
 }
 
 .message-info{
+position: relative;
+justify-content: center;
+text-align: center;
+margin-top: 40px;
+margin-left: auto;
+    margin-right: auto;
+    color: #111321;
+width: 276px;
+height: 54px;
+font-weight: 700;
+    font-size: 20px;
+    line-height: 1.35;
+        text-align: center;
+        letter-spacing: -0.01em;
 
+            @media screen and (min-width: $tablet) {
+                    width: 548px;
+                        height: 110px;
+                        margin-top:88px;
+                        font-size: 40px;
+                        line-height:1.375;
+                }
+            
+                @media screen and (min-width: $desktop) {
+                    margin-top: 120px;
+                }
 }
 
 .defImg {
-    position: absolute;
-    
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    // display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px;
+    width: 248px;
+    height: 198px;
+
+        @media screen and (min-width: $tablet) {
+                width: 560px;
+                height: 444px;
+            }
+                        @media screen and (min-width: $desktop) {
+                            width: 601px;
+                                height: 478px;
+                        }
 }
