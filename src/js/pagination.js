@@ -83,7 +83,7 @@ async function onFirstLoad(event) {
       pagination(valuePage);
       handleButtonLeft();
       handleButtonRight();
-      window.scrollTo(0, 0);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   });
 
@@ -163,13 +163,13 @@ async function onFirstLoad(event) {
       valuePage.curPage--;
       handleButtonLeft();
       renderNumPage(valuePage.curPage);
-      window.scrollTo(0, 0);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
       btnNextPg.disabled = false;
     } else if (element.classList.contains('next-page')) {
       valuePage.curPage++;
       handleButtonRight();
       renderNumPage(valuePage.curPage);
-      window.scrollTo(0, 0);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
       btnPrewPg.disabled = false;
     }
     pagination();
