@@ -10,7 +10,7 @@ const fetchweather = function(){
 
       fetchWeather(latitude, longitude, apiKey);
     }, error => {
-      console.log(error);
+      // console.log(error);
       fetchWeather(latitudeDefault, longitudeDefault, apiKey);
     }
 

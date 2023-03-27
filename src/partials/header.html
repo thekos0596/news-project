@@ -1,7 +1,7 @@
 <header class="header">
   <div class="container">
     <div class="header__container">
-      <a class="logo link" href="./index.html" id="">News</a>
+      <a class="logo link" href="./index.html">News</a>
       <button
         class="button-burger js-open-menu"
         aria-expanded="false"
@@ -12,19 +12,35 @@
         </svg>
       </button>
       <!-- SEARCH BAR -->
-      <div class="search-box">
+      <form
+        class="search-box active"
+        method="get"
+        action=""
+        enctype="application/json"
+      >
         <input
           class="search__input"
-          type="search-input"
+          name="mySearch"
+          type="text"
           placeholder="Search"
           id="mySearch"
         />
-        <button class="search-box__icon fetch">
+        <button class="search-box__icon fetch" name="btn-fetch">
           <svg class="search-box__icon-svg" width="20" height="20">
             <use href="/src/images/icons/icons.svg#icon-search"></use>
           </svg>
         </button>
-      </div>
+        <button
+          class="btn-search visually-hidden"
+          type="button"
+          name="btn-search"
+        >
+          <svg class="search-box__icon-svg-2" width="20" height="20">
+            <use href="/src/images/icons/icons.svg#icon-search"></use>
+          </svg>
+        </button>
+      </form>
+
       <div class="navbar__items">
         <nav class="navigation-menu">
           <ul class="navigation-menu__list">
@@ -49,12 +65,13 @@
           </ul>
         </nav>
       </div>
+
       <div class="toggle__wrapper toggle__wrapper--right">
         <span class="theme__text theme__text--light icon__sun">Light</span>
         <svg class="icon-theme icon__sun" width="21" height="21">
           <use href="./images/icons/icons.svg#icon-sun"></use>
         </svg>
-        <div class="toggle"></div>
+        <div class="nav__toggle toggle"></div>
         <span class="theme__text theme__text--dark icon__moon">Dark</span>
         <svg class="icon-theme icon__moon" width="21" height="21">
           <use href="./images/icons/icons.svg#icon-moon"></use>
@@ -75,36 +92,36 @@
     </div>
 
     <ul class="mobile-menu__list">
-      <a class="mobile-menu__link header__item" href="./index.html" id="index"
-        ><li class="mobile-menu__item">
+      <a class="mobile-menu__link header__item" href="./index.html" id="index">
+        <li class="mobile-menu__item">
           <svg class="menu-container__icon" width="32" height="32">
             <use href="./images/icons/icons.svg#icon-home"></use>
           </svg>
         </li>
-        Home</a
-      >
-      <a class="mobile-menu__link" href="./favorite.html" id="favorite"
-        ><li class="mobile-menu__item header__item">
+        Home
+      </a>
+      <a class="mobile-menu__link" href="./favorite.html" id="favorite">
+        <li class="mobile-menu__item header__item">
           <svg class="menu-container__icon" width="32" height="32">
             <use href="./images/icons/icons.svg#icon-favorite"></use>
           </svg>
         </li>
-        Favorite</a
-      >
-      <a class="mobile-menu__link" href="./read.html" id="read"
-        ><li class="mobile-menu__item header__item">
+        Favorite
+      </a>
+      <a class="mobile-menu__link" href="./read.html" id="read">
+        <li class="mobile-menu__item header__item">
           <svg class="menu-container__icon" width="32" height="32">
             <use href="./images/icons/icons.svg#icon-read"></use>
           </svg>
         </li>
-        Read</a
-      >
+        Read
+      </a>
     </ul>
     <div class="toggle__wrapper toggle__wrapper--bottom">
       <svg class="icon-active_theme icon__sun" width="21" height="21">
         <use href="./images/icons/icons.svg#icon-sun"></use>
       </svg>
-      <div class="toggle"></div>
+      <div class="mob__toggle toggle"></div>
       <svg class="icon-active_theme icon__moon" width="21" height="21">
         <use href="./images/icons/icons.svg#icon-moon"></use>
       </svg>

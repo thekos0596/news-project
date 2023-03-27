@@ -5,7 +5,7 @@ import { addToFavorites, checkFavorites } from './btn-add-remove';
 import { readMore, checkRead } from './btn-read-more';
 
 const buttonEL = document.querySelector('.fetch');
-const newArticles = new NewArticles();
+// const newArticles = new NewArticles();
 const newsCardEl = document.querySelector('.news-card');
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -29,7 +29,7 @@ newsCardEl.addEventListener('click', function (event) {
   }
 });
 
-const numCardsOnPages = 9;
+// const numCardsOnPages = 9;
 
 // async function onFormSubmit(event) {
 //   event.preventDefault();

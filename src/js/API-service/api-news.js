@@ -14,4 +14,29 @@ export default class NewArticles {
       console.log(error);
     }
   }
+
+  async fetchSearch(serchKeyword) {
+    const url = `${BASE_URL}search/v2/articlesearch.json?q=${serchKeyword}&&api-key=${API_KEY}`;
+
+    try {
+      const { data } = await axios.get(url);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+
+    // /search/v2/articlesearch.json?q=election&api-key=yourkey
+  }
+
+  async fetchCategories(categories) {
+    const categoriesEncoder = encodeURIComponent(categories);
+    const url = `${BASE_URL}news/v3/content/all/${categoriesEncoder}.json?api-key=${API_KEY}`;
+
+    try {
+      const { data } = await axios.get(url);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }
