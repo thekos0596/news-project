@@ -5,20 +5,9 @@ import { addToFavorites, checkFavorites } from './btn-add-remove';
 import { readMore, checkRead } from './btn-read-more';
 
 const buttonEL = document.querySelector('.fetch');
-// const newArticles = new NewArticles();
+const newArticles = new NewArticles();
 const newsCardEl = document.querySelector('.news-card');
 
-document.addEventListener('DOMContentLoaded', async () => {
-  const res = await newArticles.fetchArtic();
-  const normalizedResults = normalization(res);
-  const newArray = normalizedResults.slice(0, numCardsOnPages);
-  // btnAddtoFavEl.innerHTML = '';
-  renderArticle(newArray);
-  checkFavorites(newArray);
-  checkRead(newArray);
-});
-
-// buttonEL.addEventListener('click', onFormSubmit);
 newsCardEl.addEventListener('click', function (event) {
   const targetEl = event.target;
 

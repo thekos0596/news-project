@@ -15,16 +15,14 @@ function createIcon(bool, btn) {
 
 export function addToFavorites(event) {
   const btn = event.target.closest('.news-card__favorite-button');
-  console.log(btn);
+
   const newsId = btn.dataset.newsId;
 
-  console.log(newsId);
   const favoriteList = JSON.parse(localStorage.getItem('favoriteList')) || [];
 
   const favoriteIndex = favoriteList.findIndex(
     favorite => favorite.title === newsId
   );
-  console.log(favoriteIndex);
 
   const bool = favoriteIndex === -1;
 
