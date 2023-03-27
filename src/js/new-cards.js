@@ -1,4 +1,4 @@
-import NewArticles from './API-service/api-news';
+// import NewArticles from './API-service/api-news';
 import addToFavorites from './btn-add-remove';
 import readMore from './btn-read-more';
 
@@ -6,7 +6,7 @@ const buttonEL = document.querySelector('.fetch');
 // const newArticles = new NewArticles();
 const newsCardEl = document.querySelector('.news-card');
 
-buttonEL.addEventListener('click', onFormSubmit);
+// buttonEL.addEventListener('click', onFormSubmit);
 newsCardEl.addEventListener('click', function (event) {
   const targetEl = event.target;
 
