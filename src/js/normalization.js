@@ -12,7 +12,7 @@ export default function normalization(res) {
       published_date: res.published_date,
       multimedia: res.multimedia || [],
       url: res.url,
-      id: null,
+      id: res.title,
     });
   });
   // console.log(currentNewsPage);
@@ -29,7 +29,7 @@ export function normalizationSearch(res) {
       published_date: r.pub_date,
       multimedia: r.multimedia || [],
       url: r.web_url,
-      id: null,
+      id: r.headline.main,
     });
   });
   // console.log(currentNewsPage);
@@ -52,7 +52,7 @@ export function normalizationPopular(res) {
       published_date: r.published_date,
       multimedia: media || [],
       url: r.url,
-      id: null,
+      id: r.title,
     });
   });
   // console.log(currentNewsPage);

@@ -13,9 +13,9 @@ window.addEventListener('load', onFirstLoad);
 
 const newArticles = new NewArticles();
 
-const pageDesktop = 9;
-const pageTablet = 8;
-const pageMobile = 5;
+const pageDesktop = 8;
+const pageTablet = 7;
+const pageMobile = 4;
 
 let numCardsOnPages = 9;
 
@@ -25,11 +25,15 @@ const tabletWidth = window.matchMedia(
 );
 const mobileWidth = window.matchMedia('(max-width: 766px)');
 
-if (desktopWidth.matches === true) {
+console.log('desktopWidth ', desktopWidth);
+console.log('tabletWidth ', tabletWidth);
+console.log('mobileWidth ', mobileWidth);
+
+if (desktopWidth.matches) {
   numCardsOnPages = pageDesktop;
-} else if (tabletWidth.matches === true) {
+} else if (tabletWidth.matches) {
   numCardsOnPages = pageTablet;
-} else if (mobileWidth.matches === true) {
+} else if (mobileWidth.matches) {
   numCardsOnPages = pageMobile;
 }
 
