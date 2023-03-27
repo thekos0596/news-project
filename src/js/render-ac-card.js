@@ -8,9 +8,9 @@ const containerEl = document.querySelector('.container__read')
 
 const newAccorEl = document.querySelector('.accordion');
 
-export function renderAccordion(){
+function renderAccordion(){
   containerEl.insertAdjacentHTML('beforeEnd', pageEmpty());
-  const response = JSON.parse(localStorage.getItem('favoriteList'));
+  const response = JSON.parse(localStorage.getItem('readList')) || [];
 
   const uniqueDates = new Set();
  
@@ -49,16 +49,15 @@ export function renderAccordion(){
 }
 renderAccordion()
 
-export function pageEmpty(){
-  const items = JSON.parse(localStorage.getItem('favoriteList'));
+function pageEmpty(){
+  const items = JSON.parse(localStorage.getItem('readList'));
 
-  if (items && items.length === 0){
+  if (!items || items.length === 0){
     return `
     <div class="page-empty">
     <h2 class="page-empty__text">You don't have any read news</h2>
     <img src="${defImgPng}" alt="You have not read news" class="page-empty__img">
     </div>`
-    
   }
   return ''
 }
