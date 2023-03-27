@@ -133,3 +133,8 @@ const userRef = ref(db, 'users/1');
 //   }).catch((error) => {
 // 	console.error(error);
 //   });
+
+
+
+const theme = localStorage.getItem("ui-theme");
+console.log(theme); // "dark"
