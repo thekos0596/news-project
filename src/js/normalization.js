@@ -10,7 +10,7 @@ export default function normalization(res) {
       published_date: res.published_date,
       multimedia: res.multimedia || [],
       url: res.url,
-      id: null,
+      id: res.title,
     });
   });
 
