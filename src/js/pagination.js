@@ -1,6 +1,7 @@
 import NewArticles from './API-service/api-news';
 import { renderArticle } from './renderArticle';
 import normalization from './normalization';
+import { normalizationPopular } from './normalization';
 
 const pg = document.getElementById('pagination');
 const ulPageContainer = document.querySelector('.page-container');
@@ -16,7 +17,7 @@ const pageDesktop = 8;
 const pageTablet = 7;
 const pageMobile = 4;
 
-let numCardsOnPages;
+let numCardsOnPages = 9;
 
 const desktopWidth = window.matchMedia('(min-width: 1280px)');
 const tabletWidth = window.matchMedia(
@@ -45,12 +46,13 @@ const valuePage = {
 async function onFirstLoad(event) {
   event.preventDefault();
   try {
-    const res = await newArticles.fetchArtic();
-    // totalObjsApi = res.results; // 20[]
+    const res = await newArticles.fetchMostPopular();
+
     const totalNumberPagesApi = res.results.length; // 20
     valuePage.totalPages = Math.ceil(totalNumberPagesApi / numCardsOnPages); // 3
-    const normalizedResults = normalization(res);
+    const normalizedResults = normalizationPopular(res);
     const newArray = normalizedResults.slice(0, numCardsOnPages);
+
     addCard.innerHTML = '';
     renderArticle(newArray);
   } catch (error) {

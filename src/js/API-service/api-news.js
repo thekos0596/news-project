@@ -39,4 +39,14 @@ export default class NewArticles {
       console.log(error);
     }
   }
+  async fetchMostPopular() {
+    const url = `${BASE_URL}mostpopular/v2/viewed/7.json?api-key=${API_KEY}`;
+
+    try {
+      const { data } = await axios.get(url);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }
