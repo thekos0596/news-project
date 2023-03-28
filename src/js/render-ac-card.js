@@ -8,24 +8,24 @@ const containerEl = document.querySelector('.container__read')
 
 const newAccorEl = document.querySelector('.accordion');
 
-function renderAccordion(){
+function renderAccordion() {
   containerEl.insertAdjacentHTML('beforeEnd', pageEmpty());
   const response = JSON.parse(localStorage.getItem('readList')) || [];
 
   const uniqueDates = new Set();
- 
-  response.forEach(({published_date}) => {
-      const date = new Date(published_date);
-      const formattedDate = date.toLocaleDateString('en-GB', {
-          day: '2-digit',
-          month: '2-digit',
-          year: 'numeric'
-      });
-      uniqueDates.add(formattedDate);
+
+  response.forEach(({ published_date }) => {
+    const date = new Date(published_date);
+    const formattedDate = date.toLocaleDateString('en-GB', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric'
     });
-    const markupAccordion = Array.from(uniqueDates)
-      .map((formattedDate ) => {
-          return `
+    uniqueDates.add(formattedDate);
+  });
+  const markupAccordion = Array.from(uniqueDates)
+    .map((formattedDate) => {
+      return `
               <div class="accordion__wrap">
                   <div class="accordion__active">
                     <div class="read__date">${formattedDate}</div>
@@ -41,18 +41,18 @@ function renderAccordion(){
                   </div>
               </div>
           `;
-      })
-      .join('');
+    })
+    .join('');
 
   newAccorEl.insertAdjacentHTML('beforeEnd', markupAccordion)
   initAccordion();
 }
 renderAccordion()
 
-function pageEmpty(){
+function pageEmpty() {
   const items = JSON.parse(localStorage.getItem('readList'));
 
-  if (!items || items.length === 0){
+  if (!items || items.length === 0) {
     return `
     <div class="page-empty">
     <h2 class="page-empty__text">You don't have any read news</h2>
