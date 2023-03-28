@@ -1,6 +1,6 @@
-// імпорт бази даних
+// =====імпорт бази даних
 import { initializeApp } from 'firebase/app';
-import { getDatabase, ref, set, onValue, get } from "firebase/database";
+import { getDatabase, ref, set, onValue, get } from 'firebase/database';
 import {
   getAuth,
   signInWithEmailAndPassword,
@@ -9,7 +9,9 @@ import {
   signOut,
 } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
+import { getDatabase, ref, set } from 'firebase/database';
 
+// =====доступ
 const form = document.querySelector('.form');
 const textEmail = document.querySelector('.form__input--email');
 const textPassword = document.querySelector('.form__input--password');
@@ -18,7 +20,12 @@ const btnRegister = document.querySelector('.form__button--register');
 const btnLogout = document.querySelector('.form__button--logOut');
 const formMessage = document.querySelector('.form__message');
 
-// Your web app's Firebase configuration
+// =====локал сторедж
+const read = localStorage.getItem('readList'); // json
+const dataRead = JSON.parse(read); // {}
+console.log(dataRead);
+
+// =====мій ключ до серверу
 const firebaseApp = initializeApp({
   apiKey: 'AIzaSyBhJ5beXwmy_ttB_5GIAo765d2PbOi8cTk',
   authDomain: 'news-my-first-projec.firebaseapp.com',
@@ -29,14 +36,28 @@ const firebaseApp = initializeApp({
   appId: '1:356584807543:web:4b5836cecd17ec95b6ba72',
 });
 
-// Initialize Firebase
+// =====інстал фаєрбейс
 const auth = getAuth(firebaseApp);
 
-// запит повертає користувача у випадку якщо він є в базі
+// =====отримання даних
+function writeUserData(userId, name, email, myDataNews) {
+  const db = getDatabase();
+  set(ref(db, 'users/' + userId), {
+    username: name,
+    email: email,
+    newsRead: myDataNews,
+  });
+}
+
+// =====повертає користувача якщо він є
 const loginEmailPasword = async evt => {
   evt.preventDefault();
   const loginEmail = textEmail.value;
   const loginPassword = textPassword.value;
+
+  btnFormLogin.disabled = true;
+  btnRegister.disabled = true;
+  btnLogout.disabled = false;
 
   try {
     const userCredential = await signInWithEmailAndPassword(
@@ -44,19 +65,21 @@ const loginEmailPasword = async evt => {
       loginEmail,
       loginPassword
     );
-    console.log(userCredential.user);
+    const myUserID = userCredential.user.uid;
+    console.log(myUserID);
+    writeUserData(myUserID, loginEmail, loginPassword, dataRead);
   } catch (error) {
     console.log(error);
+    formMacup(formMessage, 'Невірний адрес або зареєструйтесь');
   }
 };
 btnFormLogin.addEventListener('click', loginEmailPasword);
 
-// дія реєстрації акаунту
+// =====дія реєстрації акаунту
 const createAccount = async evt => {
   evt.preventDefault();
   const loginEmail = textEmail.value;
   const loginPassword = textPassword.value;
-  console.log(loginEmail, loginPassword);
 
   try {
     const userCredential = await createUserWithEmailAndPassword(
@@ -64,77 +87,50 @@ const createAccount = async evt => {
       loginEmail,
       loginPassword
     );
-    console.log(userCredential.user);
-	
+    const myUserID = userCredential.user.uid;
+    console.log(myUserID);
+    writeUserData(myUserID, loginEmail, loginPassword, dataRead);
   } catch (error) {
     console.log(error.message);
-	formMacup(formMessage, error.message)
+    formMacup(formMessage, error.message);
   }
 };
 
 btnRegister.addEventListener('click', createAccount);
 
-// перевірка чи зареєстрований користувач зараз
+// =====перевірка чи зареєстрований користувач зараз
 const monitorAuthState = async () => {
   onAuthStateChanged(auth, user => {
     if (user) {
-	  formMacup(formMessage, 'Вхід виконано')
-	  btnFormLogin.disabled = true;
-	  btnRegister.disabled = true;
-	  btnLogout.disabled = false;
+      formMacup(formMessage, 'Вхід виконано');
 
+      btnFormLogin.disabled = true;
+      btnRegister.disabled = true;
+      btnLogout.disabled = false;
     } else {
-		formMacup(formMessage, 'Вхід не виконано')
-		btnLogout.disabled = true;
+      formMacup(formMessage, 'Вхід не виконано');
+      btnLogout.disabled = true;
     }
   });
 };
 
 monitorAuthState();
 
-// вихід з сайту
-const Logout = async () => {
+// =====вихід з сайту
+const Logout = async evt => {
+  evt.preventDefault();
+  btnFormLogin.disabled = false;
+  btnRegister.disabled = false;
+  btnLogout.disabled = true;
+  formMacup(formMessage, 'введытьданы або зареэструйтусь');
   await signOut(auth);
 };
 
 btnLogout.addEventListener('click', Logout);
 
-function formMacup (elem, message) {
-	const infoMessage = `<p class="form__message--text">${message}</p>`
-	elem.innerHTML = ''
-	elem.insertAdjacentHTML('beforeend', infoMessage);
+function formMacup(elem, message) {
+  const infoMessage = `<p class="form__message--text">${message}</p>`;
+  elem.innerHTML = '';
+  elem.insertAdjacentHTML('beforeend', infoMessage);
 }
 // =========================================================
-// запускаэм базу даних
-const db = getDatabase(firebaseApp);
-
-// ?Отримання посилання на вузол /users/1 у базі даних
-const userRef = ref(db, 'users/1');
-
-//? Дані, які потрібно записати
-// const userData = {
-//   name: "John",
-//   age: 30,
-//   email: "john@example.com"
-// };
-
-// ?  запис куди       що
-	// set(userRef, userData);
-// ==============================
-
-// ? =====  отримати дані
-// get(userRef).then((snapshot) => {
-// 	if (snapshot.exists()) {
-// 	  const userData = snapshot.val();
-// 	  console.log(userData);
-// 	} else {
-// 	  console.log("No data available");
-// 	}
-//   }).catch((error) => {
-// 	console.error(error);
-//   });
-
-
-
-const theme = localStorage.getItem("ui-theme");
-console.log(theme); // "dark"
