@@ -6,9 +6,9 @@ export default function normalization(res) {
   currentNewsPage = [];
   res.results.map(res => {
     currentNewsPage.push({
-      section: res.section,
-      title: res.title,
-      abstract: res.abstract,
+      section: res.section || 'Default section',
+      title: res.title || 'This article has no title.',
+      abstract: res.abstract || 'This article has no description',
       published_date: res.published_date,
       multimedia: res.multimedia || [],
       url: res.url,

@@ -31,6 +31,7 @@ function getDataFromLoc() {
 function renderArticle(res) {
   let newsId = [];
   const data = getDataFromLoc();
+
   if (data.length) {
     newsId = data.map(({ id }) => id.toUpperCase());
   }
@@ -39,7 +40,7 @@ function renderArticle(res) {
       ({ abstract, section, title, published_date, multimedia = [], url }) => {
         const bool = newsId.includes(title.toUpperCase());
         const articleTitle = bool ? 'Remove from favorite' : 'Add to favorite';
-        const iconClass = bool ? 'icon-heart' : 'icon-favorite';
+        const iconClass = bool ? 'icon-favorite' : 'icon-heart';
 
         const imageUrl =
           multimedia && multimedia[2]?.url ? multimedia[2].url : defImg;
@@ -57,6 +58,7 @@ function renderArticle(res) {
   </div>
   <button class="news-card__favorite-button" data-news-id="${title}">${articleTitle}<svg width="13" height="12" class="news-card__favorite-icon">
     <use href="${svgSprite}#${iconClass}"></use></svg>
+
   </button>
   </div>
   <div class="news-card__description">
