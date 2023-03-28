@@ -203,7 +203,7 @@ const categories = [
 
 import NewArticles from './API-service/api-news';
 import { renderCategories } from './renderCategories';
-import { normalizationCategories } from './normalization';
+import { normalizeData } from './normalization';
 import { checkFavorites } from './btn-add-remove';
 import { checkRead } from './btn-read-more';
 
@@ -220,7 +220,7 @@ buttonsEl.addEventListener('click', async function (e) {
 
   try {
     const res = await newArticles.fetchCategories(selectedCategory);
-    const normalizedResults = normalizationCategories(res);
+    const normalizedResults = normalizeData(res, 'categories');
     addCard.setAttribute('data-page', selectedCategory);
     const newArray = normalizedResults.slice(0, numCardsOnPages);
     addCard.innerHTML = '';
