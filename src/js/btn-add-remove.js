@@ -57,7 +57,7 @@ export function checkFavorites(newArray) {
       const isFavorite = favoriteIndex !== -1;
       btn.setAttribute('data-favorite', isFavorite);
       btn.textContent = isFavorite ? 'Remove from favorite' : 'Add to favorite';
-      createIcon(true, btn);
+      createIcon(isFavorite, btn);
     }
   });
 }

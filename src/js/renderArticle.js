@@ -39,6 +39,7 @@ function renderArticle(res) {
   newCardEl.classList.add(paginationClass);
   let newsId = [];
   const data = getDataFromLoc();
+
   if (data.length) {
     newsId = data.map(({ id }) => id.toUpperCase());
   }
@@ -65,6 +66,7 @@ function renderArticle(res) {
   </div>
   <button class="news-card__favorite-button" data-news-id="${title}">${articleTitle}<svg width="13" height="12" class="news-card__favorite-icon">
     <use href="${svgSprite}#${iconClass}"></use></svg>
+
   </button>
   </div>
   <div class="news-card__description">

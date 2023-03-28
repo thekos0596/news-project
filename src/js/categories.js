@@ -202,9 +202,10 @@ const categories = [
 ];
 
 import NewArticles from './API-service/api-news';
-import { renderArticle } from './renderArticle';
 import { renderCategories } from './renderCategories';
 import { normalizationCategories } from './normalization';
+import { checkFavorites } from './btn-add-remove';
+import { checkRead } from './btn-read-more';
 
 const newArticles = new NewArticles();
 const buttonsEl = document.querySelector('.categories__buttons');
@@ -222,6 +223,8 @@ buttonsEl.addEventListener('click', async function (e) {
     const newArray = normalizedResults.slice(0, numCardsOnPages);
     addCard.innerHTML = '';
     renderCategories(newArray);
+    checkFavorites(newArray);
+    checkRead(newArray);
   } catch (error) {
     console.log(error);
   }
