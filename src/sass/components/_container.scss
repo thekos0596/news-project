@@ -1,18 +1,18 @@
 .container {
-    position: relative;
-    padding-left: 16px;
-    padding-right: 16px;
-    margin: 0 auto;
-  
-    @media screen and (min-width: $mobile-less) {
-      width: $mobile;
-    }
-  
-    @media screen and (min-width: $tablet-less) {
-      width: $tablet;
-    }
-  
-    @media screen and (min-width: $desktop-less) {
-      width: $desktop;
-    }
+  position: relative;
+  padding-left: 16px;
+  padding-right: 16px;
+  margin: 0 auto;
+
+  @media screen and (min-width: $mobile-less) {
+    min-width: $mobile;
+  }
+
+  @media screen and (min-width: $tablet-less) {
+    width: $tablet;
+  }
+
+  @media screen and (min-width: $desktop-less) {
+    width: $desktop;
+  }
 }
