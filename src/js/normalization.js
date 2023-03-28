@@ -1,25 +1,28 @@
 export let currentNewsPage = [];
-// export let currentSearchPage = [];
-// export const currentPage = [];
-// export default function normalization(res) {
-//   currentNewsPage = [];
-//   res.results.map(r => {
-//     currentNewsPage.push({
-//       section: r.section || 'Default section',
-//       title: r.title || 'This article has no title',
-//       abstract: r.abstract || 'This article has no description',
-//       published_date: r.published_date,
-//       multimedia: r.multimedia || [],
-//       url: r.url,
-//       id: r.title,
-//       data_set: 'categories',
-//     });
-//   });
-//   // console.log(currentNewsPage);
-//   return currentNewsPage;
-// }
+export let currentSearchPage = [];
+export let currentPopularPage = [];
+export let currentCategoriesPage = [];
+export const currentPage = [];
+export default function normalization(res) {
+  currentNewsPage = [];
+  res.results.map(r => {
+    currentNewsPage.push({
+      section: r.section || 'Default section',
+      title: r.title || 'This article has no title',
+      abstract: r.abstract || 'This article has no description',
+      published_date: r.published_date,
+      multimedia: r.multimedia || [],
+      url: r.url,
+      id: r.title,
+      data_set: 'categories',
+    });
+  });
+  // console.log(currentNewsPage);
+  return currentNewsPage;
+}
+
 export function normalizationCategories(res) {
-  currentPopularPage = [];
+  currentCategoriesPage = [];
   res.results.map(r => {
     currentPopularPage.push({
       section: r.section || 'Default section',
@@ -33,7 +36,7 @@ export function normalizationCategories(res) {
     });
   });
 
-  return currentPopularPage;
+  return currentCategoriesPage;
 }
 
 export function normalizationSearch(res) {
