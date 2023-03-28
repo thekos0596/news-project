@@ -5,7 +5,7 @@
   margin: 0 auto;
 
   @media screen and (min-width: $mobile-less) {
-    min-width: $mobile;
+    width: $mobile;
   }
 
   @media screen and (min-width: $tablet-less) {
