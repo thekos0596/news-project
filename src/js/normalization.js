@@ -1,4 +1,4 @@
-// export let currentNewsPage = [];
+export let currentNewsPage = [];
 // export let currentSearchPage = [];
 // export const currentPage = [];
 // export default function normalization(res) {
