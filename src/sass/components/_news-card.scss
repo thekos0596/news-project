@@ -30,6 +30,12 @@
   position: relative;
 }
 
+.news-card__item:first-child {
+  @media screen and (max-width: $tablet-less) {
+    height: 469px;
+  }
+}
+
 .news-card {
   border-radius: 4px;
   padding-top: 60px;
