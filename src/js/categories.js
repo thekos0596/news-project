@@ -202,29 +202,32 @@ const categories = [
 ];
 
 import NewArticles from './API-service/api-news';
-import { renderArticle } from './renderArticle';
-import normalization from './normalization';
+import { renderCategories } from './renderCategories';
+import { normalizationCategories } from './normalization';
 import { checkFavorites } from './btn-add-remove';
 import { checkRead } from './btn-read-more';
 
 const newArticles = new NewArticles();
 const buttonsEl = document.querySelector('.categories__buttons');
 
-const numCardsOnPages = 9;
+const numCardsOnPages = 8;
 const addCard = document.querySelector('.news-card');
+
 buttonsEl.addEventListener('click', async function (e) {
   const selectedCategory = e.target.dataset.section;
-  console.dir(selectedCategory);
+
   try {
     const res = await newArticles.fetchCategories(selectedCategory);
-    console.log(res);
-    const normalizedResults = normalization(res);
+    const normalizedResults = normalizationCategories(res);
+    addCard.setAttribute('data-page', selectedCategory);
     const newArray = normalizedResults.slice(0, numCardsOnPages);
     addCard.innerHTML = '';
-    renderArticle(newArray);
+    renderCategories(newArray);
     checkFavorites(newArray);
     checkRead(newArray);
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 let select = function () {

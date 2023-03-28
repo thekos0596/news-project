@@ -15,15 +15,15 @@ const icon = document.querySelector('.search-box__icon');
 const search = document.querySelector('.search-box');
 
 search.addEventListener('submit', onFormSubmit);
-
 async function onFormSubmit(e) {
   e.preventDefault();
-  console.log(e.target.elements.mySearch.value);
-  const serchValue = e.target.elements.mySearch.value;
 
+  const serchValue = e.target.elements.mySearch.value;
   try {
     const res = await newArticles.fetchSearch(serchValue);
     const normalizedResults = normalizationSearch(res);
+    btnAddtoFavEl.setAttribute('data-page', serchValue);
+
     btnAddtoFavEl.innerHTML = '';
     renderSearchNews(normalizedResults);
     checkFavorites(normalizedResults);
