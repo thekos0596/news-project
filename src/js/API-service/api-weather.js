@@ -2,25 +2,25 @@ const apiKey = "edcdf24847596a8bc6f71c1052f5a8e5";
 const latitudeDefault = 40.778793;
 const longitudeDefault = -73.966587;
 
-const fetchweather = function(){
+const fetchweather = function () {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(position => {
       const latitude = position.coords.latitude;
       const longitude = position.coords.longitude;
 
-      fetchWeather(latitude, longitude, apiKey);
+      fetchWeatherApi(latitude, longitude, apiKey);
     }, error => {
       // console.log(error);
-      fetchWeather(latitudeDefault, longitudeDefault, apiKey);
+      fetchWeatherApi(latitudeDefault, longitudeDefault, apiKey);
     }
 
     );
   } else {
     console.log("Geolocation is not supported by this browser.");
-    fetchWeather(latitudeDefault, longitudeDefault, apiKey);
+    fetchWeatherApi(latitudeDefault, longitudeDefault, apiKey);
   }
 
-  function fetchWeather(latitude, longitude, apiKey) {
+  function fetchWeatherApi(latitude, longitude, apiKey) {
 
 
     // Make the API request
@@ -38,7 +38,7 @@ const fetchweather = function(){
         const iconCode = data.weather[0].icon;
 
         const iconUrl = `https://openweathermap.org/img/wn/04n@2x.png`;
-        
+
         const weekday = new Date().toLocaleString('en-US', { weekday: 'short' });
         const day = new Date().toLocaleString('en-US', { day: 'numeric' });
         const month = new Date().toLocaleString('en-US', { month: 'short' });
@@ -74,4 +74,5 @@ const fetchweather = function(){
   }
 }
 
-fetchweather();
+export { fetchweather };
+// fetchweather();
