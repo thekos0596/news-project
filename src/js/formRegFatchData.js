@@ -10,6 +10,7 @@ import {
 } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
 import { getDatabase, ref, set } from 'firebase/database';
+import { log } from 'console';
 
 // =====доступ
 const form = document.querySelector('.form');
@@ -23,11 +24,11 @@ const formMessage = document.querySelector('.form__message');
 // =====локал сторедж
 const read = localStorage.getItem('readList'); // json
 const dataRead = JSON.parse(read); // {}
-console.log(dataRead);
+console.log(dataRead);// обєкт що є в локал сторед
 
 // =====мій ключ до серверу
 const firebaseApp = initializeApp({
-  apiKey: 'AIzaSyBhJ5beXwmy_ttB_5GIAo765d2PbOi8cTk',
+	apiKey: 'AIzaSyBhJ5beXwmy_ttB_5GIAo765d2PbOi8cTk',
   authDomain: 'news-my-first-projec.firebaseapp.com',
   databaseURL: 'https://news-my-first-projec-default-rtdb.firebaseio.com',
   projectId: 'news-my-first-projec',
@@ -38,22 +39,31 @@ const firebaseApp = initializeApp({
 
 // =====інстал фаєрбейс
 const auth = getAuth(firebaseApp);
+const db = getDatabase(); 
+const loginEmail = textEmail.value;
+const loginPassword = textPassword.value;
 
-// =====отримання даних
+// =====відправленя даних в базу 
 function writeUserData(userId, name, email, myDataNews) {
-  const db = getDatabase();
-  set(ref(db, 'users/' + userId), {
+	set(ref(db, 'users/' + userId), {
     username: name,
     email: email,
     newsRead: myDataNews,
   });
 }
 
+// =====отримання даних з бази
+function setUserData(userId) {
+	const starCountRef = ref(db, 'users/' + userId + '/newsRead');
+	onValue(starCountRef, (snapshot) => {
+	  const data = snapshot.val();
+	  console.log(data);
+	});
+}
+
 // =====повертає користувача якщо він є
 const loginEmailPasword = async evt => {
   evt.preventDefault();
-  const loginEmail = textEmail.value;
-  const loginPassword = textPassword.value;
 
   btnFormLogin.disabled = true;
   btnRegister.disabled = true;
@@ -67,10 +77,10 @@ const loginEmailPasword = async evt => {
     );
     const myUserID = userCredential.user.uid;
     console.log(myUserID);
-    writeUserData(myUserID, loginEmail, loginPassword, dataRead);
+    writeUserData(myUserID, loginPassword, loginEmail, dataRead);
   } catch (error) {
     console.log(error);
-    formMacup(formMessage, 'Невірний адрес або зареєструйтесь');
+    formMacup(formMessage, 'Невірний адрес або зареєструйтесь', 'red');
   }
 };
 btnFormLogin.addEventListener('click', loginEmailPasword);
@@ -78,8 +88,6 @@ btnFormLogin.addEventListener('click', loginEmailPasword);
 // =====дія реєстрації акаунту
 const createAccount = async evt => {
   evt.preventDefault();
-  const loginEmail = textEmail.value;
-  const loginPassword = textPassword.value;
 
   try {
     const userCredential = await createUserWithEmailAndPassword(
@@ -92,7 +100,8 @@ const createAccount = async evt => {
     writeUserData(myUserID, loginEmail, loginPassword, dataRead);
   } catch (error) {
     console.log(error.message);
-    formMacup(formMessage, error.message);
+	console.log(1111111111111111111111111111111111);
+    formMacup(formMessage, error.message, 'red');
   }
 };
 
@@ -102,12 +111,12 @@ btnRegister.addEventListener('click', createAccount);
 const monitorAuthState = async () => {
   onAuthStateChanged(auth, user => {
     if (user) {
-      formMacup(formMessage, 'Вхід виконано');
+      formMacup(formMessage, 'Вхід виконано', 'green');
       btnFormLogin.disabled = true;
       btnRegister.disabled = true;
       btnLogout.disabled = false;
     } else {
-      formMacup(formMessage, 'Вхід не виконано');
+      formMacup(formMessage, 'Вхід не виконано', 'orange');
       btnLogout.disabled = true;
     }
   });
@@ -121,15 +130,77 @@ const Logout = async evt => {
   btnFormLogin.disabled = false;
   btnRegister.disabled = false;
   btnLogout.disabled = true;
-  formMacup(formMessage, 'введытьданы або зареэструйтусь');
+  formMacup(formMessage, 'введытьданы або зареэструйтусь', 'orange');
   await signOut(auth);
 };
 
 btnLogout.addEventListener('click', Logout);
 
-function formMacup(elem, message) {
-  const infoMessage = `<p class="form__message--text">${message}</p>`;
+function formMacup(elem, message, color) {
+  const infoMessage = `
+  <p class="form__message--text" style="color: ${color}";">${message}</p>`;
   elem.innerHTML = '';
   elem.insertAdjacentHTML('beforeend', infoMessage);
 }
 // =========================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
