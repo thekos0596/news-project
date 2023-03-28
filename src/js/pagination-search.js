@@ -4,8 +4,6 @@ import normalization from './normalization';
 import { checkFavorites } from './btn-add-remove';
 import { checkRead } from './btn-read-more';
 import { normalizationPopular } from './normalization';
-import { normalizationSearch } from './normalization';
-import renderSearchNews from './renderSerchNews';
 
 const pg = document.getElementById('pagination');
 const ulPageContainer = document.querySelector('.page-container');
@@ -29,9 +27,9 @@ const tabletWidth = window.matchMedia(
 );
 const mobileWidth = window.matchMedia('(max-width: 766px)');
 
-// console.log('desktopWidth ', desktopWidth);
-// console.log('tabletWidth ', tabletWidth);
-// console.log('mobileWidth ', mobileWidth);
+console.log('desktopWidth ', desktopWidth);
+console.log('tabletWidth ', tabletWidth);
+console.log('mobileWidth ', mobileWidth);
 
 if (desktopWidth.matches) {
   numCardsOnPages = pageDesktop;
@@ -44,7 +42,7 @@ if (desktopWidth.matches) {
 const valuePage = {
   curPage: 1,
   numLinksTwoSide: 1,
-  totalPages: 8,
+  totalPages: 10,
 };
 
 async function onFirstLoad(event) {
@@ -69,40 +67,17 @@ async function onFirstLoad(event) {
 
   async function renderNumPage(page) {
     try {
-      if (addCard.classList.contains('search')) {
-        const serchValue = addCard.getAttribute('data-page');
-        console.log(serchValue);
-        const res = await newArticles.fetchSearch(serchValue);
-        const normalizedResults = normalizationSearch(res);
+      const res = await newArticles.fetchArtic();
+      // totalObjsApi = res.results; // 20[]
+      // totalNumberPagesApi = res.results.length; // 20
+      // valuePage.totalPages = Math.ceil(totalNumberPagesApi / numCardsOnPages); // 3
+      const normalizedResults = normalization(res);
 
-        const s = (page - 1) * numCardsOnPages;
-        const e = s + numCardsOnPages;
-        const newArray = normalizedResults.slice(s, e);
-        addCard.innerHTML = '';
-        renderSearchNews(newArray);
-        checkFavorites(newArray);
-        checkRead(newArray);
-      }
-
-      if (addCard.classList.contains('popular')) {
-        const serchValue = addCard.getAttribute('data-page');
-        console.log(serchValue);
-        const res = await newArticles.fetchSearch(serchValue);
-        const normalizedResults = normalizationSearch(res);
-
-        const s = (page - 1) * numCardsOnPages;
-        const e = s + numCardsOnPages;
-        const newArray = normalizedResults.slice(s, e);
-        addCard.innerHTML = '';
-        renderSearchNews(newArray);
-        checkFavorites(newArray);
-        checkRead(newArray);
-      }
-      // const res = await newArticles.fetchArtic();
-      // // totalObjsApi = res.results; // 20[]
-      // // totalNumberPagesApi = res.results.length; // 20
-      // // valuePage.totalPages = Math.ceil(totalNumberPagesApi / numCardsOnPages); // 3
-      // const normalizedResults = normalization(res);
+      const s = (page - 1) * numCardsOnPages;
+      const e = s + numCardsOnPages;
+      const newArray = normalizedResults.slice(s, e);
+      addCard.innerHTML = '';
+      renderArticle(newArray);
     } catch (error) {
       console.log(error);
     }

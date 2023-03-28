@@ -203,29 +203,32 @@ const categories = [
 
 import NewArticles from './API-service/api-news';
 import { renderArticle } from './renderArticle';
-import normalization from './normalization';
+import { renderCategories } from './renderCategories';
+import normalizationCategories from './normalization';
 
 const newArticles = new NewArticles();
 const buttonsEl = document.querySelector('.categories__buttons');
 
 const numCardsOnPages = 9;
 const addCard = document.querySelector('.news-card');
+
 buttonsEl.addEventListener('click', async function (e) {
   const selectedCategory = e.target.dataset.section;
-  console.dir(selectedCategory);
+
   try {
     const res = await newArticles.fetchCategories(selectedCategory);
-    console.log(res);
-    const normalizedResults = normalization(res);
+    const normalizedResults = normalizationCategories(res);
+    btnAddtoFavEl.setAttribute('data-page', serchValue);
     const newArray = normalizedResults.slice(0, numCardsOnPages);
     addCard.innerHTML = '';
-    renderArticle(newArray);
-  } catch (error) {}
+    renderCategories(newArray);
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 let select = function () {
   let selectHeader = document.querySelectorAll('.categories__dropdown-header');
-  
 
   let selectItem = document.querySelectorAll('.categories__dropdown-item');
   selectHeader.forEach(item => {

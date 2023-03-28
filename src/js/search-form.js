@@ -1,6 +1,6 @@
 // import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import NewArticles from './API-service/api-news';
-import { normalizationSearch } from './normalization.js';
+import { normalizationSearch, currentSearchPage } from './normalization.js';
 import defImg from '../images/defaultimage.jpg';
 import { checkFavorites } from './btn-add-remove';
 import { checkRead } from './btn-read-more';
@@ -14,16 +14,17 @@ const icon2 = document.querySelector('.search-box__icon-svg');
 const icon = document.querySelector('.search-box__icon');
 const search = document.querySelector('.search-box');
 
+let x = 'start';
 search.addEventListener('submit', onFormSubmit);
-
 async function onFormSubmit(e) {
   e.preventDefault();
   console.log(e.target.elements.mySearch.value);
   const serchValue = e.target.elements.mySearch.value;
-
   try {
     const res = await newArticles.fetchSearch(serchValue);
     const normalizedResults = normalizationSearch(res);
+    btnAddtoFavEl.setAttribute('data-page', serchValue);
+
     btnAddtoFavEl.innerHTML = '';
     renderSearchNews(normalizedResults);
     checkFavorites(normalizedResults);
@@ -36,7 +37,7 @@ async function onFormSubmit(e) {
 
   e.target.reset();
 }
-
+console.log(currentSearchPage);
 // function messageInfo(arr) {
 //   if (normalizedResults.value === []) {
 //     return `<div><h2 class="message-info">We haven’t found news from this category</h2><img src="${defImg}" class="defImg"/></div>`;

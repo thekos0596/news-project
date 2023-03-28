@@ -28,7 +28,16 @@ function getDataFromLoc() {
   }
 }
 
-function renderArticle(res) {
+export function renderCategories(res) {
+  const paginationClass = res[0].data_set;
+  console.log(paginationClass);
+  if (newCardEl.classList.contains('search')) {
+    newCardEl.classList.remove('search');
+  } else if (newCardEl.classList.contains('popular')) {
+    newCardEl.classList.remove('popular');
+  }
+  newCardEl.classList.add(paginationClass);
+
   let newsId = [];
   const data = getDataFromLoc();
   if (data.length) {
@@ -39,7 +48,7 @@ function renderArticle(res) {
       ({ abstract, section, title, published_date, multimedia = [], url }) => {
         const bool = newsId.includes(title.toUpperCase());
         const articleTitle = bool ? 'Remove from favorite' : 'Add to favorite';
-        const iconClass = bool ? 'icon-favorite' : 'icon-heart';
+        const iconClass = bool ? 'icon-heart' : 'icon-favorite';
 
         const imageUrl =
           multimedia && multimedia[2]?.url ? multimedia[2].url : defImg;
