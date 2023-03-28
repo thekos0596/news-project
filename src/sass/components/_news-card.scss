@@ -66,15 +66,6 @@
   color: $color-black-primary;
 }
 
-// .news-card__image-container {
-//   padding: 0;
-//   margin: 0;
-//   display: flex;
-//   position: relative;
-//   flex-wrap: wrap;
-//   gap: 32px;
-//   justify-content: center;
-// }
 
 .news-card__title {
   display: -webkit-box;
@@ -106,7 +97,6 @@
 }
 
 .news-card__read-more {
-  padding: 5px 10px;
   font-size: 16px;
   line-height: 1.375;
   color: #4440f7;
