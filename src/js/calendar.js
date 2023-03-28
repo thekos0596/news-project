@@ -30,16 +30,22 @@ let options = {
     startDay: 1,
     position: 'br',
     onShow: () => {
-        document.querySelector(".arrow-down").style.display = 'none';
-        document.querySelector(".arrow-up").style.display = 'block';
+        let tabl = window.matchMedia("(min-width: 768px)");
+        if (tabl.matches === true) {
+            document.querySelector(".arrow-down").style.display = 'none';
+            document.querySelector(".arrow-up").style.display = 'block';
+        }
         document.querySelector(".callend-off").style.display = 'none';
         document.querySelector(".callend-on").style.display = 'block';
         pInput.classList.add("datepicker-selected");
         pInput.style.border = "1px solid #4440F6";
     },
     onHide: () => {
-        document.querySelector(".arrow-down").style.display = 'block';
-        document.querySelector(".arrow-up").style.display = 'none';
+        let tabl = window.matchMedia("(min-width: 768px)");
+        if (tabl.matches === true) {
+            document.querySelector(".arrow-down").style.display = 'block';
+            document.querySelector(".arrow-up").style.display = 'none';
+        }
         document.querySelector(".callend-off").style.display = 'block';
         document.querySelector(".callend-on").style.display = 'none';
         pInput.classList.remove("datepicker-selected");
