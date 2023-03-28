@@ -17,14 +17,14 @@ export default function normalization(res) {
       data_set: 'categories',
     });
   });
-  // console.log(currentNewsPage);
+
   return currentNewsPage;
 }
 
 export function normalizationCategories(res) {
   currentCategoriesPage = [];
   res.results.map(r => {
-    currentPopularPage.push({
+    currentCategoriesPage.push({
       section: r.section || 'Default section',
       title: r.title || 'This article has no title',
       abstract: r.abstract || 'This article has no description',
