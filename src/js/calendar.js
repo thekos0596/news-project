@@ -42,11 +42,11 @@ let options = {
     }
 };
 
-    const dp = datepicker(pInput, options);
-    document.querySelector(".callend-on").addEventListener('click', openCalendar);
-    document.querySelector(".callend-off").addEventListener('click', openCalendar);
-    document.querySelector(".arrow-down").addEventListener('click', openCalendar);
-    document.querySelector(".arrow-up").addEventListener('click', openCalendar);
+const dp = datepicker(pInput, options);
+document.querySelector(".callend-on").addEventListener('click', openCalendar);
+document.querySelector(".callend-off").addEventListener('click', openCalendar);
+document.querySelector(".arrow-down").addEventListener('click', openCalendar);
+document.querySelector(".arrow-up").addEventListener('click', openCalendar);
 
 
 
