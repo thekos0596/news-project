@@ -204,6 +204,8 @@ const categories = [
 import NewArticles from './API-service/api-news';
 import { renderArticle } from './renderArticle';
 import normalization from './normalization';
+import { checkFavorites } from './btn-add-remove';
+import { checkRead } from './btn-read-more';
 
 const newArticles = new NewArticles();
 const buttonsEl = document.querySelector('.categories__buttons');
@@ -220,12 +222,13 @@ buttonsEl.addEventListener('click', async function (e) {
     const newArray = normalizedResults.slice(0, numCardsOnPages);
     addCard.innerHTML = '';
     renderArticle(newArray);
+    checkFavorites(newArray);
+    checkRead(newArray);
   } catch (error) {}
 });
 
 let select = function () {
   let selectHeader = document.querySelectorAll('.categories__dropdown-header');
-  
 
   let selectItem = document.querySelectorAll('.categories__dropdown-item');
   selectHeader.forEach(item => {
