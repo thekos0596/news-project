@@ -9,6 +9,17 @@ const containerEl = document.querySelector('.container__read');
 const newAccorEl = document.querySelector('.accordion');
 const response = JSON.parse(localStorage.getItem('readList')) || [];
 
+export function pageEmpty(){
+  if (!response || response.length === 0){
+    return `
+    <div class="page-empty">
+    <h2 class="page-empty__text">You don't have any read news</h2>
+    <img src="${defImgPng}" alt="You have not read news" class="page-empty__img">
+    </div>`
+  }
+  return ''
+}
+
 function newFormatArray(response){
   const formattedItems = response.map(item => {
     const newDate = new Date(item.readAt);
@@ -69,19 +80,8 @@ export function renderAccordion(){
 }
 renderAccordion();
 
-export function pageEmpty(){
-  if (!response || response.length === 0){
-    return `
-    <div class="page-empty">
-    <h2 class="page-empty__text">You don't have any read news</h2>
-    <img src="${defImgPng}" alt="You have not read news" class="page-empty__img">
-    </div>`
-  }
-  return ''
-}
-
 function markupReadCard({ abstract, section, title, published_date, imageUrl, imageAlt, url }) {
-  return  markupRead = `
+  return `
     <li class="news-card__item">
       <div class="news-card__foto">
         <img src="${imageUrl}" alt="${imageAlt}" class="news-card__image">
