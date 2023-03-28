@@ -14,6 +14,7 @@ const targetElement = document.querySelector('.mobile-container');
       openMenuBtn.getAttribute('aria-expanded') === 'true' || false;
     openMenuBtn.setAttribute('aria-expanded', !isMenuOpen);
     mobileMenu.classList.toggle('is-open');
+    mobileMenu.classList.toggle('visually-hidden');
 
     disableBodyScroll(targetElement);
     const scrollLockMethod = !isMenuOpen ? disableBodyScroll : enableBodyScroll;

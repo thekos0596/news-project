@@ -11,13 +11,13 @@ $lightblue: lightblue;
   box-sizing: border-box;
   width: 168px;
 
-  @media screen and (min-width: $tablet-less) {
-    width: 151px;
+  @media screen and (max-width: $tablet-less) {
+    width: 124px;
   }
 
   font-family: $font-main;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 12px;
   line-height: 21px;
 
   text-align: center;
@@ -25,6 +25,10 @@ $lightblue: lightblue;
   padding: 5px;
   border: 1px solid $color-black-primary;
   border-radius: 20px;
+
+  @media screen and (max-width: $tablet-less) {
+    padding-left: 30px;
+  }
 }
 
 .datepicker-selected {
@@ -61,6 +65,11 @@ $lightblue: lightblue;
   position: absolute;
   right: 12px;
   top: 10px;
+
+  @media screen and (max-width: $tablet-less) {
+    display: none;
+    position: absolute;
+  }
 }
 
 

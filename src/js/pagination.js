@@ -4,6 +4,8 @@ import normalization from './normalization';
 import { checkFavorites } from './btn-add-remove';
 import { checkRead } from './btn-read-more';
 import { normalizationPopular } from './normalization';
+import { normalizeData } from './normalization';
+import renderSearchNews from './renderSerchNews';
 
 const pg = document.getElementById('pagination');
 const ulPageContainer = document.querySelector('.page-container');
@@ -19,7 +21,7 @@ const pageDesktop = 8;
 const pageTablet = 7;
 const pageMobile = 4;
 
-let numCardsOnPages = 9;
+let numCardsOnPages = 8;
 
 const desktopWidth = window.matchMedia('(min-width: 1280px)');
 const tabletWidth = window.matchMedia(
@@ -27,9 +29,9 @@ const tabletWidth = window.matchMedia(
 );
 const mobileWidth = window.matchMedia('(max-width: 766px)');
 
-console.log('desktopWidth ', desktopWidth);
-console.log('tabletWidth ', tabletWidth);
-console.log('mobileWidth ', mobileWidth);
+// console.log('desktopWidth ', desktopWidth);
+// console.log('tabletWidth ', tabletWidth);
+// console.log('mobileWidth ', mobileWidth);
 
 if (desktopWidth.matches) {
   numCardsOnPages = pageDesktop;
@@ -49,10 +51,9 @@ async function onFirstLoad(event) {
   event.preventDefault();
   try {
     const res = await newArticles.fetchMostPopular();
-
     const totalNumberPagesApi = res.results.length; // 20
     valuePage.totalPages = Math.ceil(totalNumberPagesApi / numCardsOnPages); // 3
-    const normalizedResults = normalizationPopular(res);
+    const normalizedResults = normalizeData(res, 'popular');
     const newArray = normalizedResults.slice(0, numCardsOnPages);
 
     addCard.innerHTML = '';
@@ -66,18 +67,55 @@ async function onFirstLoad(event) {
   pagination();
 
   async function renderNumPage(page) {
+    if (page >= 2) {
+      numCardsOnPages = 9;
+    }
     try {
-      const res = await newArticles.fetchArtic();
-      // totalObjsApi = res.results; // 20[]
-      // totalNumberPagesApi = res.results.length; // 20
-      // valuePage.totalPages = Math.ceil(totalNumberPagesApi / numCardsOnPages); // 3
-      const normalizedResults = normalization(res);
+      if (addCard.classList.contains('popular')) {
+        const res = await newArticles.fetchMostPopular();
+        const normalizedResults = normalizeData(res, 'popular');
 
-      const s = (page - 1) * numCardsOnPages;
-      const e = s + numCardsOnPages;
-      const newArray = normalizedResults.slice(s, e);
-      addCard.innerHTML = '';
-      renderArticle(newArray);
+        const s = (page - 1) * numCardsOnPages;
+        const e = s + numCardsOnPages;
+        const newArray = normalizedResults.slice(s, e);
+        addCard.innerHTML = '';
+        renderArticle(newArray);
+        checkFavorites(newArray);
+        checkRead(newArray);
+      }
+      if (addCard.classList.contains('search')) {
+        const serchValue = addCard.getAttribute('data-page');
+
+        const res = await newArticles.fetchSearch(serchValue);
+        const normalizedResults = normalizeData(res, 'search');
+
+        const s = (page - 1) * numCardsOnPages;
+        const e = s + numCardsOnPages;
+        const newArray = normalizedResults.slice(s, e);
+        addCard.innerHTML = '';
+        renderSearchNews(newArray);
+        checkFavorites(newArray);
+        checkRead(newArray);
+      }
+
+      if (addCard.classList.contains('categories')) {
+        const cotegorieshValue = addCard.getAttribute('data-page');
+        const res = await newArticles.fetchCategories(cotegorieshValue);
+        const normalizedResults = normalizeData(res, 'categories');
+
+        const s = (page - 1) * numCardsOnPages;
+        const e = s + numCardsOnPages;
+        const newArray = normalizedResults.slice(s, e);
+        addCard.innerHTML = '';
+        renderSearchNews(newArray);
+        checkFavorites(newArray);
+        checkRead(newArray);
+      }
+      // const res = await newArticles.fetchArtic();
+      // // totalObjsApi = res.results; // 20[]
+      // // totalNumberPagesApi = res.results.length; // 20
+      // // valuePage.totalPages = Math.ceil(totalNumberPagesApi / numCardsOnPages); // 3
+      // const normalizedResults = normalization(res);
     } catch (error) {
       console.log(error);
     }

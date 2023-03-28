@@ -81,7 +81,10 @@
     </div>
   </div>
 </header>
-<div class="container mobile-container js-menu-container" id="mobile-menu">
+<div
+  class="mobile-container js-menu-container visually-hidden"
+  id="mobile-menu"
+>
   <div class="mobile-container__wrap">
     <div class="top-wrapper">
       <a class="logo link" href="./index.html" id="index">News</a>
@@ -93,29 +96,42 @@
     </div>
 
     <ul class="mobile-menu__list">
-      <a class="mobile-menu__link header__item" href="./index.html" id="index">
+      <a
+        class="mobile-menu__link current__page--mob"
+        href="./index.html"
+        id="index"
+      >
         <li class="mobile-menu__item">
           <svg class="menu-container__icon" width="32" height="32">
             <use href="./images/icons/icons.svg#icon-home"></use>
           </svg>
         </li>
         Home
+        <svg class="current-page__icon" width="24" height="24">
+          <use href="./images/icons/icons.svg#icon-arrow-right"></use>
+        </svg>
       </a>
       <a class="mobile-menu__link" href="./favorite.html" id="favorite">
-        <li class="mobile-menu__item header__item">
+        <li class="mobile-menu__item">
           <svg class="menu-container__icon" width="32" height="32">
-            <use href="./images/icons/icons.svg#icon-favorite_2"></use>
+            <use href="./images/icons/icons.svg#icon-favorite-mob"></use>
           </svg>
         </li>
         Favorite
+        <svg class="current-page__icon" width="24" height="24">
+          <use href="./images/icons/icons.svg#icon-arrow-right"></use>
+        </svg>
       </a>
       <a class="mobile-menu__link" href="./read.html" id="read">
-        <li class="mobile-menu__item header__item">
+        <li class="mobile-menu__item">
           <svg class="menu-container__icon" width="32" height="32">
             <use href="./images/icons/icons.svg#icon-read"></use>
           </svg>
         </li>
         Read
+        <svg class="current-page__icon" width="24" height="24">
+          <use href="./images/icons/icons.svg#icon-arrow-right"></use>
+        </svg>
       </a>
     </ul>
     <div class="toggle__wrapper toggle__wrapper--bottom">
