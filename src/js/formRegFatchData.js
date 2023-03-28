@@ -103,7 +103,6 @@ const monitorAuthState = async () => {
   onAuthStateChanged(auth, user => {
     if (user) {
       formMacup(formMessage, 'Вхід виконано');
-
       btnFormLogin.disabled = true;
       btnRegister.disabled = true;
       btnLogout.disabled = false;
