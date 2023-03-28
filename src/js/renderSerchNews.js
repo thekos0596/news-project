@@ -11,6 +11,9 @@ export default function renderSearchNews(res) {
   if (newCardEl.classList.contains('popular')) {
     newCardEl.classList.remove('popular');
   }
+  if (newCardEl.classList.contains('categories')) {
+    newCardEl.classList.remove('categories');
+  }
   newCardEl.classList.add(paginationClass);
 
   let newsId = [];

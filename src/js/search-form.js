@@ -1,6 +1,6 @@
 // import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import NewArticles from './API-service/api-news';
-import { normalizationSearch, currentSearchPage } from './normalization.js';
+import { normalizationSearch } from './normalization.js';
 import defImg from '../images/defaultimage.jpg';
 import { checkFavorites } from './btn-add-remove';
 import { checkRead } from './btn-read-more';
@@ -14,7 +14,6 @@ const icon2 = document.querySelector('.search-box__icon-svg');
 const icon = document.querySelector('.search-box__icon');
 const search = document.querySelector('.search-box');
 
-let x = 'start';
 search.addEventListener('submit', onFormSubmit);
 async function onFormSubmit(e) {
   e.preventDefault();
