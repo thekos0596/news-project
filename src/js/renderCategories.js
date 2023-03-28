@@ -30,7 +30,7 @@ function getDataFromLoc() {
 
 export function renderCategories(res) {
   const paginationClass = res[0].data_set;
-  console.log(paginationClass);
+
   if (newCardEl.classList.contains('search')) {
     newCardEl.classList.remove('search');
   } else if (newCardEl.classList.contains('popular')) {

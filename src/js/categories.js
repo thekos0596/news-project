@@ -204,12 +204,12 @@ const categories = [
 import NewArticles from './API-service/api-news';
 import { renderArticle } from './renderArticle';
 import { renderCategories } from './renderCategories';
-import normalizationCategories from './normalization';
+import { normalizationCategories } from './normalization';
 
 const newArticles = new NewArticles();
 const buttonsEl = document.querySelector('.categories__buttons');
 
-const numCardsOnPages = 9;
+const numCardsOnPages = 8;
 const addCard = document.querySelector('.news-card');
 
 buttonsEl.addEventListener('click', async function (e) {
@@ -218,7 +218,7 @@ buttonsEl.addEventListener('click', async function (e) {
   try {
     const res = await newArticles.fetchCategories(selectedCategory);
     const normalizedResults = normalizationCategories(res);
-    btnAddtoFavEl.setAttribute('data-page', serchValue);
+    addCard.setAttribute('data-page', selectedCategory);
     const newArray = normalizedResults.slice(0, numCardsOnPages);
     addCard.innerHTML = '';
     renderCategories(newArray);

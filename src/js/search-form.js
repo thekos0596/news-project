@@ -18,7 +18,7 @@ let x = 'start';
 search.addEventListener('submit', onFormSubmit);
 async function onFormSubmit(e) {
   e.preventDefault();
-  console.log(e.target.elements.mySearch.value);
+
   const serchValue = e.target.elements.mySearch.value;
   try {
     const res = await newArticles.fetchSearch(serchValue);
@@ -37,7 +37,7 @@ async function onFormSubmit(e) {
 
   e.target.reset();
 }
-console.log(currentSearchPage);
+
 // function messageInfo(arr) {
 //   if (normalizedResults.value === []) {
 //     return `<div><h2 class="message-info">We haven’t found news from this category</h2><img src="${defImg}" class="defImg"/></div>`;

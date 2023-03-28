@@ -29,6 +29,14 @@ function getDataFromLoc() {
 }
 
 function renderArticle(res) {
+  const paginationClass = res[0].data_set;
+
+  if (newCardEl.classList.contains('search')) {
+    newCardEl.classList.remove('search');
+  } else if (newCardEl.classList.contains('categories')) {
+    newCardEl.classList.remove('categories');
+  }
+  newCardEl.classList.add(paginationClass);
   let newsId = [];
   const data = getDataFromLoc();
   if (data.length) {

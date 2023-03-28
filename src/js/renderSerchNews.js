@@ -7,12 +7,17 @@ const baseUrl = 'https://www.nytimes.com/';
 
 export default function renderSearchNews(res) {
   const paginationClass = res[0].data_set;
-  console.log(paginationClass);
+
   if (newCardEl.classList.contains('popular')) {
     newCardEl.classList.remove('popular');
   }
-
   newCardEl.classList.add(paginationClass);
+
+  let newsId = [];
+  const data = getDataFromLoc();
+  if (data.length) {
+    newsId = data.map(({ id }) => id.toUpperCase());
+  }
   const markup = `<ul class="news-card__image-container">${res
     .map(
       ({ abstract, section, title, published_date, multimedia = [], url }) => {
@@ -81,4 +86,13 @@ function onGetDate(res) {
   });
 
   return dataStr;
+}
+
+function getDataFromLoc() {
+  try {
+    const data = localStorage.getItem('favoriteList');
+    return data ? JSON.parse(data) : [];
+  } catch (error) {
+    console.log(error.message);
+  }
 }

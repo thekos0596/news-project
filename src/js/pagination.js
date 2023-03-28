@@ -69,9 +69,21 @@ async function onFirstLoad(event) {
 
   async function renderNumPage(page) {
     try {
+      if (addCard.classList.contains('popular')) {
+        const res = await newArticles.fetchMostPopular();
+        const normalizedResults = normalizationPopular(res);
+
+        const s = (page - 1) * numCardsOnPages;
+        const e = s + numCardsOnPages;
+        const newArray = normalizedResults.slice(s, e);
+        addCard.innerHTML = '';
+        renderArticle(newArray);
+        checkFavorites(newArray);
+        checkRead(newArray);
+      }
       if (addCard.classList.contains('search')) {
         const serchValue = addCard.getAttribute('data-page');
-        console.log(serchValue);
+
         const res = await newArticles.fetchSearch(serchValue);
         const normalizedResults = normalizationSearch(res);
 
@@ -84,9 +96,8 @@ async function onFirstLoad(event) {
         checkRead(newArray);
       }
 
-      if (addCard.classList.contains('popular')) {
+      if (addCard.classList.contains('categories')) {
         const serchValue = addCard.getAttribute('data-page');
-        console.log(serchValue);
         const res = await newArticles.fetchSearch(serchValue);
         const normalizedResults = normalizationSearch(res);
 

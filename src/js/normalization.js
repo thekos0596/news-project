@@ -1,23 +1,23 @@
-export let currentNewsPage = [];
-export let currentSearchPage = [];
-export const currentPage = [];
-export default function normalization(res) {
-  currentNewsPage = [];
-  res.results.map(r => {
-    currentNewsPage.push({
-      section: r.section || 'Default section',
-      title: r.title || 'This article has no title',
-      abstract: r.abstract || 'This article has no description',
-      published_date: r.published_date,
-      multimedia: r.multimedia || [],
-      url: r.url,
-      id: r.title,
-      data_set: 'categories',
-    });
-  });
-  // console.log(currentNewsPage);
-  return currentNewsPage;
-}
+// export let currentNewsPage = [];
+// export let currentSearchPage = [];
+// export const currentPage = [];
+// export default function normalization(res) {
+//   currentNewsPage = [];
+//   res.results.map(r => {
+//     currentNewsPage.push({
+//       section: r.section || 'Default section',
+//       title: r.title || 'This article has no title',
+//       abstract: r.abstract || 'This article has no description',
+//       published_date: r.published_date,
+//       multimedia: r.multimedia || [],
+//       url: r.url,
+//       id: r.title,
+//       data_set: 'categories',
+//     });
+//   });
+//   // console.log(currentNewsPage);
+//   return currentNewsPage;
+// }
 export function normalizationCategories(res) {
   currentPopularPage = [];
   res.results.map(r => {
@@ -32,7 +32,7 @@ export function normalizationCategories(res) {
       data_set: 'categories',
     });
   });
-  // console.log(currentNewsPage);
+
   return currentPopularPage;
 }
 
@@ -50,12 +50,12 @@ export function normalizationSearch(res) {
       data_set: 'search',
     });
   });
-  // console.log(currentNewsPage);
+
   return currentSearchPage;
 }
 
 export function normalizationPopular(res) {
-  currentNewsPage = [];
+  currentPopularPage = [];
   let media;
   res.results.map(r => {
     const arrMedia = r.media.map(m => m['media-metadata']);
@@ -63,7 +63,7 @@ export function normalizationPopular(res) {
     for (const arr of arrMedia) {
       media = arr;
     }
-    currentNewsPage.push({
+    currentPopularPage.push({
       section: r.section || 'Default section',
       title: r.title || 'This article has no title',
       abstract: r.abstract || 'This article has no description',
@@ -74,6 +74,6 @@ export function normalizationPopular(res) {
       data_set: 'popular',
     });
   });
-  // console.log(currentNewsPage);
-  return currentNewsPage;
+
+  return currentPopularPage;
 }
