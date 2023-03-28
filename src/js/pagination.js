@@ -4,7 +4,7 @@ import normalization from './normalization';
 import { checkFavorites } from './btn-add-remove';
 import { checkRead } from './btn-read-more';
 import { normalizationPopular } from './normalization';
-import { normalizationSearch } from './normalization';
+import { normalizeData } from './normalization';
 import renderSearchNews from './renderSerchNews';
 
 const pg = document.getElementById('pagination');
@@ -53,7 +53,7 @@ async function onFirstLoad(event) {
     const res = await newArticles.fetchMostPopular();
     const totalNumberPagesApi = res.results.length; // 20
     valuePage.totalPages = Math.ceil(totalNumberPagesApi / numCardsOnPages); // 3
-    const normalizedResults = normalizationPopular(res);
+    const normalizedResults = normalizeData(res, 'popular');
     const newArray = normalizedResults.slice(0, numCardsOnPages);
 
     addCard.innerHTML = '';
@@ -73,7 +73,7 @@ async function onFirstLoad(event) {
     try {
       if (addCard.classList.contains('popular')) {
         const res = await newArticles.fetchMostPopular();
-        const normalizedResults = normalizationPopular(res);
+        const normalizedResults = normalizeData(res, 'popular');
 
         const s = (page - 1) * numCardsOnPages;
         const e = s + numCardsOnPages;
@@ -87,7 +87,7 @@ async function onFirstLoad(event) {
         const serchValue = addCard.getAttribute('data-page');
 
         const res = await newArticles.fetchSearch(serchValue);
-        const normalizedResults = normalizationSearch(res);
+        const normalizedResults = normalizeData(res, 'search');
 
         const s = (page - 1) * numCardsOnPages;
         const e = s + numCardsOnPages;
@@ -99,9 +99,9 @@ async function onFirstLoad(event) {
       }
 
       if (addCard.classList.contains('categories')) {
-        const serchValue = addCard.getAttribute('data-page');
-        const res = await newArticles.fetchSearch(serchValue);
-        const normalizedResults = normalizationSearch(res);
+        const cotegorieshValue = addCard.getAttribute('data-page');
+        const res = await newArticles.fetchCategories(cotegorieshValue);
+        const normalizedResults = normalizeData(res, 'categories');
 
         const s = (page - 1) * numCardsOnPages;
         const e = s + numCardsOnPages;

@@ -1,6 +1,6 @@
 // import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import NewArticles from './API-service/api-news';
-import { normalizationSearch } from './normalization.js';
+import { normalizeData } from './normalization.js';
 import defImg from '../images/defaultimage.jpg';
 import { checkFavorites } from './btn-add-remove';
 import { checkRead } from './btn-read-more';
@@ -21,7 +21,7 @@ async function onFormSubmit(e) {
   const serchValue = e.target.elements.mySearch.value;
   try {
     const res = await newArticles.fetchSearch(serchValue);
-    const normalizedResults = normalizationSearch(res);
+    const normalizedResults = normalizeData(res, 'search');
     addCard.setAttribute('data-page', serchValue);
 
     const newArray = normalizedResults.slice(0, numCardsOnPages);
