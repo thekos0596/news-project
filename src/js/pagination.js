@@ -21,7 +21,7 @@ const pageDesktop = 8;
 const pageTablet = 7;
 const pageMobile = 4;
 
-let numCardsOnPages = 9;
+let numCardsOnPages = 8;
 
 const desktopWidth = window.matchMedia('(min-width: 1280px)');
 const tabletWidth = window.matchMedia(
@@ -44,14 +44,13 @@ if (desktopWidth.matches) {
 const valuePage = {
   curPage: 1,
   numLinksTwoSide: 1,
-  totalPages: 8,
+  totalPages: 10,
 };
 
 async function onFirstLoad(event) {
   event.preventDefault();
   try {
     const res = await newArticles.fetchMostPopular();
-
     const totalNumberPagesApi = res.results.length; // 20
     valuePage.totalPages = Math.ceil(totalNumberPagesApi / numCardsOnPages); // 3
     const normalizedResults = normalizationPopular(res);

@@ -8,8 +8,8 @@ import { checkRead } from './btn-read-more';
 import renderSearchNews from './renderSerchNews';
 
 const newArticles = new NewArticles();
-
-const btnAddtoFavEl = document.querySelector('.news-card');
+let numCardsOnPages = 8;
+const addCard = document.querySelector('.news-card');
 const icon2 = document.querySelector('.search-box__icon-svg');
 const icon = document.querySelector('.search-box__icon');
 const search = document.querySelector('.search-box');
@@ -22,12 +22,13 @@ async function onFormSubmit(e) {
   try {
     const res = await newArticles.fetchSearch(serchValue);
     const normalizedResults = normalizationSearch(res);
-    btnAddtoFavEl.setAttribute('data-page', serchValue);
+    addCard.setAttribute('data-page', serchValue);
 
-    btnAddtoFavEl.innerHTML = '';
-    renderSearchNews(normalizedResults);
-    checkFavorites(normalizedResults);
-    checkRead(normalizedResults);
+    const newArray = normalizedResults.slice(0, numCardsOnPages);
+    addCard.innerHTML = '';
+    renderSearchNews(newArray);
+    checkFavorites(newArray);
+    checkRead(newArray);
   } catch (error) {
     console.log(error);
   }
