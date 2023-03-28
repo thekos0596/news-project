@@ -25,7 +25,7 @@ function renderAccordion() {
   });
   const markupAccordion = Array.from(uniqueDates)
     .map((formattedDate) => {
-      return `1111
+      return `
               <div class="accordion__wrap">
                   <div class="accordion__active">
                     <div class="read__date">${formattedDate}</div>
