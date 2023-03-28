@@ -251,10 +251,4 @@
 .current__page--mob {
     background-color: $color-accent;
     color: $color-white-secondary;
-
-    &::after {
-        content: "";
-        width: 20px;
-        height: 20px;
-    }
 }
