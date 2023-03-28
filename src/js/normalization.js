@@ -1,10 +1,7 @@
 export let currentNewsPage = [];
-export let currentSearchPage = [];
-export let currentPopularPage = [];
-export let currentCategoriesPage = [];
-export const currentPage = [];
+
 export default function normalization(res) {
-  currentNewsPage = [];
+  // currentNewsPage = [];
   res.results.map(r => {
     currentNewsPage.push({
       section: r.section || 'Default section',
@@ -22,9 +19,9 @@ export default function normalization(res) {
 }
 
 export function normalizationCategories(res) {
-  currentCategoriesPage = [];
+  // currentNewsPage = [];
   res.results.map(r => {
-    currentCategoriesPage.push({
+    currentNewsPage.push({
       section: r.section || 'Default section',
       title: r.title || 'This article has no title',
       abstract: r.abstract || 'This article has no description',
@@ -36,13 +33,13 @@ export function normalizationCategories(res) {
     });
   });
 
-  return currentCategoriesPage;
+  return currentNewsPage;
 }
 
 export function normalizationSearch(res) {
-  currentSearchPage = [];
+  // currentNewsPage = [];
   res.response.docs.map(r => {
-    currentSearchPage.push({
+    currentNewsPage.push({
       section: r.section_name || 'Default section',
       title: r.headline.main || 'This article has no title',
       abstract: r.abstract || 'This article has no description',
@@ -54,11 +51,11 @@ export function normalizationSearch(res) {
     });
   });
 
-  return currentSearchPage;
+  return currentNewsPage;
 }
 
 export function normalizationPopular(res) {
-  currentPopularPage = [];
+  // currentNewsPage = [];
   let media;
   res.results.map(r => {
     const arrMedia = r.media.map(m => m['media-metadata']);
@@ -66,7 +63,7 @@ export function normalizationPopular(res) {
     for (const arr of arrMedia) {
       media = arr;
     }
-    currentPopularPage.push({
+    currentNewsPage.push({
       section: r.section || 'Default section',
       title: r.title || 'This article has no title',
       abstract: r.abstract || 'This article has no description',
@@ -78,5 +75,5 @@ export function normalizationPopular(res) {
     });
   });
 
-  return currentPopularPage;
+  return currentNewsPage;
 }
