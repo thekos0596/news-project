@@ -1,0 +1,174 @@
+.loginBtn {
+  font-size: 18px;
+  line-height: 1.3;
+  display: inline;
+  color: #4440f6;
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
+  font-size: inherit;
+  font-weight: inherit;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.loginBtn__position {
+  position: absolute;
+  right: 16px;
+  top: 60px;
+
+  @media screen and (min-width: $tablet) {
+    right: 42px;
+  }
+
+  @media screen and (min-width: $desktop) {
+    right: 70px;
+  }
+}
+
+/* Стилі для кнопки закриття */
+.form__close {
+  position: absolute;
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  right: 10px;
+  top: 0;
+  cursor: pointer;
+}
+
+.form__close:hover,
+.form__close:focus {
+  color: black;
+}
+
+/* Стилі для оверлею */
+.form__overlay {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: -1;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 300ms ease-out;
+}
+
+.form__overlay--visible {
+  visibility: visible;
+  opacity: 1;
+  z-index: 1;
+}
+
+.form {
+  position: fixed;
+  z-index: 1;
+  position: relative;
+  padding: 32px;
+  border-radius: 10px;
+  box-shadow: 0 4px 16px #ccc;
+  font-family: sans-serif;
+  letter-spacing: 1px;
+  background-color: #fff;
+}
+
+.form__input,
+.form__button {
+  font-family: sans-serif;
+  letter-spacing: 1px;
+  font-size: 16px;
+}
+
+.form__title {
+  text-align: center;
+  margin: 0 0 32px 0;
+  font-weight: normal;
+}
+
+.form__group {
+  position: relative;
+  margin-bottom: 32px;
+}
+
+.form__lable {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  color: #9e9e9e;
+  transition: 0.3s;
+}
+
+.form__input {
+  width: 100%;
+  padding: 0 0 10px 0;
+  border: none;
+  border-bottom: 1px solid #e0e0e0;
+  background-color: transparent;
+  outline: none;
+  transition: 0.3s;
+}
+
+.form__input:focus {
+  border-bottom: 1px solid #1a73a8;
+}
+
+.form__button-wrapper {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.form__button {
+  font-size: 12px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  background-color: #0071f0;
+  outline: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.form__button:hover,
+.form__button:focus {
+  background-color: rgba(0, 113, 240, 0.7);
+}
+
+// коли form__input:focus стилі застосуються до сусіда .form__lable
+
+.form__input:focus~.form__lable,
+.form__input:not(:placeholder-shown)~.form__lable {
+  top: -18px;
+  font-size: 12px;
+  color: #e0e0e0;
+}
+
+.form__message {
+  height: 30px;
+}
+
+.form__message--text {
+  margin: 0;
+  font-size: 10px;
+}
+
+button[disabled] {
+  background-color: gray;
+  color: white;
+  cursor: default;
+}
+
+button[disabled]:hover {
+  background-color: gray;
+  color: white;
+  cursor: default;
+}

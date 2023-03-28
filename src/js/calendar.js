@@ -6,6 +6,11 @@ const datepicker = require('js-datepicker');
 const pInput = document.querySelector("#datepicker");
 
 
+let today = new Date();
+let formattedDate = `${today.getDate().toString().padStart(2, '0')}/${(today.getMonth() + 1).toString().padStart(2, '0')}/${today.getFullYear()}`;
+pInput.value = formattedDate;
+
+
 let options = {
     formatter: (input, date, instance) => {
 
@@ -42,11 +47,11 @@ let options = {
     }
 };
 
-    const dp = datepicker(pInput, options);
-    document.querySelector(".callend-on").addEventListener('click', openCalendar);
-    document.querySelector(".callend-off").addEventListener('click', openCalendar);
-    document.querySelector(".arrow-down").addEventListener('click', openCalendar);
-    document.querySelector(".arrow-up").addEventListener('click', openCalendar);
+const dp = datepicker(pInput, options);
+document.querySelector(".callend-on").addEventListener('click', openCalendar);
+document.querySelector(".callend-off").addEventListener('click', openCalendar);
+document.querySelector(".arrow-down").addEventListener('click', openCalendar);
+document.querySelector(".arrow-up").addEventListener('click', openCalendar);
 
 
 

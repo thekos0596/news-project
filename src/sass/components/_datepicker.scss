@@ -10,13 +10,14 @@ $lightblue: lightblue;
 #datepicker {
   box-sizing: border-box;
   width: 168px;
-  @media screen and (min-width: $tablet-less) {
-    width: 151px;
+
+  @media screen and (max-width: $tablet-less) {
+    width: 124px;
   }
 
   font-family: $font-main;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 12px;
   line-height: 21px;
 
   text-align: center;
@@ -24,7 +25,12 @@ $lightblue: lightblue;
   padding: 5px;
   border: 1px solid $color-black-primary;
   border-radius: 20px;
+
+  @media screen and (max-width: $tablet-less) {
+    padding-left: 30px;
+  }
 }
+
 .datepicker-selected {
   color: $color-white-primary;
   background: $color-accent;
@@ -33,24 +39,37 @@ $lightblue: lightblue;
   transition-duration: 250ms;
 }
 
-.calendar{
+.calendar {
   position: relative;
+  margin-top: 28px;
+  margin-right: 16px;
+
+  @media screen and (min-width: $desktop) {
+    margin-right: 52px;
+  }
 }
 
-.callend-off, .callend-on{
+.callend-off,
+.callend-on {
   position: absolute;
   left: 14px;
-  top: 2px;
+  top: 5px;
 }
 
 .callend-on {
   display: none;
 }
 
-.arrow-down, .arrow-up{
+.arrow-down,
+.arrow-up {
   position: absolute;
   right: 12px;
-  top: 7px;
+  top: 10px;
+
+  @media screen and (max-width: $tablet-less) {
+    display: none;
+    position: absolute;
+  }
 }
 
 
@@ -218,14 +237,14 @@ $lightblue: lightblue;
     width: 25px;
     height: 30px;
   }
-  
-    &.qs-right {
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='9' height='18' viewBox='0 0 9 18'%3E%3Cpath fill='%234440F6' d='M9 9a1.3 1.3 0 0 0-.361-.882L1.78.826A.979.979 0 0 0 1.049.5C.459.5 0 .998 0 1.64c0 .307.115.595.317.815L6.487 9l-6.17 6.545A1.18 1.18 0 0 0 0 16.36c0 .642.458 1.14 1.049 1.14a.993.993 0 0 0 .732-.326l6.858-7.302C8.885 9.622 9 9.335 9 9Z'/%3E%3C/svg%3E");
-      background-position: center;
-      background-repeat: no-repeat;
-      width: 25px;
-      height: 30px;
-    }
+
+  &.qs-right {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='9' height='18' viewBox='0 0 9 18'%3E%3Cpath fill='%234440F6' d='M9 9a1.3 1.3 0 0 0-.361-.882L1.78.826A.979.979 0 0 0 1.049.5C.459.5 0 .998 0 1.64c0 .307.115.595.317.815L6.487 9l-6.17 6.545A1.18 1.18 0 0 0 0 16.36c0 .642.458 1.14 1.049 1.14a.993.993 0 0 0 .732-.326l6.858-7.302C8.885 9.622 9 9.335 9 9Z'/%3E%3C/svg%3E");
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 25px;
+    height: 30px;
+  }
 
   &:hover {
     &.qs-left:after {
@@ -261,8 +280,8 @@ $lightblue: lightblue;
 .qs-month-year {
   // font-weight: bold;
   font-weight: 500;
-    font-size: 16px;
-    line-height: 22px;
+  font-size: 16px;
+  line-height: 22px;
   transition: border .2s;
   border-bottom: 1px solid transparent;
 

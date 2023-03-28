@@ -61,8 +61,8 @@ export function renderAccordion(){
                   </div>
               </div>
           `;
-      })
-      .join('');
+    })
+    .join('');
 
   newAccorEl.insertAdjacentHTML('beforeEnd', markupAccordion)
   initAccordion();
@@ -76,7 +76,6 @@ export function pageEmpty(){
     <h2 class="page-empty__text">You don't have any read news</h2>
     <img src="${defImgPng}" alt="You have not read news" class="page-empty__img">
     </div>`
-    
   }
   return ''
 }
