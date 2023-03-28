@@ -67,6 +67,9 @@ async function onFirstLoad(event) {
   pagination();
 
   async function renderNumPage(page) {
+    if (page >= 2) {
+      numCardsOnPages = 9;
+    }
     try {
       if (addCard.classList.contains('popular')) {
         const res = await newArticles.fetchMostPopular();
