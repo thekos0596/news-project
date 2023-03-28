@@ -1,14 +1,20 @@
 // імпорт бази даних
-import { initializeApp } from 'firebase/app';
-import { getDatabase, ref, set, onValue, get } from "firebase/database";
+import { initializeApp } from '../../node_modules/@firebase/app';
+import {
+  getDatabase,
+  ref,
+  set,
+  onValue,
+  get,
+} from '../../node_modules/@firebase/database';
 import {
   getAuth,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   signOut,
-} from 'firebase/auth';
-import { initializeApp } from 'firebase/app';
+} from '../../node_modules/@firebase/auth';
+import { initializeApp } from '../../node_modules/@firebase/app';
 
 const form = document.querySelector('.form');
 const textEmail = document.querySelector('.form__input--email');
@@ -65,10 +71,9 @@ const createAccount = async evt => {
       loginPassword
     );
     console.log(userCredential.user);
-	
   } catch (error) {
     console.log(error.message);
-	formMacup(formMessage, error.message)
+    formMacup(formMessage, error.message);
   }
 };
 
@@ -78,14 +83,13 @@ btnRegister.addEventListener('click', createAccount);
 const monitorAuthState = async () => {
   onAuthStateChanged(auth, user => {
     if (user) {
-	  formMacup(formMessage, 'Вхід виконано')
-	  btnFormLogin.disabled = true;
-	  btnRegister.disabled = true;
-	  btnLogout.disabled = false;
-
+      formMacup(formMessage, 'Вхід виконано');
+      btnFormLogin.disabled = true;
+      btnRegister.disabled = true;
+      btnLogout.disabled = false;
     } else {
-		formMacup(formMessage, 'Вхід не виконано')
-		btnLogout.disabled = true;
+      formMacup(formMessage, 'Вхід не виконано');
+      btnLogout.disabled = true;
     }
   });
 };
@@ -99,10 +103,10 @@ const Logout = async () => {
 
 btnLogout.addEventListener('click', Logout);
 
-function formMacup (elem, message) {
-	const infoMessage = `<p class="form__message--text">${message}</p>`
-	elem.innerHTML = ''
-	elem.insertAdjacentHTML('beforeend', infoMessage);
+function formMacup(elem, message) {
+  const infoMessage = `<p class="form__message--text">${message}</p>`;
+  elem.innerHTML = '';
+  elem.insertAdjacentHTML('beforeend', infoMessage);
 }
 // =========================================================
 // запускаэм базу даних
@@ -119,7 +123,7 @@ const userRef = ref(db, 'users/1');
 // };
 
 // ?  запис куди       що
-	// set(userRef, userData);
+// set(userRef, userData);
 // ==============================
 
 // ? =====  отримати дані

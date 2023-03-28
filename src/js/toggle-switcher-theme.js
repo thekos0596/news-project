@@ -11,6 +11,7 @@ if (getMode && getMode === 'dark') {
 
 navToggle.addEventListener('click', () => {
   body.classList.toggle('dark');
+  body.style.transition = '1s';
 
   if (!body.classList.contains('dark')) {
     return localStorage.setItem('theme', 'light');
