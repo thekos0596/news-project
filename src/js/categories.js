@@ -213,6 +213,9 @@ const buttonsEl = document.querySelector('.categories__buttons');
 const numCardsOnPages = 9;
 const addCard = document.querySelector('.news-card');
 buttonsEl.addEventListener('click', async function (e) {
+  if (e.target.nodeName !== 'BUTTON') {
+    return;
+  }
   const selectedCategory = e.target.dataset.section;
   console.dir(selectedCategory);
   try {
