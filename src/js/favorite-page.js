@@ -1,16 +1,29 @@
 import svgSprite from '../images/icons/icons.svg';
 import defImg from '../images/defaultimage.jpg';
+import defImgPng from '../images/default_hidden.png';
 import { checkFavorites } from './btn-add-remove';
+import { readMore } from './btn-read-more';
 
 const favoriteNewsCardEl = document.querySelector('.favorite-news-card');
 const favoriteList = JSON.parse(localStorage.getItem('favoriteList')) || [];
+
+favoriteNewsCardEl.addEventListener('click', deleteFromFavorites);
+
+const readMoreButtons = document.querySelectorAll('.news-card__read-more');
+readMoreButtons.forEach(button => button.addEventListener('click', readMore));
+
 renderArticle(favoriteList);
 
 function renderArticle(res) {
+  if (!res || res.length === 0) {
+    pageEmpty();
+  }
+
   let newsId = [];
   if (res.length) {
     newsId = res.map(({ id }) => id.toUpperCase());
   }
+
   const markup = `<ul class="news-card__image-container">${res
     .map(
       ({ abstract, section, title, published_date, multimedia = [], url }) => {
@@ -63,20 +76,28 @@ function renderArticle(res) {
   checkFavorites(favoriteList);
 }
 
-favoriteNewsCardEl.addEventListener('click', deleteFromFavorites);
-
 function deleteFromFavorites(event) {
+  const favoriteList = JSON.parse(localStorage.getItem('favoriteList')) || [];
   const targetEl = event.target;
+  console.log(targetEl);
 
-  if (targetEl.classList.contains('news-card__favorite-button')) {
-    const title = targetEl.id;
-    const favoriteIndex = favoriteList.findIndex(
-      favorite => favorite.title === title
-    );
-    if (favoriteIndex !== -1) {
-      favoriteList.splice(favoriteIndex, 1);
-      localStorage.setItem('favoriteList', JSON.stringify(favoriteList));
-      renderArticle(favoriteList);
-    }
+  const newsId = targetEl.dataset.newsId;
+  const favoriteIndex = favoriteList.findIndex(
+    favorite => favorite.title === newsId
+  );
+  if (favoriteIndex !== -1) {
+    favoriteList.splice(favoriteIndex, 1);
+    localStorage.setItem('favoriteList', JSON.stringify(favoriteList));
+    location.reload();
+    // renderArticle(favoriteList);
   }
+}
+
+function pageEmpty() {
+  const markup = `
+    <div class="page-empty">
+    <h2 class="page-empty__text">You don't have any favorite news</h2>
+    <img src="${defImgPng}" alt="You have no favorite news" class="page-empty__img">
+    </div>`;
+  favoriteNewsCardEl.insertAdjacentHTML('beforeend', markup);
 }
