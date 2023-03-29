@@ -77,11 +77,15 @@ async function onFirstLoad(event) {
         const res = await newArticles.fetchSearch(serchValue);
         renderPagePagination(res, 'search', page);
       }
-
       if (addCard.classList.contains('categories')) {
         const cotegorieshValue = addCard.getAttribute('data-page');
         const res = await newArticles.fetchCategories(cotegorieshValue);
         renderPagePagination(res, 'categories', page);
+      }
+      if (addCard.classList.contains('calendar')) {
+        const cotegorieshValue = addCard.getAttribute('data-page');
+        const res = await newArticles.fetchByDate(cotegorieshValue);
+        renderPagePagination(res, 'calendar', page);
       }
 
       // const res = await newArticles.fetchArtic();
