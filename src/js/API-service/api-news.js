@@ -39,6 +39,19 @@ export default class NewArticles {
       console.log(error);
     }
   }
+
+  async fetchByDate(date) {
+    const url = `${BASE_URL}search/v2/articlesearch.json?api-key=${API_KEY}&page=0&begin_date=${date}&end_date=${date}`;
+    https://api.nytimes.com/svc/search/v2/articlesearch.json?fq=food&api-key=eQ8t8FWqeAGnKDTtIFrHmgZCflFrUTcV&page=0&begin_date=20221125&end_date=20221125
+
+    try {
+      const { data } = await axios.get(url);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   async fetchMostPopular() {
     const url = `${BASE_URL}mostpopular/v2/viewed/7.json?api-key=${API_KEY}`;
 
