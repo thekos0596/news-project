@@ -7,7 +7,7 @@ import { normalizationPopular } from './normalization';
 import { normalizeData } from './normalization';
 import renderSearchNews from './renderSerchNews';
 import { renderCategories } from './renderCategories';
-import { renderByDate } from './renderCategories';
+import { renderByDate } from './renderByDate';
 
 const pg = document.getElementById('pagination');
 const ulPageContainer = document.querySelector('.page-container');
