@@ -1,13 +1,13 @@
 import NewArticles from './API-service/api-news';
 import { renderArticle } from './renderArticle';
-import normalization from './normalization';
+
 import { checkFavorites } from './btn-add-remove';
 import { checkRead } from './btn-read-more';
-import { normalizationPopular } from './normalization';
+
 import { normalizeData } from './normalization';
 import renderSearchNews from './renderSerchNews';
 import { renderCategories } from './renderCategories';
-import { renderByDate } from './renderByDate';
+import renderByDate from './renderByDate';
 
 const pg = document.getElementById('pagination');
 const ulPageContainer = document.querySelector('.page-container');
