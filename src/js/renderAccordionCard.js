@@ -165,7 +165,7 @@ function addMarkupToCards() {
     return acc;
   }, {});
 
-  // Добавляем разметку к каждому элементу соответствующей группы
+  // Добавляем разметку к каждому элементу соответствующей группы.
   readDates.forEach(dateEl => {
     const date = dateEl.textContent;
     const items = groupedItems[date] || [];
