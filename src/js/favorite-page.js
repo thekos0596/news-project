@@ -4,7 +4,7 @@ import defImgPng from '../images/default_hidden.png';
 import { checkFavorites } from './btn-add-remove';
 import { readMore, checkRead } from './btn-read-more';
 
-const favoriteNewsCardEl = document.querySelector('.favorite-news-card');
+const favoriteNewsCardEl = document.querySelector('.news-card');
 
 const favoriteList = JSON.parse(localStorage.getItem('favoriteList')) || [];
 
@@ -13,7 +13,7 @@ favoriteNewsCardEl.addEventListener('click', function (event) {
 
   if (targetEl.classList.contains('news-card__favorite-button')) {
     deleteFromFavorites(event);
-  } 
+  }
 });
 
 renderArticle(favoriteList);
