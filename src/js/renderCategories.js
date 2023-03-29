@@ -1,7 +1,7 @@
 export { renderArticle };
 import defImg from '../images/defaultimage.jpg';
 import svgSprite from '../images/icons/icons.svg';
-
+import { fetchweather } from "../js/API-service/api-weather.js";
 const newCardEl = document.querySelector('.news-card');
 
 function onGetDate(res) {
@@ -27,6 +27,14 @@ function getDataFromLoc() {
     console.log(error.message);
   }
 }
+
+let numberNew = 1;
+let numberWeather = 1;
+let insertWeather = "";
+let tablet = window.matchMedia("(min-width: 768px)");
+let desctop = window.matchMedia("(min-width: 1280px)");
+if (tablet.matches === true) { numberWeather = 2; }
+if (desctop.matches === true) { numberWeather = 3; }
 
 export function renderCategories(res) {
   const paginationClass = res[0].data_set;
@@ -57,7 +65,15 @@ export function renderCategories(res) {
             ? multimedia[2].caption
             : 'Default Image';
 
-        return `
+        if (numberNew === numberWeather) {
+          insertWeather = "<li class=\"news-card__item\"><div class=\"news-card__foto news-card__image\"><div id=weather></div></li>";
+        }
+        else {
+          insertWeather = "";
+        }
+        numberNew++;
+
+        return `${insertWeather}
   <li class="news-card__item">
    <div class="news-card__foto">
     <img src="${imageUrl}" alt="${imageAlt}" class="news-card__image">
@@ -93,4 +109,5 @@ export function renderCategories(res) {
     </ul>`;
 
   newCardEl.insertAdjacentHTML('beforeEnd', markup);
+  fetchweather();
 }
