@@ -110,7 +110,15 @@ export function renderAccordion() {
 
 renderAccordion();
 
-function markupReadCard({ abstract, section, title, published_date, imageUrl, imageAlt, url }) {
+function markupReadCard({
+  abstract,
+  section,
+  title,
+  published_date,
+  imageUrl,
+  imageAlt,
+  url,
+}) {
   let newsId = [];
   const bool = newsId.includes(title.toUpperCase());
   const articleTitle = bool ? 'Remove from favorite' : 'Add to favorite';
@@ -173,8 +181,7 @@ function addMarkupToCards() {
   });
 }
 
-addMarkupToCards()
-
+addMarkupToCards();
 
 function createIcon(bool, btn) {
   const icon = !bool ? `${svgSprite}#icon-favorite` : `${svgSprite}#icon-heart`;
@@ -188,8 +195,6 @@ function createIcon(bool, btn) {
   btn.insertAdjacentHTML('beforeend', svg.outerHTML);
 }
 
-
-
 function addToFavorites(event) {
   const btn = event.target.closest('.news-card__favorite-button');
 
@@ -197,16 +202,15 @@ function addToFavorites(event) {
 
   const readList = JSON.parse(localStorage.getItem('readList')) || [];
   const favoriteList = JSON.parse(localStorage.getItem('favoriteList')) || [];
- 
+
   const favoriteIndex = favoriteList.findIndex(
     favorite => favorite.title === newsId
   );
-  
+
   const bool = favoriteIndex === -1;
   if (bool) {
     const currentNews = readList.find(news => news.title === newsId);
     favoriteList.push(currentNews);
-    
   } else {
     favoriteList.splice(favoriteIndex, 1);
   }
@@ -216,4 +220,3 @@ function addToFavorites(event) {
   btn.textContent = bool ? 'Remove from favorite' : 'Add to favorite';
   createIcon(bool, btn);
 }
-addMarkupToCards();
