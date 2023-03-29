@@ -47,6 +47,8 @@ function renderArticle(res) {
     newCardEl.classList.remove('search');
   } else if (newCardEl.classList.contains('categories')) {
     newCardEl.classList.remove('categories');
+  } else if (newCardEl.classList.contains('calendar')) {
+    newCardEl.classList.remove('calendar');
   }
   newCardEl.classList.add(paginationClass);
   let newsId = [];

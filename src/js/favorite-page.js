@@ -1,16 +1,20 @@
 import svgSprite from '../images/icons/icons.svg';
 import defImg from '../images/defaultimage.jpg';
 import defImgPng from '../images/default_hidden.png';
-import { checkFavorites } from './btn-add-remove';
-import { readMore } from './btn-read-more';
+import { checkFavorites } from './btnAddRemove';
+import { readMore, checkRead } from './btnReadMore';
 
-const favoriteNewsCardEl = document.querySelector('.favorite-news-card');
+const favoriteNewsCardEl = document.querySelector('.news-card');
+
 const favoriteList = JSON.parse(localStorage.getItem('favoriteList')) || [];
 
-favoriteNewsCardEl.addEventListener('click', deleteFromFavorites);
+favoriteNewsCardEl.addEventListener('click', function (event) {
+  const targetEl = event.target;
 
-const readMoreButtons = document.querySelectorAll('.news-card__read-more');
-readMoreButtons.forEach(button => button.addEventListener('click', readMore));
+  if (targetEl.classList.contains('news-card__favorite-button')) {
+    deleteFromFavorites(event);
+  }
+});
 
 renderArticle(favoriteList);
 
@@ -79,7 +83,6 @@ function renderArticle(res) {
 function deleteFromFavorites(event) {
   const favoriteList = JSON.parse(localStorage.getItem('favoriteList')) || [];
   const targetEl = event.target;
-  console.log(targetEl);
 
   const newsId = targetEl.dataset.newsId;
   const favoriteIndex = favoriteList.findIndex(
@@ -89,7 +92,6 @@ function deleteFromFavorites(event) {
     favoriteList.splice(favoriteIndex, 1);
     localStorage.setItem('favoriteList', JSON.stringify(favoriteList));
     location.reload();
-    // renderArticle(favoriteList);
   }
 }
 

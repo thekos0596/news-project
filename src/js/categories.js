@@ -204,8 +204,8 @@ const categories = [
 import NewArticles from './API-service/api-news';
 import { renderCategories } from './renderCategories';
 import { normalizeData } from './normalization';
-import { checkFavorites } from './btn-add-remove';
-import { checkRead } from './btn-read-more';
+import { checkFavorites } from './btnAddRemove';
+import { checkRead } from './btnReadMore';
 
 const newArticles = new NewArticles();
 const buttonsEl = document.querySelector('.categories__buttons');
