@@ -12,6 +12,7 @@ pInput.value = formattedDate;
 
 
 let options = {
+    maxDate: new Date(),
     formatter: (input, date, instance) => {
 
         const inputDate = new Date(date);
@@ -22,29 +23,36 @@ let options = {
         input.value = `${day.toString().padStart(2, '0')}/${month.toString().padStart(2, '0')}/${year}`;
 
         const queryformat = `${year}${month.toString().padStart(2, '0')}${day.toString().padStart(2, '0')}`;
-        console.log(`data for your function ${queryformat}`);
-        // call your function
-        document.querySelector("#hidden-picker").value = queryformat;
+        onSelect(queryformat);
+
     },
     customDays: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
     startDay: 1,
     position: 'br',
+
     onShow: () => {
-        document.querySelector(".arrow-down").style.display = 'none';
-        document.querySelector(".arrow-up").style.display = 'block';
+        let tabl = window.matchMedia("(min-width: 768px)");
+        if (tabl.matches === true) {
+            document.querySelector(".arrow-down").style.display = 'none';
+            document.querySelector(".arrow-up").style.display = 'block';
+        }
         document.querySelector(".callend-off").style.display = 'none';
         document.querySelector(".callend-on").style.display = 'block';
         pInput.classList.add("datepicker-selected");
         pInput.style.border = "1px solid #4440F6";
     },
     onHide: () => {
-        document.querySelector(".arrow-down").style.display = 'block';
-        document.querySelector(".arrow-up").style.display = 'none';
+        let tabl = window.matchMedia("(min-width: 768px)");
+        if (tabl.matches === true) {
+            document.querySelector(".arrow-down").style.display = 'block';
+            document.querySelector(".arrow-up").style.display = 'none';
+        }
         document.querySelector(".callend-off").style.display = 'block';
         document.querySelector(".callend-on").style.display = 'none';
         pInput.classList.remove("datepicker-selected");
         pInput.style.border = "1px solid #111";
     }
+
 };
 
 const dp = datepicker(pInput, options);
@@ -61,3 +69,31 @@ function openCalendar(e) {
     dp.show();
 }
 
+
+import NewArticles from './API-service/api-news';
+import { normalizeData } from './normalization.js';
+import { checkFavorites } from './btn-add-remove';
+import { checkRead } from './btn-read-more';
+import renderByDate from './renderByDate';
+
+const newArticles = new NewArticles();
+let numCardsOnPages = 8;
+const addCard = document.querySelector('.news-card');
+
+async function onSelect(date) {
+
+  try {
+    const res = await newArticles.fetchByDate(date);
+    const normalizedResults = normalizeData(res, 'search');
+    addCard.setAttribute('data-page', date);
+
+    const newArray = normalizedResults.slice(0, numCardsOnPages);
+    addCard.innerHTML = '';
+    renderByDate(newArray);
+    checkFavorites(newArray);
+    checkRead(newArray);
+  } catch (error) {
+    console.log(error);
+  }
+
+}

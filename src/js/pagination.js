@@ -6,6 +6,7 @@ import { checkRead } from './btn-read-more';
 import { normalizationPopular } from './normalization';
 import { normalizeData } from './normalization';
 import renderSearchNews from './renderSerchNews';
+import { renderCategories } from './renderCategories';
 
 const pg = document.getElementById('pagination');
 const ulPageContainer = document.querySelector('.page-container');
@@ -53,13 +54,8 @@ async function onFirstLoad(event) {
     const res = await newArticles.fetchMostPopular();
     const totalNumberPagesApi = res.results.length; // 20
     valuePage.totalPages = Math.ceil(totalNumberPagesApi / numCardsOnPages); // 3
-    const normalizedResults = normalizeData(res, 'popular');
-    const newArray = normalizedResults.slice(0, numCardsOnPages);
 
-    addCard.innerHTML = '';
-    renderArticle(newArray);
-    checkFavorites(newArray);
-    checkRead(newArray);
+    renderPagePagination(res, 'popular');
   } catch (error) {
     console.log(error);
   }
@@ -73,44 +69,22 @@ async function onFirstLoad(event) {
     try {
       if (addCard.classList.contains('popular')) {
         const res = await newArticles.fetchMostPopular();
-        const normalizedResults = normalizeData(res, 'popular');
-
-        const s = (page - 1) * numCardsOnPages;
-        const e = s + numCardsOnPages;
-        const newArray = normalizedResults.slice(s, e);
-        addCard.innerHTML = '';
-        renderArticle(newArray);
-        checkFavorites(newArray);
-        checkRead(newArray);
+        renderPagePagination(res, 'popular', page);
       }
       if (addCard.classList.contains('search')) {
         const serchValue = addCard.getAttribute('data-page');
 
         const res = await newArticles.fetchSearch(serchValue);
-        const normalizedResults = normalizeData(res, 'search');
-
-        const s = (page - 1) * numCardsOnPages;
-        const e = s + numCardsOnPages;
-        const newArray = normalizedResults.slice(s, e);
-        addCard.innerHTML = '';
-        renderSearchNews(newArray);
-        checkFavorites(newArray);
-        checkRead(newArray);
+        renderPagePagination(res, 'search', page);
       }
 
       if (addCard.classList.contains('categories')) {
         const cotegorieshValue = addCard.getAttribute('data-page');
         const res = await newArticles.fetchCategories(cotegorieshValue);
-        const normalizedResults = normalizeData(res, 'categories');
 
-        const s = (page - 1) * numCardsOnPages;
-        const e = s + numCardsOnPages;
-        const newArray = normalizedResults.slice(s, e);
-        addCard.innerHTML = '';
-        renderSearchNews(newArray);
-        checkFavorites(newArray);
-        checkRead(newArray);
+        renderPagePagination(res, 'categories', page);
       }
+
       // const res = await newArticles.fetchArtic();
       // // totalObjsApi = res.results; // 20[]
       // // totalNumberPagesApi = res.results.length; // 20
@@ -118,6 +92,25 @@ async function onFirstLoad(event) {
       // const normalizedResults = normalization(res);
     } catch (error) {
       console.log(error);
+    }
+  }
+
+  function renderPagePagination(res, type, page) {
+    const normalizedResults = normalizeData(res, type);
+    if (page) {
+      const start = (page - 1) * numCardsOnPages;
+      const end = start + numCardsOnPages;
+      const newArray = normalizedResults.slice(start, end);
+      addCard.innerHTML = '';
+      renderCategories(newArray);
+      checkFavorites(newArray);
+      checkRead(newArray);
+    } else {
+      const newArray = normalizedResults.slice(0, numCardsOnPages);
+      addCard.innerHTML = '';
+      renderArticle(newArray);
+      checkFavorites(newArray);
+      checkRead(newArray);
     }
   }
 
