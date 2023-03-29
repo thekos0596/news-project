@@ -13,6 +13,8 @@ const addCard = document.querySelector('.news-card');
 const icon2 = document.querySelector('.search-box__icon-svg');
 const icon = document.querySelector('.search-box__icon');
 const search = document.querySelector('.search-box');
+const newEl = document.querySelector('.container__home-search');
+const pagination = document.querySelector('.pagination');
 
 search.addEventListener('submit', onFormSubmit);
 async function onFormSubmit(e) {
@@ -22,6 +24,15 @@ async function onFormSubmit(e) {
   try {
     const res = await newArticles.fetchSearch(serchValue);
     const normalizedResults = normalizeData(res, 'search');
+
+    if (normalizedResults.length === 0) {
+      pagination.classList.add('visually-hidden')
+      newEl.innerHTML = `
+<div class="page-empty">
+<h2 class="page-empty__text">We haven’t found news from this category</h2>
+<img src="${defImg}" alt="We haven’t found news from this category" class="page-empty__img">
+</div>`
+    };
 
     addCard.setAttribute('data-page', serchValue);
     const newArray = normalizedResults.slice(0, numCardsOnPages);
