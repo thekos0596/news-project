@@ -21,21 +21,25 @@ async function onFormSubmit(e) {
   e.preventDefault();
 
   const serchValue = e.target.elements.mySearch.value;
+  console.log(serchValue);
   try {
     const res = await newArticles.fetchSearch(serchValue);
     const normalizedResults = normalizeData(res, 'search');
 
     if (normalizedResults.length === 0) {
-      pagination.classList.add('visually-hidden')
-      newEl.innerHTML = `
-<div class="page-empty">
-<h2 class="page-empty__text">We haven’t found news from this category</h2>
-<img src="${defImg}" alt="We haven’t found news from this category" class="page-empty__img">
-</div>`
-    };
+      pagination.classList.add('visually-hidden');
+      addCard.innerHTML = `
+      <div class="page-empty">
+      <h2 class="page-empty__text">We haven’t found news from this category</h2>
+      <img src="${defImg}" alt="We haven’t found news from this category" class="page-empty__img">
+      </div>`;
+      return;
+    }
+    pagination.classList.remove('visually-hidden');
 
     addCard.setAttribute('data-page', serchValue);
     const newArray = normalizedResults.slice(0, numCardsOnPages);
+
     addCard.innerHTML = '';
     renderSearchNews(newArray);
     checkFavorites(newArray);
@@ -96,8 +100,6 @@ if (screenWidth <= 768) {
     search.classList.add('active');
     btnFetch.classList.add('fetch');
     btnSerch.classList.add('visually-hidden');
-
-    console.log(btnSerch);
 
     document.addEventListener('click', e => {
       const withinBoundaries = e.composedPath().includes(search);
