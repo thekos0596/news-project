@@ -1,25 +1,30 @@
 import svgSprite from '../images/icons/icons.svg';
 import defImg from '../images/defaultimage.jpg';
-import { fetchweather } from "../js/API-service/api-weather.js";
+import { fetchweather } from '../js/API-service/api-weather.js';
 const newCardEl = document.querySelector('.news-card');
 
 const baseUrl = 'https://www.nytimes.com/';
 let numberNew = 1;
 let numberWeather = 1;
-let insertWeather = "";
-let tablet = window.matchMedia("(min-width: 768px)");
-let desctop = window.matchMedia("(min-width: 1280px)");
-if (tablet.matches === true) { numberWeather = 2; }
-if (desctop.matches === true) { numberWeather = 3; }
+let insertWeather = '';
+let tablet = window.matchMedia('(min-width: 768px)');
+let desctop = window.matchMedia('(min-width: 1280px)');
+if (tablet.matches === true) {
+  numberWeather = 2;
+}
+if (desctop.matches === true) {
+  numberWeather = 3;
+}
 
 export default function renderSearchNews(res) {
   const paginationClass = res[0].data_set;
 
   if (newCardEl.classList.contains('popular')) {
     newCardEl.classList.remove('popular');
-  }
-  if (newCardEl.classList.contains('categories')) {
+  } else if (newCardEl.classList.contains('categories')) {
     newCardEl.classList.remove('categories');
+  } else if (newCardEl.classList.contains('calendar')) {
+    newCardEl.classList.remove('calendar');
   }
   newCardEl.classList.add(paginationClass);
 
@@ -45,15 +50,14 @@ export default function renderSearchNews(res) {
             ? multimedia[2].caption
             : 'Default Image';
 
-
         if (numberNew === numberWeather) {
-          insertWeather = "<li class=\"news-card__item\"><div class=\"news-card__foto news-card__image\"><div id=weather></div></li>";
-        }
-        else {
-          insertWeather = "";
+          insertWeather =
+            '<li class="news-card__item"><div class="news-card__foto news-card__image"><div id=weather></div></li>';
+        } else {
+          insertWeather = '';
         }
         numberNew++;
-        
+
         return `${insertWeather}
   <li class="news-card__item">
    <div class="news-card__foto">
@@ -106,7 +110,6 @@ function onGetDate(res) {
   });
 
   return dataStr;
-
 }
 
 function getDataFromLoc() {

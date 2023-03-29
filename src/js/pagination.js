@@ -7,6 +7,7 @@ import { normalizationPopular } from './normalization';
 import { normalizeData } from './normalization';
 import renderSearchNews from './renderSerchNews';
 import { renderCategories } from './renderCategories';
+import { renderByDate } from './renderCategories';
 
 const pg = document.getElementById('pagination');
 const ulPageContainer = document.querySelector('.page-container');
@@ -73,7 +74,6 @@ async function onFirstLoad(event) {
       }
       if (addCard.classList.contains('search')) {
         const serchValue = addCard.getAttribute('data-page');
-
         const res = await newArticles.fetchSearch(serchValue);
         renderPagePagination(res, 'search', page);
       }
@@ -81,7 +81,6 @@ async function onFirstLoad(event) {
       if (addCard.classList.contains('categories')) {
         const cotegorieshValue = addCard.getAttribute('data-page');
         const res = await newArticles.fetchCategories(cotegorieshValue);
-
         renderPagePagination(res, 'categories', page);
       }
 
@@ -102,7 +101,28 @@ async function onFirstLoad(event) {
       const end = start + numCardsOnPages;
       const newArray = normalizedResults.slice(start, end);
       addCard.innerHTML = '';
-      renderCategories(newArray);
+
+      switch (type) {
+        case 'popular':
+          renderArticle(newArray);
+          break;
+
+        case 'search':
+          renderSearchNews(newArray);
+          break;
+
+        case 'categories':
+          renderCategories(newArray);
+          break;
+
+        case 'calendar':
+          renderByDate(newArray);
+          break;
+
+        default:
+          break;
+      }
+
       checkFavorites(newArray);
       checkRead(newArray);
     } else {

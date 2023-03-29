@@ -26,6 +26,18 @@ export function normalizeData(res, type) {
         data_set: 'search',
       }));
       break;
+    case 'calendar':
+      currentNewsPage = res.response.docs.map(r => ({
+        section: r.section_name || 'Default section',
+        title: r.headline.main || 'This article has no title',
+        abstract: r.abstract || 'This article has no description',
+        published_date: r.pub_date,
+        multimedia: r.multimedia || [],
+        url: r.web_url,
+        id: r.headline.main,
+        data_set: 'calendar',
+      }));
+      break;
     case 'popular':
       currentNewsPage = res.results.map(r => {
         const media = r.media.map(m => m['media-metadata'])[0];
