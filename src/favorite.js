@@ -7,3 +7,4 @@ import './js/formOpen';
 import './js/formRegFatchData';
 // import './js/to-favorite';
 import './js/favorite-page';
+import './js/btn-scroll-up';

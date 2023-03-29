@@ -9,9 +9,4 @@ import './js/pagination';
 import './js/calendar';
 import './js/formOpen';
 import './js/formRegFatchData';
-
-const up = document.querySelector('.btn-scroll');
-
-up.addEventListener('click', () =>
-  window.scrollTo({ top: 0, behavior: 'smooth' })
-);
+import './js/btn-scroll-up';

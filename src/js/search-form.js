@@ -9,7 +9,7 @@ import renderSearchNews from './renderSerchNews';
 
 const newArticles = new NewArticles();
 let numCardsOnPages = 8;
-const addCard = document.querySelector('.news-card');
+const addCard = document.querySelectorAll('.news-card');
 const icon2 = document.querySelector('.search-box__icon-svg');
 const icon = document.querySelector('.search-box__icon');
 const search = document.querySelector('.search-box');
@@ -22,8 +22,8 @@ async function onFormSubmit(e) {
   try {
     const res = await newArticles.fetchSearch(serchValue);
     const normalizedResults = normalizeData(res, 'search');
+    console.log(addCard);
     addCard.setAttribute('data-page', serchValue);
-
     const newArray = normalizedResults.slice(0, numCardsOnPages);
     addCard.innerHTML = '';
     renderSearchNews(newArray);
