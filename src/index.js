@@ -1,6 +1,5 @@
 import './js/mobile-menu';
 import './js/new-cards';
-import './js/current-page';
 import './js/toggle-switcher-theme';
 import './js/search-form';
 import './js/API-service/api-weather';

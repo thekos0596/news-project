@@ -1,4 +1,3 @@
-import NewArticles from './API-service/api-news';
 import { initAccordion } from './accordion';
 import svgSprite from '../images/icons/icons.svg';
 import defImgPng from '../images/default_hidden.png';
@@ -9,29 +8,43 @@ const containerEl = document.querySelector('.container__read');
 const newAccorEl = document.querySelector('.accordion');
 const response = JSON.parse(localStorage.getItem('readList')) || [];
 
-export function pageEmpty(){
-  if (!response || response.length === 0){
+export function pageEmpty() {
+  if (!response || response.length === 0) {
     return `
     <div class="page-empty">
     <h2 class="page-empty__text">You don't have any read news</h2>
     <img src="${defImgPng}" alt="You have not read news" class="page-empty__img">
-    </div>`
+    </div>`;
   }
-  return ''
+  return '';
 }
 
-function newFormatArray(response){
+function newFormatArray(response) {
   const formattedItems = response.map(item => {
     const newDate = new Date(item.readAt);
-    const formattedReadAt = `${newDate.getDate().toString().padStart(2, '0')}/${(newDate.getMonth() + 1).toString().padStart(2, '0')}/${newDate.getFullYear()}`;
-  
+    const formattedReadAt = `${newDate
+      .getDate()
+      .toString()
+      .padStart(2, '0')}/${(newDate.getMonth() + 1)
+      .toString()
+      .padStart(2, '0')}/${newDate.getFullYear()}`;
+
     const newPublishedDate = new Date(item.published_date);
-    const formattedPublishedDate = `${newPublishedDate.getDate().toString().padStart(2, '0')}/${(newPublishedDate.getMonth() + 1).toString().padStart(2, '0')}/${newPublishedDate.getFullYear()}`;
-    
+    const formattedPublishedDate = `${newPublishedDate
+      .getDate()
+      .toString()
+      .padStart(2, '0')}/${(newPublishedDate.getMonth() + 1)
+      .toString()
+      .padStart(2, '0')}/${newPublishedDate.getFullYear()}`;
+
     const { multimedia = [] } = item;
-    const imageUrl = multimedia && multimedia[2]?.url ? multimedia[2].url : defImg;
-    const imageAlt = multimedia && multimedia[2]?.caption ? multimedia[2].caption : 'Default Image';
-    
+    const imageUrl =
+      multimedia && multimedia[2]?.url ? multimedia[2].url : defImg;
+    const imageAlt =
+      multimedia && multimedia[2]?.caption
+        ? multimedia[2].caption
+        : 'Default Image';
+
     return {
       ...item,
       readAt: formattedReadAt,
@@ -45,17 +58,17 @@ function newFormatArray(response){
 
 const formattedItems = newFormatArray(response);
 
-export function renderAccordion(){
+export function renderAccordion() {
   containerEl.insertAdjacentHTML('beforeEnd', pageEmpty());
 
   const uniqueDates = new Set();
- 
-  formattedItems.forEach(({readAt}) => {
-      uniqueDates.add(readAt);
-    });
-    const markupAccordion = Array.from(uniqueDates)
-      .map((readAt ) => {
-          return `
+
+  formattedItems.forEach(({ readAt }) => {
+    uniqueDates.add(readAt);
+  });
+  const markupAccordion = Array.from(uniqueDates)
+    .map(readAt => {
+      return `
               <div class="accordion__wrap">
                   <div class="accordion__active">
                     <div class="read__date">${readAt}</div>
@@ -75,12 +88,20 @@ export function renderAccordion(){
     })
     .join('');
 
-  newAccorEl.insertAdjacentHTML('beforeEnd', markupAccordion)
+  newAccorEl.insertAdjacentHTML('beforeEnd', markupAccordion);
   initAccordion();
 }
 renderAccordion();
 
-function markupReadCard({ abstract, section, title, published_date, imageUrl, imageAlt, url }) {
+function markupReadCard({
+  abstract,
+  section,
+  title,
+  published_date,
+  imageUrl,
+  imageAlt,
+  url,
+}) {
   return `
     <li class="news-card__item">
       <div class="news-card__foto">
@@ -108,7 +129,7 @@ function markupReadCard({ abstract, section, title, published_date, imageUrl, im
       </a>
     </div>
   </li>
-  `
+  `;
 }
 
 function addMarkupToCards() {
@@ -125,18 +146,19 @@ function addMarkupToCards() {
   }, {});
 
   // Добавляем разметку к каждому элементу соответствующей группы
-  readDates.forEach((dateEl) => {
+  readDates.forEach(dateEl => {
     const date = dateEl.textContent;
     const items = groupedItems[date] || [];
-    const cardContainer = dateEl.closest('.accordion__wrap').querySelector('.news-card__image-container');
-    
-    items.forEach((item) => {
+    const cardContainer = dateEl
+      .closest('.accordion__wrap')
+      .querySelector('.news-card__image-container');
+
+    items.forEach(item => {
       if (item.readAt === date) {
-        console.log(item)
         cardContainer.insertAdjacentHTML('beforeEnd', markupReadCard(item));
       }
     });
   });
 }
 
-addMarkupToCards()
+addMarkupToCards();

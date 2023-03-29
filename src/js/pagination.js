@@ -31,10 +31,6 @@ const tabletWidth = window.matchMedia(
 );
 const mobileWidth = window.matchMedia('(max-width: 766px)');
 
-// console.log('desktopWidth ', desktopWidth);
-// console.log('tabletWidth ', tabletWidth);
-// console.log('mobileWidth ', mobileWidth);
-
 if (desktopWidth.matches) {
   numCardsOnPages = pageDesktop;
 } else if (tabletWidth.matches) {
@@ -87,12 +83,6 @@ async function onFirstLoad(event) {
         const res = await newArticles.fetchByDate(cotegorieshValue);
         renderPagePagination(res, 'calendar', page);
       }
-
-      // const res = await newArticles.fetchArtic();
-      // // totalObjsApi = res.results; // 20[]
-      // // totalNumberPagesApi = res.results.length; // 20
-      // // valuePage.totalPages = Math.ceil(totalNumberPagesApi / numCardsOnPages); // 3
-      // const normalizedResults = normalization(res);
     } catch (error) {
       console.log(error);
     }

@@ -4,7 +4,6 @@ import { currentNewsPage } from './normalization';
 const readList = JSON.parse(localStorage.getItem('readList')) || [];
 
 export function readMore(event) {
-  console.log('read more');
   const newsId = event.target.dataset.newsId;
 
   const readIndex = readList.findIndex(read => read.title === newsId);
