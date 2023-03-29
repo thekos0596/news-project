@@ -92,7 +92,6 @@ function deleteFromFavorites(event) {
     favoriteList.splice(favoriteIndex, 1);
     localStorage.setItem('favoriteList', JSON.stringify(favoriteList));
     location.reload();
-    // renderArticle(favoriteList);
   }
 }
 

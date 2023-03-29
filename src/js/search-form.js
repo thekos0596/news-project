@@ -1,4 +1,3 @@
-// import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import NewArticles from './API-service/api-news';
 import { normalizeData } from './normalization.js';
 import defImg from '../images/defaultimage.jpg';
@@ -48,40 +47,8 @@ async function onFormSubmit(e) {
     console.log(error);
   }
 
-  // messageInfo();
-
   e.target.reset();
 }
-
-// function messageInfo(arr) {
-//   if (normalizedResults.value === []) {
-//     return `<div><h2 class="message-info">We haven’t found news from this category</h2><img src="${defImg}" class="defImg"/></div>`;
-//   }
-// }
-
-// document.addEventListener('click', e => {
-//   const withinBoundaries = e.composedPath().includes(search);
-
-//   if (!withinBoundaries) {
-//     search.classList.remove('active');
-//     brnSerchEl.classList.remove('fetch');
-//     btnSerchEl.classList.remove('visually-hidden');
-//   }
-// });
-// // закриття форми по кліку поза формою на мобільній версії
-
-// search.addEventListener('click', onOpenSearch);
-
-// function onOpenSearch(e) {
-//   const btnFetch = e.currentTarget.elements.namedItem('btn-fetch');
-//   const btnSerch = e.currentTarget.elements.namedItem('btn-search');
-
-//   search.classList.add('active');
-//   btnFetch.classList.add('fetch');
-//   btnSerch.classList.add('visually-hidden');
-//   search.addEventListener('submit', onFormSubmit);
-//   console.log(btnSerch);
-// }
 
 const brnSerchEl = document.querySelector('.search-box__icon');
 const btnSerchEl = document.querySelector('.btn-search');
