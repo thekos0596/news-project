@@ -1,4 +1,3 @@
-import NewArticles from './API-service/api-news';
 import { initAccordion } from './accordion';
 import svgSprite from '../images/icons/icons.svg';
 import defImgPng from '../images/default_hidden.png';
@@ -62,11 +61,13 @@ export function renderAccordion(){
               </div>
           `;
     })
+    .reverse()
     .join('');
 
   newAccorEl.insertAdjacentHTML('beforeEnd', markupAccordion)
   initAccordion();
 }
+
 renderAccordion();
 
 export function pageEmpty(){

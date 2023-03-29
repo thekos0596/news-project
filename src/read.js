@@ -4,3 +4,4 @@ import './js/toggle-switcher-theme';
 import './js/search-form';
 import './js/accordion';
 import './js/render-ac-card';
+import './js/btn-add-remove';
