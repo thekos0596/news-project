@@ -10,7 +10,6 @@ import {
 } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
 import { getDatabase, ref, set } from 'firebase/database';
-import { log } from 'console';
 
 // =====доступ
 const form = document.querySelector('.form');
@@ -39,9 +38,8 @@ const firebaseApp = initializeApp({
 
 // =====інстал фаєрбейс
 const auth = getAuth(firebaseApp);
-const db = getDatabase(); 
-const loginEmail = textEmail.value;
-const loginPassword = textPassword.value;
+const db = getDatabase(firebaseApp); 
+
 
 // =====відправленя даних в базу 
 function writeUserData(userId, name, email, myDataNews) {
@@ -69,6 +67,9 @@ const loginEmailPasword = async evt => {
   btnRegister.disabled = true;
   btnLogout.disabled = false;
 
+ 	const loginEmail = textEmail.value;
+	const loginPassword = textPassword.value;
+
   try {
     const userCredential = await signInWithEmailAndPassword(
       auth,
@@ -80,14 +81,18 @@ const loginEmailPasword = async evt => {
     writeUserData(myUserID, loginPassword, loginEmail, dataRead);
   } catch (error) {
     console.log(error);
-    formMacup(formMessage, 'Невірний адрес або зареєструйтесь', 'red');
-  }
+    formMacup(formMessage, 'Invalid address or register', 'red'); //==============================================
+  
+}
 };
 btnFormLogin.addEventListener('click', loginEmailPasword);
 
 // =====дія реєстрації акаунту
 const createAccount = async evt => {
   evt.preventDefault();
+
+  const loginEmail = textEmail.value;
+  const loginPassword = textPassword.value; 
 
   try {
     const userCredential = await createUserWithEmailAndPassword(
@@ -100,8 +105,7 @@ const createAccount = async evt => {
     writeUserData(myUserID, loginEmail, loginPassword, dataRead);
   } catch (error) {
     console.log(error.message);
-	console.log(1111111111111111111111111111111111);
-    formMacup(formMessage, error.message, 'red');
+    formMacup(formMessage, error.message, 'red'); //===================================
   }
 };
 
@@ -111,12 +115,12 @@ btnRegister.addEventListener('click', createAccount);
 const monitorAuthState = async () => {
   onAuthStateChanged(auth, user => {
     if (user) {
-      formMacup(formMessage, 'Вхід виконано', 'green');
+      formMacup(formMessage, 'Login is complete', 'green');
       btnFormLogin.disabled = true;
       btnRegister.disabled = true;
       btnLogout.disabled = false;
     } else {
-      formMacup(formMessage, 'Вхід не виконано', 'orange');
+      formMacup(formMessage, 'Log in not done', 'orange');
       btnLogout.disabled = true;
     }
   });
@@ -130,7 +134,7 @@ const Logout = async evt => {
   btnFormLogin.disabled = false;
   btnRegister.disabled = false;
   btnLogout.disabled = true;
-  formMacup(formMessage, 'введытьданы або зареэструйтусь', 'orange');
+  formMacup(formMessage, 'Enter the data or register', 'orange');
   await signOut(auth);
 };
 
@@ -143,7 +147,6 @@ function formMacup(elem, message, color) {
   elem.insertAdjacentHTML('beforeend', infoMessage);
 }
 // =========================================================
-
 
 
 

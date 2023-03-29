@@ -64,7 +64,7 @@
 .form__overlay--visible {
   visibility: visible;
   opacity: 1;
-  z-index: 1;
+  z-index: 100;
 }
 
 .form {
