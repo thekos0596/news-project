@@ -23,11 +23,10 @@ const formMessage = document.querySelector('.form__message');
 // =====локал сторедж
 const read = localStorage.getItem('readList'); // json
 const dataRead = JSON.parse(read); // {}
-console.log(dataRead);// обєкт що є в локал сторед
 
 // =====мій ключ до серверу
 const firebaseApp = initializeApp({
-	apiKey: 'AIzaSyBhJ5beXwmy_ttB_5GIAo765d2PbOi8cTk',
+  apiKey: 'AIzaSyBhJ5beXwmy_ttB_5GIAo765d2PbOi8cTk',
   authDomain: 'news-my-first-projec.firebaseapp.com',
   databaseURL: 'https://news-my-first-projec-default-rtdb.firebaseio.com',
   projectId: 'news-my-first-projec',
@@ -38,12 +37,11 @@ const firebaseApp = initializeApp({
 
 // =====інстал фаєрбейс
 const auth = getAuth(firebaseApp);
-const db = getDatabase(firebaseApp); 
+const db = getDatabase(firebaseApp);
 
-
-// =====відправленя даних в базу 
+// =====відправленя даних в базу
 function writeUserData(userId, name, email, myDataNews) {
-	set(ref(db, 'users/' + userId), {
+  set(ref(db, 'users/' + userId), {
     username: name,
     email: email,
     newsRead: myDataNews,
@@ -52,11 +50,11 @@ function writeUserData(userId, name, email, myDataNews) {
 
 // =====отримання даних з бази
 function setUserData(userId) {
-	const starCountRef = ref(db, 'users/' + userId + '/newsRead');
-	onValue(starCountRef, (snapshot) => {
-	  const data = snapshot.val();
-	  console.log(data);
-	});
+  const starCountRef = ref(db, 'users/' + userId + '/newsRead');
+  onValue(starCountRef, snapshot => {
+    const data = snapshot.val();
+    console.log(data);
+  });
 }
 
 // =====повертає користувача якщо він є
@@ -67,8 +65,8 @@ const loginEmailPasword = async evt => {
   btnRegister.disabled = true;
   btnLogout.disabled = false;
 
- 	const loginEmail = textEmail.value;
-	const loginPassword = textPassword.value;
+  const loginEmail = textEmail.value;
+  const loginPassword = textPassword.value;
 
   try {
     const userCredential = await signInWithEmailAndPassword(
@@ -82,8 +80,7 @@ const loginEmailPasword = async evt => {
   } catch (error) {
     console.log(error);
     formMacup(formMessage, 'Invalid address or register', 'red'); //==============================================
-  
-}
+  }
 };
 btnFormLogin.addEventListener('click', loginEmailPasword);
 
@@ -92,7 +89,7 @@ const createAccount = async evt => {
   evt.preventDefault();
 
   const loginEmail = textEmail.value;
-  const loginPassword = textPassword.value; 
+  const loginPassword = textPassword.value;
 
   try {
     const userCredential = await createUserWithEmailAndPassword(
@@ -147,63 +144,3 @@ function formMacup(elem, message, color) {
   elem.insertAdjacentHTML('beforeend', infoMessage);
 }
 // =========================================================
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

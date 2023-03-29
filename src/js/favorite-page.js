@@ -83,7 +83,6 @@ function renderArticle(res) {
 function deleteFromFavorites(event) {
   const favoriteList = JSON.parse(localStorage.getItem('favoriteList')) || [];
   const targetEl = event.target;
-  console.log(targetEl);
 
   const newsId = targetEl.dataset.newsId;
   const favoriteIndex = favoriteList.findIndex(
