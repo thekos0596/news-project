@@ -4,3 +4,4 @@ import './js/search-form';
 import './js/accordion';
 import './js/renderAccordionCard';
 import './js/btnScrollUp';
+import './js/btnAddRemove';
