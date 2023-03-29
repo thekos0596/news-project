@@ -4,4 +4,4 @@ import './js/search-form';
 import './js/formOpen';
 import './js/formRegFatchData';
 import './js/favorite-page';
-import './js/btn-scroll-up';
+import './js/btnScrollUp';

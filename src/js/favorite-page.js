@@ -1,8 +1,8 @@
 import svgSprite from '../images/icons/icons.svg';
 import defImg from '../images/defaultimage.jpg';
 import defImgPng from '../images/default_hidden.png';
-import { checkFavorites } from './btn-add-remove';
-import { readMore, checkRead } from './btn-read-more';
+import { checkFavorites } from './btnAddRemove';
+import { readMore, checkRead } from './btnReadMore';
 
 const favoriteNewsCardEl = document.querySelector('.news-card');
 

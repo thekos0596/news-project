@@ -1,5 +1,5 @@
-import { addToFavorites } from './btn-add-remove';
-import { readMore } from './btn-read-more';
+import { addToFavorites } from './btnAddRemove';
+import { readMore } from './btnReadMore';
 
 const newsCardEl = document.querySelector('.news-card');
 

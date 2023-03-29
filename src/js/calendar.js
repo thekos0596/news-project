@@ -70,8 +70,8 @@ function openCalendar(e) {
 
 import NewArticles from './API-service/api-news';
 import { normalizeData } from './normalization.js';
-import { checkFavorites } from './btn-add-remove';
-import { checkRead } from './btn-read-more';
+import { checkFavorites } from './btnAddRemove';
+import { checkRead } from './btnReadMore';
 import renderByDate from './renderByDate';
 
 const newArticles = new NewArticles();

@@ -1,8 +1,8 @@
 import NewArticles from './API-service/api-news';
 import { normalizeData } from './normalization.js';
 import defImg from '../images/defaultimage.jpg';
-import { checkFavorites } from './btn-add-remove';
-import { checkRead } from './btn-read-more';
+import { checkFavorites } from './btnAddRemove';
+import { checkRead } from './btnReadMore';
 
 import renderSearchNews from './renderSerchNews';
 

@@ -2,7 +2,7 @@ import { initAccordion } from './accordion';
 import svgSprite from '../images/icons/icons.svg';
 import defImgPng from '../images/default_hidden.png';
 import defImg from '../images/defaultimage.jpg';
-import './btn-add-remove';
+import './btnAddRemove';
 
 const containerEl = document.querySelector('.container__read');
 const newAccorEl = document.querySelector('.accordion');
