@@ -43,9 +43,9 @@ export function addToFavorites(event) {
 export function checkFavorites(newArray) {
   const favoriteList = JSON.parse(localStorage.getItem('favoriteList')) || [];
 
-  if (!favoriteList.length) {
-    return;
-  }
+  // if (!favoriteList.length) {
+  //   return;
+  // }
 
   newArray.forEach(item => {
     const btn = document.querySelector(
