@@ -1,6 +1,7 @@
 import svgSprite from '../images/icons/icons.svg';
 import { currentNewsPage } from './normalization';
 
+
 function createIcon(bool, btn) {
   const icon = !bool ? `${svgSprite}#icon-favorite` : `${svgSprite}#icon-heart`;
   const svg = document.createElement('svg');
